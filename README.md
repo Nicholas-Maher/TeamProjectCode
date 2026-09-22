@@ -1,2 +1,2 @@
 # TeamProjectCode
-Nicholas, Chloe, Tomas, & Patrick's TeamProjectCode repo for Project Files
+Nicholas, Chloe, Tomas, & Patrick's repo for Project Files
