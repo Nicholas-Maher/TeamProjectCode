@@ -1,2 +1,2 @@
 # TeamProjectCode
-TeamProjectCode repo for GameCode 
+Nicholas, Chloe, Tomas, & Patrick's TeamProjectCode repo for Project Files
