@@ -1,2 +1,14 @@
+# Ignore caches and user files
 .vs/
+.obj
+
+## Ignores Visual Studio's temporary build files
 obj/
+bin/
+
+# Ignore all compiled object files
+*.obj
+
+# Ignore all log files
+*.log
+*.tlog
