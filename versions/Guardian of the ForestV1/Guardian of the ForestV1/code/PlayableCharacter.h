@@ -26,13 +26,17 @@ protected:
 	// Has the player just initialted a jump
 	bool m_JustJumped = false;
 
-	// Private variables and functions come next
+	// Private variables and functions
 private:
 	// What is the gravity
 	float m_Gravity;
 
 	// How fast is the character
 	float m_Speed = 300;
+	float m_VelocityX = 0;
+	float m_Acceleration = 0.8;
+	float m_Deceleration = 0.99;
+
 
 	// Where is the player
 	Vector2f m_Position;

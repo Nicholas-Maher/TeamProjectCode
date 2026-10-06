@@ -16,17 +16,54 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 
 void PlayableCharacter::update(float elapsedTime)
 {
-
+	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_RightPressed)
 	{
-		m_Position.x += m_Speed * elapsedTime;
-	}
+		m_VelocityX += m_Speed * m_Acceleration * elapsedTime;
 
+		// Stop accelerating once top speed is reached
+		if (m_VelocityX > m_Speed)
+		{
+			m_VelocityX = m_Speed;
+		}
+		// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
+		m_Position.x += m_VelocityX * elapsedTime;
+	}
+	// Reduces velocity incrementally until 0 is reached when right key is released
+	else if (!m_RightPressed && m_VelocityX > 0)
+	{
+		m_VelocityX -= m_Speed * m_Deceleration * elapsedTime;
+
+		if (m_VelocityX < 0)
+		{
+			m_VelocityX = 0;
+		}
+		m_Position.x += m_VelocityX * elapsedTime;
+	}
+	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_LeftPressed)
 	{
-		m_Position.x -= m_Speed * elapsedTime;
-	}
+		m_VelocityX -= m_Speed * m_Acceleration * elapsedTime;
 
+		if (m_VelocityX < -m_Speed)
+		{
+			m_VelocityX = -m_Speed;
+		}
+		m_Position.x += m_VelocityX * elapsedTime;
+	}
+	// Reduces velocity incrementally until 0 is reached when left key is released
+	else if (!m_LeftPressed && m_VelocityX < 0)
+	{
+		m_VelocityX += m_Speed * m_Deceleration * elapsedTime;
+
+		if (m_VelocityX > 0)
+		{
+			m_VelocityX = 0;
+		}
+		m_Position.x += m_VelocityX * elapsedTime;
+	}
+	
+	
 
 	// Handle Jumping
 	if (m_IsJumping)
