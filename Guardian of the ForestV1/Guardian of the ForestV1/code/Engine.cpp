@@ -9,7 +9,7 @@ Engine::Engine()
 	resolution.y = VideoMode::getDesktopMode().height;
 
 	m_Window.create(VideoMode(resolution.x, resolution.y),
-		"Thomas was late",
+		"Guardian of the Forest",
 		Style::Fullscreen);
 
 	// Initialize the full screen view
