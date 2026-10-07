@@ -1,6 +1,8 @@
 # Ignore caches and user files
 .vs/
-.obj
+*.vcxproj.user
+*.user
+*.suo
 
 ## Ignores Visual Studio's temporary build files
 obj/
@@ -8,6 +10,15 @@ bin/
 
 # Ignore all compiled object files
 *.obj
+*.exe
+
+# Ignore Visual Studio generated files
+*.exe.recipe
+*.ilk
+*.idb
+*.pdb
+*.tlog
+*.lastbuildstate
 
 # Ignore all log files
 *.log
