@@ -18,52 +18,41 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 
 void PlayableCharacter::update(float elapsedTime)
 {
-	// not working - acceleration is insanely slow
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_WalkRightPressed)
 	{
 		walkRight(elapsedTime);
 	}
-	// Reduces velocity incrementally until 0 is reached when right key is released
-	else if (!m_WalkRightPressed && m_VelocityX > 0)
-	{
-		slideStopRight(elapsedTime);
-	}
-
-	// working
+	
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_RunRightPressed)
 	{
 		runRight(elapsedTime);
 	}
-	// Reduces velocity incrementally until 0 is reached when right key is released
-	else if (!m_RunRightPressed && m_VelocityX > 0)
-	{
-		slideStopRight(elapsedTime);
-	}
-
-	/// working
+	
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_WalkLeftPressed)
 	{
 		walkLeft(elapsedTime);
 	}
-	// Reduces velocity incrementally until 0 is reached when left key is released
-	else if (!m_WalkLeftPressed && m_VelocityX < 0)
-	{
-		slideStopLeft(elapsedTime);
-	}
-
-	// working
+	
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_RunLeftPressed)
 	{
 		runLeft(elapsedTime);
 	}
-	// Reduces velocity incrementally until 0 is reached when left key is released
-	else if (!m_WalkLeftPressed && m_VelocityX < 0)
+
+	// If there is no input for walking or running in any direction, the player will slide quickly to a stop in the direction they were last travelling
+	if (!m_WalkRightPressed && !m_WalkLeftPressed && !m_RunRightPressed && !m_RunLeftPressed)
 	{
-		slideStopLeft(elapsedTime);
+		if (m_VelocityX > 0)
+		{
+			slideStopRight(elapsedTime);
+		}
+		else if (m_VelocityX < 0)
+		{
+			slideStopLeft(elapsedTime);
+		}
 	}
 
 	// Handle Jumping
@@ -83,7 +72,6 @@ void PlayableCharacter::update(float elapsedTime)
 			m_IsJumping = false;
 			m_IsFalling = true;
 		}
-
 	}
 
 	// Apply gravity
@@ -165,7 +153,6 @@ Sprite PlayableCharacter::getSprite()
 /****** Player movement methods - Patrick *****/
 void PlayableCharacter::walkRight(float elapsedTime)
 {
-	/*
 	m_VelocityX += m_MaxWalkSpeed * m_Acceleration * elapsedTime;
 
 	// Stop accelerating once top speed is reached
@@ -177,8 +164,8 @@ void PlayableCharacter::walkRight(float elapsedTime)
 	// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
 	m_Position.x += m_VelocityX * elapsedTime;
 
-	*/
-	m_Position.x += m_MaxWalkSpeed * elapsedTime;
+	
+	//m_Position.x += m_MaxWalkSpeed * elapsedTime;
 	cout << "Walk Right - Speed: " << m_MaxWalkSpeed << " Velocity: " << m_VelocityX << endl;
 }
 
@@ -209,7 +196,6 @@ void PlayableCharacter::slideStopRight(float elapsedTime)
 
 void PlayableCharacter::walkLeft(float elapsedTime)
 {
-	/*
 	m_VelocityX -= m_MaxWalkSpeed * m_Acceleration * elapsedTime;
 
 	if (m_VelocityX < -m_MaxWalkSpeed)
@@ -219,8 +205,7 @@ void PlayableCharacter::walkLeft(float elapsedTime)
 	}
 	m_Position.x += m_VelocityX * elapsedTime;
 
-	*/
-	m_Position.x += m_MaxWalkSpeed * elapsedTime;
+	//m_Position.x += m_MaxWalkSpeed * elapsedTime;
 	cout << "Walk Left - Speed: " << m_MaxWalkSpeed << " Velocity: " << m_VelocityX << endl;
 }
 

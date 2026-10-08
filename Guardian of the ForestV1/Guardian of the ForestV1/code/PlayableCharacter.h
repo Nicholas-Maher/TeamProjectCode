@@ -40,7 +40,7 @@ private:
 	float m_MaxRunSpeed = 700;
 	float m_VelocityX = 0;
 	float m_Acceleration = 0.9;
-	float m_Deceleration = 0.99;
+	float m_Deceleration = 2;
 
 
 	// Where is the player
