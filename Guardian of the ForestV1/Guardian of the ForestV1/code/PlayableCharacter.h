@@ -16,9 +16,13 @@ protected:
 	bool m_IsJumping;
 	bool m_IsFalling;
 
-	// Which directions is the character currently moving in
-	bool m_LeftPressed;
-	bool m_RightPressed;
+	// Which directions is the character currently walking in
+	bool m_WalkLeftPressed;
+	bool m_WalkRightPressed;
+
+	// Which directions is the character currently walking in
+	bool m_RunLeftPressed;
+	bool m_RunRightPressed;
 
 	// How long has this jump lasted so far
 	float m_TimeThisJump;
@@ -32,9 +36,10 @@ private:
 	float m_Gravity;
 
 	// How fast is the character
-	float m_Speed = 300;
+	float m_MaxWalkSpeed = 300;
+	float m_MaxRunSpeed = 700;
 	float m_VelocityX = 0;
-	float m_Acceleration = 0.8;
+	float m_Acceleration = 0.9;
 	float m_Deceleration = 0.99;
 
 
@@ -70,6 +75,18 @@ public:
 
 	// Send a copy of the sprite to main
 	Sprite getSprite();
+
+	// Make the character walk
+	void walkLeft(float elapsedTime);
+	void walkRight(float elapsedTime);
+
+	// Make the character run
+	void runLeft(float elapsedTime);
+	void runRight(float elapsedTime);
+
+	// Make the character slide to a stop
+	void slideStopRight(float elapsedTime);
+	void slideStopLeft(float elapsedTime);
 
 	// Make the character stand firm
 	void stopFalling(float position);

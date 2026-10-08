@@ -30,23 +30,44 @@ bool Player::handleInput()
 		m_IsJumping = false;
 		m_IsFalling = true;
 	}
+	// Check if walking keys are pressed
 	if (Keyboard::isKeyPressed(Keyboard::A))
 	{
-		m_LeftPressed = true;
+		m_WalkLeftPressed = true;
 	}
 	else
 	{
-		m_LeftPressed = false;
+		m_WalkLeftPressed = false;
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
-		m_RightPressed = true;;
+		m_WalkRightPressed = true;
 	}
 	else
 	{
-		m_RightPressed = false;
+		m_WalkRightPressed = false;
 	}
+
+	// Check if running keys are pressed
+	if (Keyboard::isKeyPressed(Keyboard::J))
+	{
+		m_RunLeftPressed = true;
+	}
+	else
+	{
+		m_RunLeftPressed = false;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::L))
+	{
+		m_RunRightPressed = true;
+	}
+	else
+	{
+		m_RunRightPressed = false;
+	}
+	
 
 	return m_JustJumped;
 }

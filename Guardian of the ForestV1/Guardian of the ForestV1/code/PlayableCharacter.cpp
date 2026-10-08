@@ -1,4 +1,6 @@
 #include "PlayableCharacter.h"
+#include <iostream>
+using namespace std;
 
 void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 {
@@ -16,54 +18,53 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 
 void PlayableCharacter::update(float elapsedTime)
 {
+	// not working - acceleration is insanely slow
 	// incrementally increases speed while right is pressed until max speed is reached
-	if (m_RightPressed)
+	if (m_WalkRightPressed)
 	{
-		m_VelocityX += m_Speed * m_Acceleration * elapsedTime;
-
-		// Stop accelerating once top speed is reached
-		if (m_VelocityX > m_Speed)
-		{
-			m_VelocityX = m_Speed;
-		}
-		// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
-		m_Position.x += m_VelocityX * elapsedTime;
+		walkRight(elapsedTime);
 	}
 	// Reduces velocity incrementally until 0 is reached when right key is released
-	else if (!m_RightPressed && m_VelocityX > 0)
+	else if (!m_WalkRightPressed && m_VelocityX > 0)
 	{
-		m_VelocityX -= m_Speed * m_Deceleration * elapsedTime;
-
-		if (m_VelocityX < 0)
-		{
-			m_VelocityX = 0;
-		}
-		m_Position.x += m_VelocityX * elapsedTime;
+		slideStopRight(elapsedTime);
 	}
-	// incrementally increases speed while left is pressed until max speed is reached
-	if (m_LeftPressed)
-	{
-		m_VelocityX -= m_Speed * m_Acceleration * elapsedTime;
 
-		if (m_VelocityX < -m_Speed)
-		{
-			m_VelocityX = -m_Speed;
-		}
-		m_Position.x += m_VelocityX * elapsedTime;
+	// working
+	// incrementally increases speed while right is pressed until max speed is reached
+	if (m_RunRightPressed)
+	{
+		runRight(elapsedTime);
+	}
+	// Reduces velocity incrementally until 0 is reached when right key is released
+	else if (!m_RunRightPressed && m_VelocityX > 0)
+	{
+		slideStopRight(elapsedTime);
+	}
+
+	/// working
+	// incrementally increases speed while left is pressed until max speed is reached
+	if (m_WalkLeftPressed)
+	{
+		walkLeft(elapsedTime);
 	}
 	// Reduces velocity incrementally until 0 is reached when left key is released
-	else if (!m_LeftPressed && m_VelocityX < 0)
+	else if (!m_WalkLeftPressed && m_VelocityX < 0)
 	{
-		m_VelocityX += m_Speed * m_Deceleration * elapsedTime;
-
-		if (m_VelocityX > 0)
-		{
-			m_VelocityX = 0;
-		}
-		m_Position.x += m_VelocityX * elapsedTime;
+		slideStopLeft(elapsedTime);
 	}
-	
-	
+
+	// working
+	// incrementally increases speed while left is pressed until max speed is reached
+	if (m_RunLeftPressed)
+	{
+		runLeft(elapsedTime);
+	}
+	// Reduces velocity incrementally until 0 is reached when left key is released
+	else if (!m_WalkLeftPressed && m_VelocityX < 0)
+	{
+		slideStopLeft(elapsedTime);
+	}
 
 	// Handle Jumping
 	if (m_IsJumping)
@@ -161,8 +162,93 @@ Sprite PlayableCharacter::getSprite()
 {
 	return m_Sprite;
 }
+/****** Player movement methods - Patrick *****/
+void PlayableCharacter::walkRight(float elapsedTime)
+{
+	/*
+	m_VelocityX += m_MaxWalkSpeed * m_Acceleration * elapsedTime;
+
+	// Stop accelerating once top speed is reached
+	if (m_VelocityX > m_MaxWalkSpeed)
+	{
+		m_VelocityX = m_MaxWalkSpeed;
+		cout << "Walk Right - Cap hit " << endl;
+	}
+	// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
+	m_Position.x += m_VelocityX * elapsedTime;
+
+	*/
+	m_Position.x += m_MaxWalkSpeed * elapsedTime;
+	cout << "Walk Right - Speed: " << m_MaxWalkSpeed << " Velocity: " << m_VelocityX << endl;
+}
+
+void PlayableCharacter::runRight(float elapsedTime)
+{
+	m_VelocityX += m_MaxRunSpeed * m_Acceleration * elapsedTime;
+
+	// Stop accelerating once top speed is reached
+	if (m_VelocityX > m_MaxRunSpeed)
+	{
+		m_VelocityX = m_MaxRunSpeed;
+	}
+	// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
+	m_Position.x += m_VelocityX * elapsedTime;
+	cout << "Run Right - Speed: " << m_MaxRunSpeed << " Velocity: " << m_VelocityX << endl;
+}
+
+void PlayableCharacter::slideStopRight(float elapsedTime)
+{
+	m_VelocityX -= m_MaxWalkSpeed * m_Deceleration * elapsedTime;
+
+	if (m_VelocityX < 0)
+	{
+		m_VelocityX = 0;
+	}
+	m_Position.x += m_VelocityX * elapsedTime;
+}
+
+void PlayableCharacter::walkLeft(float elapsedTime)
+{
+	/*
+	m_VelocityX -= m_MaxWalkSpeed * m_Acceleration * elapsedTime;
+
+	if (m_VelocityX < -m_MaxWalkSpeed)
+	{
+		m_VelocityX = -m_MaxWalkSpeed;
+		cout << "Walk Left - Cap hit " << endl;
+	}
+	m_Position.x += m_VelocityX * elapsedTime;
+
+	*/
+	m_Position.x += m_MaxWalkSpeed * elapsedTime;
+	cout << "Walk Left - Speed: " << m_MaxWalkSpeed << " Velocity: " << m_VelocityX << endl;
+}
+
+void PlayableCharacter::runLeft(float elapsedTime)
+{
+	m_VelocityX -= m_MaxRunSpeed * m_Acceleration * elapsedTime;
+
+	if (m_VelocityX < -m_MaxRunSpeed)
+	{
+		m_VelocityX = -m_MaxRunSpeed;
+	}
+	m_Position.x += m_VelocityX * elapsedTime;
+	cout << "Run Left - Speed: " << m_MaxRunSpeed << " Velocity: " << m_VelocityX << endl;
+}
 
 
+
+
+void PlayableCharacter::slideStopLeft(float elapsedTime)
+{
+	m_VelocityX += m_MaxWalkSpeed * m_Deceleration * elapsedTime;
+
+	if (m_VelocityX > 0)
+	{
+		m_VelocityX = 0;
+	}
+	m_Position.x += m_VelocityX * elapsedTime;
+}
 
 void PlayableCharacter::stopFalling(float position)
 {
