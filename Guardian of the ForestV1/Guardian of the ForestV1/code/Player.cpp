@@ -4,8 +4,9 @@
 Player::Player()
 {
 	// Associate a texture with the sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"graphics/player.png"));
+	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/pacman-spritesheet-resized-810-730.png"));
+	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
+	ani_counter = 1;
 
 	m_JumpDuration = .50;
 }
@@ -24,6 +25,7 @@ bool Player::handleInput()
 			m_TimeThisJump = 0;
 			m_JustJumped = true;
 		}
+
 	}
 	else
 	{
@@ -43,6 +45,7 @@ bool Player::handleInput()
 	if (Keyboard::isKeyPressed(Keyboard::D))
 	{
 		m_WalkRightPressed = true;
+		
 	}
 	else
 	{
