@@ -1,4 +1,5 @@
 #include "PlayableCharacter.h"
+#include "TextureHolder.h"
 #include <iostream>
 using namespace std;
 
@@ -13,6 +14,11 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
+
+	// Associate a texture with the sprite
+	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/player.png"));
+
+	m_JumpDuration = .50;
 
 }
 
@@ -262,5 +268,64 @@ void PlayableCharacter::stopJump()
 	m_IsFalling = true;
 }
 
+bool PlayableCharacter::handleInput()
+{
+	m_JustJumped = false;
+
+	if (Keyboard::isKeyPressed(Keyboard::W))
+	{
+		// Start a jump if not already jumping
+		// but only if standing on a block (not falling)
+		if (!m_IsJumping && !m_IsFalling)
+		{
+			m_IsJumping = true;
+			m_TimeThisJump = 0;
+			m_JustJumped = true;
+		}
+	}
+	else
+	{
+		m_IsJumping = false;
+		m_IsFalling = true;
+	}
+	// Check if walking keys are pressed
+	if (Keyboard::isKeyPressed(Keyboard::A))
+	{
+		m_WalkLeftPressed = true;
+	}
+	else
+	{
+		m_WalkLeftPressed = false;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::D))
+	{
+		m_WalkRightPressed = true;
+	}
+	else
+	{
+		m_WalkRightPressed = false;
+	}
+
+	// Check if running keys are pressed
+	if (Keyboard::isKeyPressed(Keyboard::J))
+	{
+		m_RunLeftPressed = true;
+	}
+	else
+	{
+		m_RunLeftPressed = false;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::L))
+	{
+		m_RunRightPressed = true;
+	}
+	else
+	{
+		m_RunRightPressed = false;
+	}
 
 
+	return m_JustJumped;
+}

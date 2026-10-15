@@ -13,7 +13,7 @@ private:
 	TextureHolder th;
 
 	// The player
-	Player m_Player;
+	PlayableCharacter m_Player;
 
 	// A class to manage all the levels
 	LevelManager m_LM;

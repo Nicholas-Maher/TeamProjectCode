@@ -8,7 +8,7 @@ public:
 	Player();
 
 	// The overriden input handler for Player
-	bool virtual handleInput();
+	//bool handleInput();
 
 };
 
