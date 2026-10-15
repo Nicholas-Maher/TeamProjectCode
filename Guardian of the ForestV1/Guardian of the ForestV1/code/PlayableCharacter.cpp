@@ -1,5 +1,5 @@
 #include "PlayableCharacter.h"
-#include "TextureHolder.h"
+#include "LevelManager.h"
 #include <iostream>
 using namespace std;
 
@@ -28,24 +28,44 @@ void PlayableCharacter::update(float elapsedTime)
 	if (m_WalkRightPressed)
 	{
 		walkRight(elapsedTime);
+
+		//2nd row of sprite sheet 3 characters 150 pixels by 50 pixels
+		setSpriteFromSheet(sf::IntRect(12, 62, 150, 50));
+		//move the rectangle to the appropriate cell
+		moveTextureRect();
 	}
 	
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_RunRightPressed)
 	{
 		runRight(elapsedTime);
+
+		//2nd row of sprite sheet 3 characters 150 pixels by 50 pixels
+		setSpriteFromSheet(sf::IntRect(217, 62, 150, 50));
+		//move the rectangle to the appropriate cell
+		moveTextureRect();
 	}
 	
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_WalkLeftPressed)
 	{
 		walkLeft(elapsedTime);
+
+		//1st row of sprite sheet 3 characters
+		setSpriteFromSheet(sf::IntRect(12, 12, 150, 50));
+		//move the rectangle to the appropriate cell
+		moveTextureRect();
 	}
 	
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_RunLeftPressed)
 	{
 		runLeft(elapsedTime);
+
+		//1st row of sprite sheet 3 characters
+		setSpriteFromSheet(sf::IntRect(217, 12, 150, 50));
+		//move the rectangle to the appropriate cell
+		moveTextureRect();
 	}
 
 	// If there is no input for walking or running in any direction, the player will slide quickly to a stop in the direction they were last travelling
@@ -66,6 +86,11 @@ void PlayableCharacter::update(float elapsedTime)
 	{
 		// Update how long the jump has been going
 		m_TimeThisJump += elapsedTime;
+
+		//3rd row of sprite sheet 3 characters
+		setSpriteFromSheet(sf::IntRect(12, 112, 150, 50));
+		//move the rectangle to the appropriate cell
+		moveTextureRect();
 
 		// Is the jump going upwards
 		if (m_TimeThisJump < m_JumpDuration)
@@ -156,6 +181,12 @@ Sprite PlayableCharacter::getSprite()
 {
 	return m_Sprite;
 }
+
+Sprite PlayableCharacter::getSpriteFromSheet()
+{
+	return m_Sprite;
+}
+
 /****** Player movement methods - Patrick *****/
 void PlayableCharacter::walkRight(float elapsedTime)
 {
@@ -227,7 +258,28 @@ void PlayableCharacter::runLeft(float elapsedTime)
 	cout << "Run Left - Speed: " << m_MaxRunSpeed << " Velocity: " << m_VelocityX << endl;
 }
 
+void PlayableCharacter::setSpriteFromSheet(sf::IntRect textureBox)
+{
+	LevelManager l;
+	int tile_size = l.TILE_SIZE;
+	sheetCoordinate = sf::Vector2i(textureBox.left, textureBox.top);
+	spriteSize = sf::Vector2i(tile_size, tile_size);
+	if (textureBox.width > tile_size)
+	{
+		animation_it_limit = textureBox.width / tile_size;
 
+		horizontal = true;
+	}
+	else if (textureBox.height > tile_size)
+	{
+		animation_it_limit = textureBox.height / tile_size;
+		horizontal = false;
+	}
+	else
+		throw std::logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
+	m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, spriteSize });
+
+}
 
 
 void PlayableCharacter::slideStopLeft(float elapsedTime)
@@ -250,7 +302,7 @@ void PlayableCharacter::stopFalling(float position)
 
 void PlayableCharacter::stopRight(float position)
 {
-	
+
 	m_Position.x = position - m_Sprite.getGlobalBounds().width;
 	m_Sprite.setPosition(m_Position);
 }
@@ -268,63 +320,34 @@ void PlayableCharacter::stopJump()
 	m_IsFalling = true;
 }
 
-bool PlayableCharacter::handleInput()
+void PlayableCharacter::moveTextureRect()
 {
-	m_JustJumped = false;
-
-	if (Keyboard::isKeyPressed(Keyboard::W))
+	// if the animation counter is greater than the animation limit reset to 1;
+	if (ani_counter == animation_it_limit)
 	{
-		// Start a jump if not already jumping
-		// but only if standing on a block (not falling)
-		if (!m_IsJumping && !m_IsFalling)
-		{
-			m_IsJumping = true;
-			m_TimeThisJump = 0;
-			m_JustJumped = true;
-		}
-	}
-	else
-	{
-		m_IsJumping = false;
-		m_IsFalling = true;
-	}
-	// Check if walking keys are pressed
-	if (Keyboard::isKeyPressed(Keyboard::A))
-	{
-		m_WalkLeftPressed = true;
-	}
-	else
-	{
-		m_WalkLeftPressed = false;
+		ani_counter = 0;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::D))
+	if (horizontal)
 	{
-		m_WalkRightPressed = true;
+		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(spriteSize.x * ani_counter, 0), spriteSize));
 	}
-	else
+	else 
 	{
-		m_WalkRightPressed = false;
-	}
-
-	// Check if running keys are pressed
-	if (Keyboard::isKeyPressed(Keyboard::J))
-	{
-		m_RunLeftPressed = true;
-	}
-	else
-	{
-		m_RunLeftPressed = false;
+		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(0, spriteSize.y * ani_counter), spriteSize));
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::L))
+	//increment animation counter to point to the next frame
+	double timePerFrame;
+	timePerFrame = 1.0 / 6.0;
+	animationTimer = animationTimer + timeElapsed;
+	if (animationTimer > timePerFrame)
 	{
-		m_RunRightPressed = true;
+		ani_counter++;
+		animationTimer = 0;
 	}
-	else
-	{
-		m_RunRightPressed = false;
-	}
+
+}
 
 
 	return m_JustJumped;

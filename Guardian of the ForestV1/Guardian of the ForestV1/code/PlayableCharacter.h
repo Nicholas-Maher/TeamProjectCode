@@ -6,9 +6,16 @@ using namespace sf;
 class PlayableCharacter
 {
 protected:
-	// Of course we will need a sprite
+	// sprite sheet
 	Sprite m_Sprite;
+	Sprite m_SpriteSheet;
 
+	int ani_counter{};
+	sf::Vector2i sheetCoordinate; // Coordinate on spritesheet
+	sf::Vector2i spriteSize;
+	int animation_it_limit;
+	bool horizontal{ true };
+	
 	// How long does a jump last
 	float m_JumpDuration;
 
@@ -29,6 +36,9 @@ protected:
 
 	// Has the player just initialted a jump
 	bool m_JustJumped = false;
+	
+	float timeElapsed;
+	float animationTimer = 0;
 
 	// Private variables and functions
 private:
@@ -63,6 +73,12 @@ public:
 	bool handleInput();
 	// This class is now abstract and cannot be instanciated
 
+	//setSprite to use correct animation cell
+	void setSpriteFromSheet(sf::IntRect textureBox);
+
+	//move the rectangle to the next cell in the animation
+	void moveTextureRect();
+
 	// Where is the player
 	FloatRect getPosition();
 
@@ -74,6 +90,7 @@ public:
 
 	// Send a copy of the sprite to main
 	Sprite getSprite();
+	Sprite getSpriteFromSheet();
 
 	// Make the character walk
 	void walkLeft(float elapsedTime);
