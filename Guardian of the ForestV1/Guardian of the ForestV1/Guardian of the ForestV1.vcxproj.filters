@@ -21,9 +21,6 @@
     <ClInclude Include="code\LevelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\PlayableCharacter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="code\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -41,7 +38,7 @@
     <ClCompile Include="code\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\Input.cpp">
+    <ClCompile Include="code\HandleInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\LevelManager.cpp">
@@ -51,9 +48,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code\PlayableCharacter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\Player.cpp">

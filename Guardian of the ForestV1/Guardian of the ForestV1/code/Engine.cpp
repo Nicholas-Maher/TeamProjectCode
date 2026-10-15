@@ -8,14 +8,11 @@ Engine::Engine()
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 
-	m_Window.create(VideoMode(resolution.x, resolution.y),
-		"Guardian of the Forest",
-		Style::Fullscreen);
+	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
 
 	// Initialize the full screen view
 	m_MainView.setSize(resolution);
 	m_MainView.setCenter(resolution.x / 2.f, resolution.y / 2.f);
-
 
 	m_HudView.reset(FloatRect(0, 0, resolution.x, resolution.y));
 
@@ -28,14 +25,6 @@ Engine::Engine()
 	{
 		m_Window.close();
 	}
-
-	m_BackgroundTexture = TextureHolder::GetTexture("graphics/background.png");
-
-	// Associate the sprite with the texture
-	m_BackgroundSprite.setTexture(m_BackgroundTexture);
-
-	// Load the texture for the background vertex array
-	m_TextureTiles = TextureHolder::GetTexture("graphics/tiles_sheet.png");
 }
 
 void Engine::run()
@@ -51,8 +40,36 @@ void Engine::run()
 		// Make a decimal fraction from the delta time
 		float dtAsSeconds = dt.asSeconds();
 
-		input();
+		init();
+		handleInput();
 		update(dtAsSeconds);
 		draw();
 	}
+}
+
+void Engine::init()
+{
+	m_BackgroundTexture = TextureHolder::GetTexture("graphics/background.png");
+
+	// Associate the sprite with the texture
+	m_BackgroundSprite.setTexture(m_BackgroundTexture);
+
+	// Load the texture for the background vertex array
+	m_TextureTiles = TextureHolder::GetTexture("graphics/tiles_sheet.png");
+
+	// Setting up the background for the healthbar
+	m_HealthBarBackground.setFillColor(Color::Red);
+	m_HealthBarBackground.setPosition(55, 55);
+	m_HealthBarBackground.setSize(Vector2f(m_Player.getFullHealth() * m_HealthBarWidthMultiplier, 70));
+
+	// Setting up the dynamic part of the healthbar
+	m_HealthBar.setFillColor(Color::Green);
+	m_HealthBar.setPosition(55, 55);
+	m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
+
+	// Setting up the border for the healthbar
+	m_HealthBarBorder.setFillColor(Color(139, 69, 19)); // light brown
+	m_HealthBarBorder.setPosition(55 - m_HealthBarBorderWidth, 55 - m_HealthBarBorderWidth);
+	m_HealthBarBorder.setSize(Vector2f((m_Player.getFullHealth() * m_HealthBarWidthMultiplier) +
+		m_HealthBarBorderWidth * 2, 70 + (m_HealthBarBorderWidth * 2)));
 }

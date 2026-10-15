@@ -21,6 +21,10 @@ void Engine::draw()
 	// Draw the HUD
 	// Switch to m_HudView
 	m_Window.setView(m_HudView);
+	m_Window.draw(m_HealthBarBorder);
+	m_Window.draw(m_HealthBarBackground);
+	m_Window.draw(m_HealthBar);
+	
 	
 	// Show everything we have just drawn
 	m_Window.display();

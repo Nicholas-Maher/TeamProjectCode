@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-void Engine::input()
+void Engine::handleInput()
 {
 	Event event;
 	while (m_Window.pollEvent(event))

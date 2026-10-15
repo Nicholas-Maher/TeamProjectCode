@@ -13,7 +13,7 @@ private:
 	TextureHolder th;
 
 	// The player
-	PlayableCharacter m_Player;
+	Player m_Player;
 
 	// A class to manage all the levels
 	LevelManager m_LM;
@@ -55,9 +55,17 @@ private:
 
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
+
+	// Health bar
+	RectangleShape m_HealthBar;
+	RectangleShape m_HealthBarBackground;
+	RectangleShape m_HealthBarBorder;
+	int m_HealthBarBorderWidth = 20;
+	int m_HealthBarWidthMultiplier = 4;
 	
 	// Private functions for internal use only
-	void input();
+	void init();
+	void handleInput();
 	void update(float dtAsSeconds);
 	void draw();	
 
@@ -65,7 +73,7 @@ private:
 	void loadLevel();
 
 	// Run will call all the private functions
-	bool detectCollisions(PlayableCharacter& character);
+	bool detectCollisions(Player& character);
 	
 public:
 	// The Engine constructor

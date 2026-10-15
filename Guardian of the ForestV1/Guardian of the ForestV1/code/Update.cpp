@@ -16,6 +16,8 @@ void Engine::update(float dtAsSeconds)
 		// Update the player
 		m_Player.update(dtAsSeconds);
 
+		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
+
 		// Detect collisions and see if the player has reached the goal tile
 		// The second part of the if condition is only executed
 		// when the player is touching the home tile
