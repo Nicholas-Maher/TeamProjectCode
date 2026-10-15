@@ -71,6 +71,5 @@ bool Player::handleInput()
 		m_RunRightPressed = false;
 	}
 	
-
-	return m_JustJumped;
 }
+

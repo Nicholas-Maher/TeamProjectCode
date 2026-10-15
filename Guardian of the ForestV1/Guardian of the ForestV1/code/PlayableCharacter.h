@@ -70,8 +70,7 @@ public:
 
 	void spawn(Vector2f startPosition, float gravity);
 
-	// This is a pure virtual function
-	bool virtual handleInput() = 0;
+	bool handleInput();
 	// This class is now abstract and cannot be instanciated
 
 	//setSprite to use correct animation cell

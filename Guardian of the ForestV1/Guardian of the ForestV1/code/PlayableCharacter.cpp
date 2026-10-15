@@ -15,6 +15,11 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
 
+	// Associate a texture with the sprite
+	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/player.png"));
+
+	m_JumpDuration = .50;
+
 }
 
 void PlayableCharacter::update(float elapsedTime)
@@ -345,3 +350,5 @@ void PlayableCharacter::moveTextureRect()
 }
 
 
+	return m_JustJumped;
+}
