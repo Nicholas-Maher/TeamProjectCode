@@ -68,7 +68,7 @@ private:
 	RectangleShape m_HealthBarBorder;
 	int m_HealthBarBorderWidth = 20;
 	int m_HealthBarWidthMultiplier = 4;
-	
+
 	// Private functions for internal use only
 	void init();
 	void handleInput();
@@ -80,7 +80,7 @@ private:
 
 	// Run will call all the private functions
 	bool detectCollisions(Player& character);
-	
+
 public:
 	// The Engine constructor
 	Engine();
