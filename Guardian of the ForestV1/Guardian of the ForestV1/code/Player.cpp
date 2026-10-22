@@ -3,6 +3,19 @@
 #include "TextureHolder.h"
 #include <iostream>
 using namespace std;
+#include <cmath>
+#include <random>
+
+Player::Player()
+{
+	// Associate a texture with the sprite
+	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/pacman-spritesheet-resized-810-730.png"));
+	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
+	ani_counter = 1;
+
+	m_JumpDuration = .50;
+m_Health = m_FullHealth;
+}
 
 void Player::spawn(Vector2f startPosition, float gravity)
 {
@@ -15,16 +28,8 @@ void Player::spawn(Vector2f startPosition, float gravity)
 
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
-
-	// Associate a texture with the sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/pacman-spritesheet-resized-810-730.png"));
-	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
-	ani_counter = 1;
-
-	m_JumpDuration = .50;
-
-	m_Health = m_FullHealth;
 }
+	
 
 bool Player::handleInput()
 {
@@ -89,6 +94,8 @@ bool Player::handleInput()
 
 void Player::update(float elapsedTime)
 {
+	timeElapsed = elapsedTime;
+
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_WalkRightPressed)
 	{
@@ -105,8 +112,8 @@ void Player::update(float elapsedTime)
 	{
 		runRight(elapsedTime);
 
-		//2nd row of sprite sheet 3 characters 150 pixels by 50 pixels
-		setSpriteFromSheet(sf::IntRect(217, 62, 150, 50));
+		//2nd row of sprite sheet 3 chara2ters 150 pixels by 50 pixels
+		setSpriteFromSheet(sf::IntRect(212, 62, 150, 50));
 		//move the rectangle to the appropriate cell
 		moveTextureRect();
 	}
@@ -128,7 +135,7 @@ void Player::update(float elapsedTime)
 		runLeft(elapsedTime);
 
 		//1st row of sprite sheet 3 characters
-		setSpriteFromSheet(sf::IntRect(217, 12, 150, 50));
+		setSpriteFromSheet(sf::IntRect(212, 12, 150, 50));
 		//move the rectangle to the appropriate cell
 		moveTextureRect();
 	}
@@ -181,15 +188,15 @@ void Player::update(float elapsedTime)
 
 
 	// Feet
-	m_Feet.left = r.left + 3;
+	m_Feet.left = r.left;
 	m_Feet.top = r.top + r.height - 1;
-	m_Feet.width = r.width - 6;
+	m_Feet.width = r.width;
 	m_Feet.height = 1;
 
 	// Head
-	m_Head.left = r.left;
+	m_Head.left = r.left + 3;
 	m_Head.top = r.top + (r.height * .3);
-	m_Head.width = r.width;
+	m_Head.width = r.width - 6;
 	m_Head.height = 1;
 
 	// Right
@@ -344,7 +351,8 @@ void Player::setSpriteFromSheet(sf::IntRect textureBox)
 	}
 	else
 		throw std::logic_error("Animation bounding box must contain multiply sprites, setSprite(sf::IntRect )\n");
-		m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, spriteSize });
+	m_Sprite.setTextureRect(sf::IntRect{ sheetCoordinate, spriteSize });
+
 }
 
 
@@ -388,7 +396,7 @@ void Player::stopJump()
 void Player::moveTextureRect()
 {
 	// if the animation counter is greater than the animation limit reset to 1;
-	if (ani_counter == animation_it_limit)
+	if (ani_counter ==animation_it_limit)
 	{
 		ani_counter = 0;
 	}

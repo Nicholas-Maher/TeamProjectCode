@@ -14,11 +14,19 @@ protected:
 	Sprite m_Sprite;
 	Sprite m_SpriteSheet;
 
-	int ani_counter{};
+	// And a texture
+	Texture m_Texture;
+	
 	sf::Vector2i sheetCoordinate; // Coordinate on spritesheet
 	sf::Vector2i spriteSize;
+
 	int animation_it_limit;
 	bool horizontal{ true };
+	int ani_counter{};
+	int counter{};
+	Clock clock;
+	float timeElapsed;
+	float animationTimer = 0;
 	
 	// How long does a jump last
 	float m_JumpDuration;
@@ -44,8 +52,7 @@ protected:
 	// When was the gameactor last hit
 	Time m_timeLastHit;
 	
-	float timeElapsed;
-	float animationTimer = 0;
+	
 
 	// Private variables and functions
 private:
@@ -69,10 +76,12 @@ private:
 	FloatRect m_Left;
 
 	// And a texture
-	Texture m_Texture;
+	//Texture m_Texture;
 
 	// All our public functions will come next
 public:
+
+	Player();
 
 	void spawn(Vector2f startPosition, float gravity);
 
