@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="code\Engine.h" />
     <ClInclude Include="code\LevelManager.h" />
-    <ClInclude Include="code\PlayableCharacter.h" />
     <ClInclude Include="code\Player.h" />
     <ClInclude Include="code\TextureHolder.h" />
   </ItemGroup>
@@ -29,11 +28,10 @@
     <ClCompile Include="code\DetectCollisions.cpp" />
     <ClCompile Include="code\Draw.cpp" />
     <ClCompile Include="code\Engine.cpp" />
-    <ClCompile Include="code\Input.cpp" />
+    <ClCompile Include="code\HandleInput.cpp" />
     <ClCompile Include="code\LevelManager.cpp" />
     <ClCompile Include="code\LoadLevel.cpp" />
     <ClCompile Include="code\Main.cpp" />
-    <ClCompile Include="code\PlayableCharacter.cpp" />
     <ClCompile Include="code\Player.cpp" />
     <ClCompile Include="code\TextureHolder.cpp" />
     <ClCompile Include="code\Update.cpp" />

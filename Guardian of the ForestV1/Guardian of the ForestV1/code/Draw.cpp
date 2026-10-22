@@ -24,7 +24,7 @@ void Engine::draw()
 	// Draw the HUD
 	// Switch to m_HudView
 	m_Window.setView(m_HudView);
-
+	
 	// Show everything we have just drawn
 	m_Window.display();
 }
