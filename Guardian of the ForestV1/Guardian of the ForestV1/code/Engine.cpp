@@ -5,8 +5,8 @@ Engine::Engine()
 {
 	// Get the screen resolution and create an SFML window and View
 	Vector2f resolution;
-	resolution.x = VideoMode::getDesktopMode().width;
-	resolution.y = VideoMode::getDesktopMode().height;
+	resolution.x = 1920;
+	resolution.y = 1080;
 
 	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
 
