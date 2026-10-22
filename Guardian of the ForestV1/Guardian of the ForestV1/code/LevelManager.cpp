@@ -3,6 +3,7 @@
 #include "TextureHolder.h"
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include "LevelManager.h"
 
 using namespace sf;
@@ -15,6 +16,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	// Get the next level
 	m_CurrentLevel++;
+
 	if (m_CurrentLevel > NUM_LEVELS)
 	{
 		m_CurrentLevel = 1;
@@ -25,11 +27,44 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	string levelToLoad;
 	switch (m_CurrentLevel)
 	{
-	
+
 	case 1:
+		// leavel loads of Levels Folder in to level1.txt file
 		levelToLoad = "levels/level1.txt";
-		m_StartPosition.x = 100;
-		m_StartPosition.y = 100;
+		m_StartPosition.x = 1;
+		m_StartPosition.y = 900;
+		m_BaseTimeLimit = 30.0f;
+		break;
+
+	case 2:
+		//level load of levels folder in to level2.txt file
+		levelToLoad = "Levels/level2.txt";
+		m_StartPosition.x = 1;
+		m_StartPosition.y = 900;
+		m_BaseTimeLimit = 30.0f;
+		break;
+
+	case 3:
+		//level load of levels folder in to level3.txt file
+		levelToLoad = "Levels/level3.txt";
+		m_StartPosition.x = 1;
+		m_StartPosition.y = 900;
+		m_BaseTimeLimit = 30.0f;
+		break;
+
+	case 4:
+		//level load of levels folder in to level4.txt file
+		levelToLoad = "Levels/level4.txt";
+		m_StartPosition.x = 1;
+		m_StartPosition.y = 400;
+		m_BaseTimeLimit = 30.0f;
+		break;
+
+	case 5:
+		//level load of levels folder in to level4.txt file
+		levelToLoad = "Levels/level5.txt";
+		m_StartPosition.x = 1;
+		m_StartPosition.y = 400;
 		m_BaseTimeLimit = 30.0f;
 		break;
 	}
@@ -41,11 +76,14 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	while (getline(inputFile, s))
 	{
 		++m_LevelSize.y;
+
+		if (s.length() > m_LevelSize.x)
+		{
+			m_LevelSize.x = s.length();
+		}
 	}
 
 	// Store the length of the rows
-	m_LevelSize.x = s.length();
-
 	// Go back to the start of the file
 	inputFile.clear();
 	inputFile.seekg(0, ios::beg);
@@ -68,7 +106,6 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 			const char val = row[x];
 			arrayLevel[y][x] = atoi(&val);
 		}
-
 		y++;
 	}
 
@@ -89,31 +126,31 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		for (int y = 0; y < m_LevelSize.y; y++)
 		{
 			// Position each vertex in the current quad
-			rVaLevel[currentVertex + 0].position = 
+			rVaLevel[currentVertex + 0].position =
 				Vector2f(x * TILE_SIZE, y * TILE_SIZE);
 
-			rVaLevel[currentVertex + 1].position = 
+			rVaLevel[currentVertex + 1].position =
 				Vector2f((x * TILE_SIZE) + TILE_SIZE, y * TILE_SIZE);
 
-			rVaLevel[currentVertex + 2].position = 
+			rVaLevel[currentVertex + 2].position =
 				Vector2f((x * TILE_SIZE) + TILE_SIZE, (y * TILE_SIZE) + TILE_SIZE);
 
-			rVaLevel[currentVertex + 3].position = 
+			rVaLevel[currentVertex + 3].position =
 				Vector2f((x * TILE_SIZE), (y * TILE_SIZE) + TILE_SIZE);
 
 			// Which tile from the sprite sheet should we use
 			int verticalOffset = arrayLevel[y][x] * TILE_SIZE;
 
-			rVaLevel[currentVertex + 0].texCoords = 
+			rVaLevel[currentVertex + 0].texCoords =
 				Vector2f(0, 0 + verticalOffset);
 
-			rVaLevel[currentVertex + 1].texCoords = 
+			rVaLevel[currentVertex + 1].texCoords =
 				Vector2f(TILE_SIZE, 0 + verticalOffset);
 
-			rVaLevel[currentVertex + 2].texCoords = 
+			rVaLevel[currentVertex + 2].texCoords =
 				Vector2f(TILE_SIZE, TILE_SIZE + verticalOffset);
 
-			rVaLevel[currentVertex + 3].texCoords = 
+			rVaLevel[currentVertex + 3].texCoords =
 				Vector2f(0, TILE_SIZE + verticalOffset);
 
 			// Position ready for the next four vertices

@@ -34,9 +34,34 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 	FloatRect level(0, 0, m_LM.getLevelSize().x * TILE_SIZE, m_LM.getLevelSize().y * TILE_SIZE);
 	if (!character.getPosition().intersects(level))
 	{
-		// respawn the character
+		// respawn the character changeing this mean he falls for every with out end
 		character.spawn(m_LM.getStartPosition(), GRAVITY);
 	}
+
+	/*Nicholas -- player Bourder*/
+
+	// Get the player's current position.
+	FloatRect playerBounds = character.getPosition();
+
+	float levelWidth =
+		m_LM.getLevelSize().x * TILE_SIZE;
+
+	// Stop the player at the left edge.
+	if (playerBounds.left < 0.f)
+	{
+		character.stopLeft(0.f);
+	}
+
+	// Update the player's position after the correction.
+	playerBounds = character.getPosition();
+
+	// Stop the player at the right edge.
+	if (playerBounds.left + playerBounds.width > levelWidth)
+	{
+		character.stopRight(levelWidth);
+	}
+
+	/*End of Nicholas - code*/
 
 	for (int x = startX; x < endX; x++)
 	{

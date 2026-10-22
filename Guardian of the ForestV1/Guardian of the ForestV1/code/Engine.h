@@ -40,8 +40,11 @@ private:
 	bool m_Playing = false;
 
 	// How much time is left in the current level
+
 	float m_TimeRemaining = 10;
 	Time m_GameTimeTotal;
+
+
 
 	// Is it time for a new/first level?
 	bool m_NewLevelRequired = true;
@@ -49,24 +52,27 @@ private:
 	// The vertex array for the level design
 	VertexArray m_VALevel;
 
+	/*Nicholas -- Level Border*/
+	sf::RectangleShape m_LevelBorder;
+
 	// The 2d array with the map for the level
 	// A pointer to a pointer
 	int** m_ArrayLevel = NULL;
 
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
-	
+
 	// Private functions for internal use only
 	void input();
 	void update(float dtAsSeconds);
-	void draw();	
+	void draw();
 
 	// Load a new level
 	void loadLevel();
 
 	// Run will call all the private functions
 	bool detectCollisions(PlayableCharacter& character);
-	
+
 public:
 	// The Engine constructor
 	Engine();

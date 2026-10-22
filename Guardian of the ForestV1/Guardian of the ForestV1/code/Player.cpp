@@ -4,8 +4,7 @@
 Player::Player()
 {
 	// Associate a texture with the sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture(
-		"graphics/player.png"));
+	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/player.png"));
 
 	m_JumpDuration = .50;
 }
@@ -67,7 +66,7 @@ bool Player::handleInput()
 	{
 		m_RunRightPressed = false;
 	}
-	
+
 
 	return m_JustJumped;
 }

@@ -9,6 +9,7 @@ void PlayableCharacter::spawn(Vector2f startPosition, float gravity)
 	m_Position.y = startPosition.y;
 
 	// Initialize the gravity
+
 	m_Gravity = gravity;
 
 	// Move the sprite in to position
@@ -23,19 +24,19 @@ void PlayableCharacter::update(float elapsedTime)
 	{
 		walkRight(elapsedTime);
 	}
-	
+
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_RunRightPressed)
 	{
 		runRight(elapsedTime);
 	}
-	
+
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_WalkLeftPressed)
 	{
 		walkLeft(elapsedTime);
 	}
-	
+
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_RunLeftPressed)
 	{
@@ -164,7 +165,7 @@ void PlayableCharacter::walkRight(float elapsedTime)
 	// Multiplying by delta t is needed here to prevent the character hitting max speed immediately
 	m_Position.x += m_VelocityX * elapsedTime;
 
-	
+
 	//m_Position.x += m_MaxWalkSpeed * elapsedTime;
 	cout << "Walk Right - Speed: " << m_MaxWalkSpeed << " Velocity: " << m_VelocityX << endl;
 }
@@ -244,7 +245,7 @@ void PlayableCharacter::stopFalling(float position)
 
 void PlayableCharacter::stopRight(float position)
 {
-	
+
 	m_Position.x = position - m_Sprite.getGlobalBounds().width;
 	m_Sprite.setPosition(m_Position);
 }
@@ -257,7 +258,7 @@ void PlayableCharacter::stopLeft(float position)
 
 void PlayableCharacter::stopJump()
 {
-	// Stop a jump early 
+	// Stop a jump early
 	m_IsJumping = false;
 	m_IsFalling = true;
 }

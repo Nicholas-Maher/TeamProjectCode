@@ -7,7 +7,7 @@ void Engine::input()
 	{
 		if (event.type == Event::KeyPressed)
 		{
-			
+
 
 			// Handle the player quitting
 			if (Keyboard::isKeyPressed(Keyboard::Escape))
@@ -21,7 +21,7 @@ void Engine::input()
 				m_Playing = true;
 			}
 		}
-	}	
+	}
 
 	// Handle input specific to the player
 	if (m_Player.handleInput())

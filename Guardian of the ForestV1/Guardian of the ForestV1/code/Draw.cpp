@@ -10,10 +10,13 @@ void Engine::draw()
 	// Draw the background
 	m_Window.draw(m_BackgroundSprite);
 	// Switch to m_MainView
-	m_Window.setView(m_MainView);		
+	m_Window.setView(m_MainView);
 
 	// Draw the Level
 	m_Window.draw(m_VALevel, &m_TextureTiles);
+
+	/*Nicholas Drwing the LevelBorder*/
+	m_Window.draw(m_LevelBorder);
 
 	// Draw the player
 	m_Window.draw(m_Player.getSprite());
@@ -21,7 +24,7 @@ void Engine::draw()
 	// Draw the HUD
 	// Switch to m_HudView
 	m_Window.setView(m_HudView);
-	
+
 	// Show everything we have just drawn
 	m_Window.display();
 }
