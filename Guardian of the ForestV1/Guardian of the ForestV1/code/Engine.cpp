@@ -10,6 +10,8 @@ Engine::Engine()
 
 	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
 
+	m_Window.setFramerateLimit(60);
+
 	// Initialize the full screen view
 	m_MainView.setSize(resolution);
 	m_MainView.setCenter(resolution.x / 2.f, resolution.y / 2.f);
@@ -17,8 +19,8 @@ Engine::Engine()
 	m_HudView.reset(FloatRect(0, 0, resolution.x, resolution.y));
 
 	// Inititialize the background view
-	m_BGMainView.setSize(resolution);
-	m_BGMainView.setCenter(resolution.x / 2.f, resolution.y / 2.f);
+	//m_BGMainView.setSize(resolution);
+	//m_BGMainView.setCenter(resolution.x / 2.f, resolution.y / 2.f);
 
 	// Can this graphics card use shaders?
 	if (!sf::Shader::isAvailable())
