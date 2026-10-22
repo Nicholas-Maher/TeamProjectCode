@@ -30,7 +30,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	case 1:
 		// leavel loads of Levels Folder in to level1.txt file
-		levelToLoad = "levels/level1.txt";
+		levelToLoad = "levels/level1-Earth.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 900;
 		m_BaseTimeLimit = 30.0f;
@@ -38,7 +38,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	case 2:
 		//level load of levels folder in to level2.txt file
-		levelToLoad = "Levels/level2.txt";
+		levelToLoad = "Levels/level2-Water.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 900;
 		m_BaseTimeLimit = 30.0f;
@@ -46,7 +46,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	case 3:
 		//level load of levels folder in to level3.txt file
-		levelToLoad = "Levels/level3.txt";
+		levelToLoad = "Levels/level3-Air.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 900;
 		m_BaseTimeLimit = 30.0f;
@@ -54,7 +54,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	case 4:
 		//level load of levels folder in to level4.txt file
-		levelToLoad = "Levels/level4.txt";
+		levelToLoad = "Levels/level4-Fire.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 400;
 		m_BaseTimeLimit = 30.0f;
@@ -62,7 +62,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 
 	case 5:
 		//level load of levels folder in to level4.txt file
-		levelToLoad = "Levels/level5.txt";
+		levelToLoad = "Levels/level5-Homeland.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 400;
 		m_BaseTimeLimit = 30.0f;
