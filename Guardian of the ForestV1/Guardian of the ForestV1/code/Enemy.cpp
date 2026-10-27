@@ -18,3 +18,9 @@ void Enemy::draw(sf::RenderWindow& window)
 {
 	window.draw(m_Body);
 }
+
+// Returns position of enemy
+sf::Vector2f Enemy::getPosition() const
+{
+	return m_Position;
+}

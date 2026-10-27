@@ -14,7 +14,11 @@ public:
 
 	//Initializes the enemy with a position
 	Enemy(sf::Vector2f startPosition);
+
 	// Draws the enemy on the window
 	void draw(sf::RenderWindow& window);
+
+	// Returns position of enemy
+	sf::Vector2f getPosition() const;
 
 };
