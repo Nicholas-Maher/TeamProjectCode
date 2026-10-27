@@ -48,7 +48,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		//level load of levels folder in to level3.txt file
 		levelToLoad = "Levels/level3-Air.txt";
 		m_StartPosition.x = 1;
-		m_StartPosition.y = 900;
+		m_StartPosition.y = 600;
 		m_BaseTimeLimit = 30.0f;
 		break;
 
