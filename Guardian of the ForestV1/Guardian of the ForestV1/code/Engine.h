@@ -3,6 +3,7 @@
 #include "TextureHolder.h"
 #include "Player.h"
 #include "LevelManager.h"
+#include "Enemy.h"
 
 using namespace sf;
 
@@ -68,6 +69,10 @@ private:
 	RectangleShape m_HealthBarBorder;
 	int m_HealthBarBorderWidth = 20;
 	int m_HealthBarWidthMultiplier = 4;
+
+	//Creating Enemy
+	Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
+
 
 	// Private functions for internal use only
 	void init();

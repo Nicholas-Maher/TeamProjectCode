@@ -21,6 +21,9 @@ void Engine::draw()
 	// Draw the player
 	m_Window.draw(m_Player.getSprite());
 
+	// Draw the enemy
+	m_Enemy.draw(m_Window);
+
 	// Draw the HUD
 	// Switch to m_HudView
 	m_Window.setView(m_HudView);
