@@ -18,11 +18,6 @@ void Engine::draw()
         // Switch to HUD view for the menu
         m_Window.setView(m_HudView);
 
-        // Dark overlay
-        RectangleShape overlay(Vector2f(1920, 1080));
-        overlay.setFillColor(Color(0, 0, 0, 150));
-        m_Window.draw(overlay);
-
         // Game title
         Text title;
         title.setFont(m_MenuFont);
@@ -31,10 +26,7 @@ void Engine::draw()
         title.setFillColor(Color(220, 240, 180));
 
         FloatRect titleBounds = title.getLocalBounds();
-        title.setOrigin(
-            titleBounds.left + titleBounds.width / 2.f,
-            titleBounds.top + titleBounds.height / 2.f
-        );
+        title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f );
 
         title.setPosition(960, 350);
         m_Window.draw(title);
@@ -44,7 +36,6 @@ void Engine::draw()
         startButton.setPosition(810, 500);
         startButton.setFillColor(Color(45, 110, 55));
         startButton.setOutlineColor(Color::White);
-        startButton.setOutlineThickness(3);
         m_Window.draw(startButton);
 
         // Start Game text
@@ -55,10 +46,7 @@ void Engine::draw()
         startText.setFillColor(Color::White);
 
         FloatRect startBounds = startText.getLocalBounds();
-        startText.setOrigin(
-            startBounds.left + startBounds.width / 2.f,
-            startBounds.top + startBounds.height / 2.f
-        );
+        startText.setOrigin(startBounds.left + startBounds.width / 2.f, startBounds.top + startBounds.height / 2.f);
 
         startText.setPosition(960, 540);
         m_Window.draw(startText);

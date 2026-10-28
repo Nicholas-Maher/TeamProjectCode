@@ -40,7 +40,7 @@ void Engine::handleInput()
             Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
 
             // Start Game Button
-            if (FloatRect(810, 500, 300, 80).contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+            if (FloatRect(810, 500, 300, 80).contains((mousePosition.x),(mousePosition.y)))
             {
                 if (m_NewLevelRequired)
                 {
@@ -51,7 +51,7 @@ void Engine::handleInput()
                 m_Playing = true;
             }
             // Quit the Game Button
-            else if (FloatRect(810, 620, 300, 80).contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y)))
+            else if (FloatRect(810, 620, 300, 80).contains((mousePosition.x), (mousePosition.y)))
             {
                 m_Window.close();
             }
