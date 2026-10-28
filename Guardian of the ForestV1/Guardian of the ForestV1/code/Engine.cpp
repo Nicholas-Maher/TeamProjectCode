@@ -10,6 +10,7 @@ Engine::Engine()
 	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
 	m_Window.setFramerateLimit(60);
 
+	/*Nicholas -- adding Font to the main Menu*/
 	m_MenuFont.loadFromFile("fonts/Cinzel.ttf");
 
 	// Initialize the full screen view
