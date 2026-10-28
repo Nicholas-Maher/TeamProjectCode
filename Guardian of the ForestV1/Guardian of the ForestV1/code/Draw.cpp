@@ -26,7 +26,7 @@ void Engine::draw()
         title.setFillColor(Color(220, 240, 180));
 
         FloatRect titleBounds = title.getLocalBounds();
-        title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f );
+        title.setOrigin(titleBounds.left + titleBounds.width / 2.f,titleBounds.top + titleBounds.height / 2.f);
 
         title.setPosition(960, 350);
         m_Window.draw(title);
@@ -67,10 +67,7 @@ void Engine::draw()
         quitText.setFillColor(Color::White);
 
         FloatRect quitBounds = quitText.getLocalBounds();
-        quitText.setOrigin(
-            quitBounds.left + quitBounds.width / 2.f,
-            quitBounds.top + quitBounds.height / 2.f
-        );
+        quitText.setOrigin(quitBounds.left + quitBounds.width / 2.f,quitBounds.top + quitBounds.height / 2.f );
 
         quitText.setPosition(960, 660);
         m_Window.draw(quitText);

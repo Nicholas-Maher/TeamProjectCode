@@ -51,7 +51,7 @@ void Engine::handleInput()
                 m_Playing = true;
             }
             // Quit the Game Button
-            else if (FloatRect(810, 620, 300, 80).contains((mousePosition.x), (mousePosition.y)))
+            else if (FloatRect(810, 620, 300, 80).contains((mousePosition.x), static_cast<float>(mousePosition.y)))
             {
                 m_Window.close();
             }
