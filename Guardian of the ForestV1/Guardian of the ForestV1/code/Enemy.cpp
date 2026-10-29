@@ -4,6 +4,8 @@ Enemy::Enemy(sf::Vector2f startPosition)
 {
 	// Set the position of the enemy
 	m_Position = startPosition;
+	// Set the starting position of the enemy
+	m_StartPosition = startPosition;
 	// Set the size of the enemy
 	m_Body.setSize(sf::Vector2f(50.f,100.f));
 	// Set the color of the enemy
@@ -27,8 +29,17 @@ sf::Vector2f Enemy::getPosition() const
 
 void Enemy::update(float dt)
 {
-	// Move the enemy
 	m_Position.x += m_Speed * dt;
-	// Update the position of the enemy
+
+	if (m_Position.x >= m_StartPosition.x + m_PatrolDistance)
+	{
+		m_Speed = -100.f;
+	}
+
+	if (m_Position.x <= m_StartPosition.x)
+	{
+		m_Speed = 100.f;
+	}
+
 	m_Body.setPosition(m_Position);
 }

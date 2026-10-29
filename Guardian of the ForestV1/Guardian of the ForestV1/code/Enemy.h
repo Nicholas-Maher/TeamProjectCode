@@ -10,6 +10,10 @@ private:
 	// Vector holds position of enemy	
 	sf::Vector2f m_Position;
 
+	sf::Vector2f m_StartPosition; // Starting position of the enemy
+
+	float m_PatrolDistance = 150.f; // Distance the enemy patrols
+
 
 	float m_Speed = 100.f; // Speed of the enemy
 
