@@ -29,8 +29,10 @@ sf::Vector2f Enemy::getPosition() const
 
 void Enemy::update(float dt)
 {
+	// Update the position of the enemy based on its speed and delta time
 	m_Position.x += m_Speed * dt;
 
+	// Check if enemy has reached the patrol distance and reverse its direction if necessary
 	if (m_Position.x >= m_StartPosition.x + m_PatrolDistance)
 	{
 		m_Speed = -100.f;
@@ -41,5 +43,6 @@ void Enemy::update(float dt)
 		m_Speed = 100.f;
 	}
 
+	// Update the position of enemy body
 	m_Body.setPosition(m_Position);
 }
