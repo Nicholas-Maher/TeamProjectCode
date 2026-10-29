@@ -10,6 +10,9 @@ private:
 	// Vector holds position of enemy	
 	sf::Vector2f m_Position;
 
+
+	float m_Speed = 100.f; // Speed of the enemy
+
 public:
 
 	//Initializes the enemy with a position
@@ -20,5 +23,7 @@ public:
 
 	// Returns position of enemy
 	sf::Vector2f getPosition() const;
+
+	void update(float dt); // Update the enemy position by delta time
 
 };
