@@ -71,8 +71,9 @@ bool Player::handleInput()
 	}
 
 	// Check if running keys are pressed
-	if (Keyboard::isKeyPressed(Keyboard::J))
+	if (Keyboard::isKeyPressed(Keyboard::A) && Keyboard::isKeyPressed(Keyboard::LShift))
 	{
+		m_WalkLeftPressed = false;
 		m_RunLeftPressed = true;
 	}
 	else
@@ -80,8 +81,9 @@ bool Player::handleInput()
 		m_RunLeftPressed = false;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::L))
+	if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::L))
 	{
+		m_WalkRightPressed = false;
 		m_RunRightPressed = true;
 	}
 	else
