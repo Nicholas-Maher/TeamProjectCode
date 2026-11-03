@@ -81,7 +81,7 @@ bool Player::handleInput()
 		m_RunLeftPressed = false;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::L))
+	if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::LShift))
 	{
 		m_WalkRightPressed = false;
 		m_RunRightPressed = true;
