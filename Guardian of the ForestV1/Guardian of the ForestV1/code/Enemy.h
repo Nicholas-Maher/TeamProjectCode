@@ -30,4 +30,7 @@ public:
 
 	void update(float dt); // Update the enemy position by delta time
 
+	// Sets the position of the enemy
+	void setPosition(sf::Vector2f position);
+
 };

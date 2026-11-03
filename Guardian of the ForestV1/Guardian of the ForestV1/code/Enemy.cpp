@@ -46,3 +46,10 @@ void Enemy::update(float dt)
 	// Update the position of enemy body
 	m_Body.setPosition(m_Position);
 }
+
+// Sets the position of the enemy
+void Enemy::setPosition(sf::Vector2f position)
+{
+	m_Position = position;
+	m_Body.setPosition(m_Position);
+}
