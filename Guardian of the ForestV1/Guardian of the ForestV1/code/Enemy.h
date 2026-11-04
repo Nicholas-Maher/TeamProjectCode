@@ -33,4 +33,7 @@ public:
 	// Sets the position of the enemy
 	void setPosition(sf::Vector2f position);
 
+	// enemies speed and direction
+	float getSpeed() const;
+
 };

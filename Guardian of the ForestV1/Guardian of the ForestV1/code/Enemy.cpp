@@ -51,5 +51,13 @@ void Enemy::update(float dt)
 void Enemy::setPosition(sf::Vector2f position)
 {
 	m_Position = position;
+
+	m_StartPosition = position; // Update the starting position as well
 	m_Body.setPosition(m_Position);
+}
+
+// enemies speed andd direction
+float Enemy::getSpeed() const
+{
+	return m_Speed;
 }

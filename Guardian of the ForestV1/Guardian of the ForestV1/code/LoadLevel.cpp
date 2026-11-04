@@ -35,6 +35,24 @@ void Engine::loadLevel()
 	// Spawn the player
 	m_Player.spawn(m_LM.getStartPosition(), GRAVITY);
 
+
+	// Spawn the enemy at a specific tile position (for example, tile (10, y))	
+	int enemyTileX = 10;
+
+	for (int y = 0; y < m_LM.getLevelSize().y; y++)
+	{
+		if (m_ArrayLevel[y][enemyTileX] == 1)
+		{
+			float enemyX = enemyTileX * TILE_SIZE;
+			float enemyY = (y * TILE_SIZE) - 100.f;
+
+			m_Enemy.setPosition(Vector2f(enemyX, enemyY));
+
+			// Enemy spawned, exit the loop
+			break;
+		}
+	}
+
 	// Make sure this code isn't run again
 	m_NewLevelRequired = false;
 }
