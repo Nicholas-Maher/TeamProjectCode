@@ -19,6 +19,9 @@ void Engine::update(float dtAsSeconds)
 		// Update the enemy
 		m_Enemy.update(dtAsSeconds, hasGroundAhead());
 
+		// Check if the enemy can detect the player
+		bool playerDetected = m_Enemy.canDetectPlayer(m_Player.getPosition());
+
 		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 
 		// Detect collisions and see if the player has reached the goal tile

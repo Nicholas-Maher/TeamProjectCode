@@ -40,6 +40,6 @@ public:
 	// enemies speed and direction
 	float getSpeed() const;
 
-	bool canDetectPlayer(sf::Vector2f playerPosition); // Check if the enemy can detect the player based on their position
+	bool canDetectPlayer(sf::FloatRect playerBounds); // Check if the enemy can detect the player based on their position
 
 };
