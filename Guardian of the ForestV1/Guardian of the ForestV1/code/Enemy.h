@@ -28,7 +28,7 @@ public:
 	// Returns position of enemy
 	sf::Vector2f getPosition() const;
 
-	void update(float dt); // Update the enemy position by delta time
+	void update(float dt, bool groundAhead); // Update the enemy position by delta time
 
 	// Sets the position of the enemy
 	void setPosition(sf::Vector2f position);
