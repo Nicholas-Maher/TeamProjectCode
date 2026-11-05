@@ -29,6 +29,13 @@ sf::Vector2f Enemy::getPosition() const
 
 void Enemy::update(float dt, bool groundAhead)
 {
+
+	// If there is no ground ahead, reverse the direction of the enemy
+	if (!groundAhead)
+	{
+		m_Speed = -m_Speed;
+	}
+
 	// Update the position of the enemy based on its speed and delta time
 	m_Position.x += m_Speed * dt;
 
