@@ -17,7 +17,7 @@ void Engine::update(float dtAsSeconds)
 		m_Player.update(dtAsSeconds);
 
 		// Update the enemy
-		m_Enemy.update(dtAsSeconds);
+		m_Enemy.update(dtAsSeconds, hasGroundAhead());
 
 		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 

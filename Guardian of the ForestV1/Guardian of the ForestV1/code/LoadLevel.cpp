@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+#include <iostream>
+
 void Engine::loadLevel()
 {
 	m_Playing = false;
@@ -37,8 +39,9 @@ void Engine::loadLevel()
 
 
 	// Spawn the enemy at a specific tile position (for example, tile (10, y))	
-	int enemyTileX = 10;
+	int enemyTileX = 25;
 
+	std::cout << "Enemy spawn column: " << enemyTileX << std::endl;
 	for (int y = 0; y < m_LM.getLevelSize().y; y++)
 	{
 		if (m_ArrayLevel[y][enemyTileX] == 1)
