@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <iostream>
 
 using namespace sf;
 
@@ -21,6 +22,12 @@ void Engine::update(float dtAsSeconds)
 
 		// Check if the enemy can detect the player
 		bool playerDetected = m_Enemy.canDetectPlayer(m_Player.getPosition());
+
+		// testing if player detected
+		if (playerDetected)
+		{
+			std::cout << "Player detected by enemy!" << std::endl;
+		}
 
 		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 
