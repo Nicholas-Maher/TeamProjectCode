@@ -31,10 +31,12 @@ void Enemy::update(float dt, bool groundAhead)
 {
 
 	// If there is no ground ahead, reverse the direction of the enemy
-	if (!groundAhead)
+	if (!groundAhead && m_WasGroundAhead)
 	{
 		m_Speed = -m_Speed;
 	}
+
+	m_WasGroundAhead = groundAhead;
 
 	// Update the position of the enemy based on its speed and delta time
 	m_Position.x += m_Speed * dt;

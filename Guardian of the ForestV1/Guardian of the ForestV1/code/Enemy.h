@@ -17,6 +17,8 @@ private:
 
 	float m_Speed = 100.f; // Speed of the enemy
 
+	bool m_WasGroundAhead = true; // To track if there was ground ahead in the last update
+
 public:
 
 	//Initializes the enemy with a position
