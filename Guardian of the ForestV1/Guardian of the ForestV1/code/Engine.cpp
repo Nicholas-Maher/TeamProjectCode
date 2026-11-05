@@ -80,3 +80,37 @@ void Engine::init()
 	m_HealthBarBorder.setSize(Vector2f((m_Player.getFullHealth() * m_HealthBarWidthMultiplier) +
 		m_HealthBarBorderWidth * 2, 70 + (m_HealthBarBorderWidth * 2)));
 }
+
+// Function to check if there is ground for the enemy
+bool Engine::hasGroundAhead()
+{
+	// Get the enemy's current position
+	sf::Vector2f enemyPos = m_Enemy.getPosition();
+
+	float checkX;
+
+	// Determine the direction the enemy is moving and set the checkX accordingly
+	if (m_Enemy.getSpeed() > 0)
+	{
+		checkX = enemyPos.x + 51.f; // Moving right
+
+	}
+	// If the enemy is moving left, check the tile to the left of the enemy
+	else
+	{
+		checkX = enemyPos.x - 1.f; // Moving left
+	}
+
+	float checkY = enemyPos.y + 101.f; // Check below the enemy
+
+	// Convert the world coordinates to tile coordinates
+	int tileX = static_cast<int>(checkX / TILE_SIZE);
+	int tileY = static_cast<int>(checkY / TILE_SIZE);
+
+	if (tileX < 0 || tileX >= m_LM.getLevelSize().x || tileY < 0 || tileY >= m_LM.getLevelSize().y)
+	{
+		return false; // Out of bounds, treat as no ground
+	}
+
+	return m_ArrayLevel[tileY][tileX] == 1; // Only tile type 1 is ground
+}

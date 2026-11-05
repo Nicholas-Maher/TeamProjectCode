@@ -73,6 +73,8 @@ private:
 	//Creating Enemy
 	Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
 
+	bool hasGroundAhead(); // Function to check if there is ground ahead of the enemy
+
 
 	// Private functions for internal use only
 	void init();
