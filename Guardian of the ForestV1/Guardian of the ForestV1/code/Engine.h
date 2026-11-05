@@ -40,8 +40,11 @@ private:
 	// Is the game currently playing?
 	bool m_Playing = false;
 
-	// How much time is left in the current level
+	/*Nicholas - adding a simple main menu to the game */
+	bool m_Mainmenu = true;
+	Font m_MenuFont;
 
+	// How much time is left in the current level
 	float m_TimeRemaining = 10;
 	Time m_GameTimeTotal;
 

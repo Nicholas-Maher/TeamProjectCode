@@ -3,17 +3,15 @@
 
 Engine::Engine()
 {
-	// Get the screen resolution and create an SFML window and View
+	// Get the screen resolution and create an SFML window and View resolution.x = 1920 and  resolution.y = 1080;
 	Vector2f resolution;
 	resolution.x = 1920;
 	resolution.y = 1080;
-
-	//resolution.x = 1920;
-	//resolution.y = 1080;
-
 	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
-
 	m_Window.setFramerateLimit(60);
+
+	/*Nicholas -- adding Font to the main Menu*/
+	m_MenuFont.loadFromFile("fonts/Cinzel.ttf");
 
 	// Initialize the full screen view
 	m_MainView.setSize(resolution);
@@ -56,9 +54,8 @@ void Engine::run()
 
 void Engine::init()
 {
-	m_BackgroundTexture = TextureHolder::GetTexture("graphics/background.png");
-
 	// Associate the sprite with the texture
+	m_BackgroundTexture = TextureHolder::GetTexture("graphics/background.png");
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
 
 	// Load the texture for the background vertex array

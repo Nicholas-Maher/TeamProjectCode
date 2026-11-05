@@ -58,4 +58,6 @@ void Engine::loadLevel()
 
 	// Make sure this code isn't run again
 	m_NewLevelRequired = false;
+
+	m_Playing = true; // this prevents the need to press enter at the start of each new level
 }
