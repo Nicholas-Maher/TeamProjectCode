@@ -19,6 +19,8 @@ private:
 
 	bool m_WasGroundAhead = true; // To track if there was ground ahead in the last update
 
+	float m_DetectionRange = 250.f; // Range at which the enemy can detect the player
+
 public:
 
 	//Initializes the enemy with a position
@@ -37,5 +39,7 @@ public:
 
 	// enemies speed and direction
 	float getSpeed() const;
+
+	bool canDetectPlayer(sf::Vector2f playerPosition); // Check if the enemy can detect the player based on their position
 
 };

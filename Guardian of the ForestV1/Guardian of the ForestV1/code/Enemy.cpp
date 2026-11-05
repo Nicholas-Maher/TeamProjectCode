@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include <cmath>
 
 Enemy::Enemy(sf::Vector2f startPosition)
 {
@@ -69,4 +70,16 @@ void Enemy::setPosition(sf::Vector2f position)
 float Enemy::getSpeed() const
 {
 	return m_Speed;
+}
+
+// Check if the enemy can detect the player based on their position
+bool Enemy::canDetectPlayer(sf::Vector2f playerPosition)
+{
+	// Calculate the distance between the enemy and the player
+	float distanceX = playerPosition.x - m_Position.x;
+	float distanceY = playerPosition.y - m_Position.y;
+	float distance = std::sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+	// Check if the distance is within the detection range
+	return distance <= m_DetectionRange;
 }
