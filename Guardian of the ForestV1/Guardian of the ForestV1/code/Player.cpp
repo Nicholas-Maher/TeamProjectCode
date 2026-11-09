@@ -29,7 +29,7 @@ void Player::spawn(Vector2f startPosition, float gravity)
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
 }
-	
+
 
 bool Player::handleInput()
 {
@@ -46,7 +46,10 @@ bool Player::handleInput()
 			m_JustJumped = true;
 		}
 	}
-	else
+	// -- Nicholas cause of it was the player charter was consitonly being presed down
+	// while collision detection pushed them back up potentially causing the jitter maybe
+	// also by adding an else if stateng if ture m_IsJumpng  the if falling is then to be true then
+	else if(m_IsJumping)
 	{
 		m_IsJumping = false;
 		m_IsFalling = true;
@@ -108,7 +111,7 @@ void Player::update(float elapsedTime)
 		//move the rectangle to the appropriate cell
 		moveTextureRect();
 	}
-	
+
 	// incrementally increases speed while right is pressed until max speed is reached
 	if (m_RunRightPressed)
 	{
@@ -119,7 +122,7 @@ void Player::update(float elapsedTime)
 		//move the rectangle to the appropriate cell
 		moveTextureRect();
 	}
-	
+
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_WalkLeftPressed)
 	{
@@ -130,7 +133,7 @@ void Player::update(float elapsedTime)
 		//move the rectangle to the appropriate cell
 		moveTextureRect();
 	}
-	
+
 	// incrementally increases speed while left is pressed until max speed is reached
 	if (m_RunLeftPressed)
 	{
@@ -390,7 +393,7 @@ void Player::stopLeft(float position)
 
 void Player::stopJump()
 {
-	// Stop a jump early 
+	// Stop a jump early
 	m_IsJumping = false;
 	m_IsFalling = true;
 }
@@ -407,7 +410,7 @@ void Player::moveTextureRect()
 	{
 		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(spriteSize.x * ani_counter, 0), spriteSize));
 	}
-	else 
+	else
 	{
 		m_Sprite.setTextureRect(sf::IntRect(sheetCoordinate + sf::Vector2i(0, spriteSize.y * ani_counter), spriteSize));
 	}

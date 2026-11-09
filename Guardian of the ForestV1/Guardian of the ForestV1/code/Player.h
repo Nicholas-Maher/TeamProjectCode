@@ -16,7 +16,7 @@ protected:
 
 	// And a texture
 	Texture m_Texture;
-	
+
 	sf::Vector2i sheetCoordinate; // Coordinate on spritesheet
 	sf::Vector2i spriteSize;
 
@@ -27,21 +27,21 @@ protected:
 	Clock clock;
 	float timeElapsed;
 	float animationTimer = 0;
-	
+
 	// How long does a jump last
 	float m_JumpDuration;
 
 	// Is character currently jumping or falling
-	bool m_IsJumping;
-	bool m_IsFalling;
+	bool m_IsJumping = false;
+	bool m_IsFalling = false;
 
 	// Which directions is the character currently walking in
-	bool m_WalkLeftPressed;
-	bool m_WalkRightPressed;
+	bool m_WalkLeftPressed = false;
+	bool m_WalkRightPressed = false;
 
 	// Which directions is the character currently walking in
-	bool m_RunLeftPressed;
-	bool m_RunRightPressed;
+	bool m_RunLeftPressed = false;
+	bool m_RunRightPressed = false;
 
 	// How long has this jump lasted so far
 	float m_TimeThisJump;
@@ -51,8 +51,8 @@ protected:
 
 	// When was the gameactor last hit
 	Time m_timeLastHit;
-	
-	
+
+
 
 	// Private variables and functions
 private:
