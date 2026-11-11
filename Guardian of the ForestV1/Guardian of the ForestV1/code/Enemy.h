@@ -1,16 +1,19 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+
+
 class Enemy
 {
 private:
 
 	// Rectangle shape to represent enemy
-	sf::RectangleShape m_Body;
+	RectangleShape m_Body;
 	// Vector holds position of enemy	
-	sf::Vector2f m_Position;
+	Vector2f m_Position;
 
-	sf::Vector2f m_StartPosition; // Starting position of the enemy
+	Vector2f m_StartPosition; // Starting position of the enemy
 
 	float m_PatrolDistance = 150.f; // Distance the enemy patrols
 
@@ -21,25 +24,36 @@ private:
 
 	float m_DetectionRange = 250.f; // Range at which the enemy can detect the player
 
+	// Enemy chase the player if they are within the detection range
+	bool m_IsChasing = false;
+	// Enemy chase speed
+	float m_ChaseSpeed = 150.f;
+
 public:
 
 	//Initializes the enemy with a position
-	Enemy(sf::Vector2f startPosition);
+	Enemy(Vector2f startPosition);
 
 	// Draws the enemy on the window
-	void draw(sf::RenderWindow& window);
+	void draw(RenderWindow& window);
 
 	// Returns position of enemy
-	sf::Vector2f getPosition() const;
+	Vector2f getPosition() const;
 
-	void update(float dt, bool groundAhead); // Update the enemy position by delta time
+	void update(float dt, bool groundAhead, FloatRect playerBounds); // Update the enemy position by elapsed time and check for ground ahead
 
 	// Sets the position of the enemy
-	void setPosition(sf::Vector2f position);
+	void setPosition(Vector2f position);
 
 	// enemies speed and direction
 	float getSpeed() const;
 
-	bool canDetectPlayer(sf::FloatRect playerBounds); // Check if the enemy can detect the player based on their position
+	bool canDetectPlayer(FloatRect playerBounds); // Check if the enemy can detect the player based on their position
+
+	void setChasing(bool chasing); // Set the chasing state of the enemy
+
+	float getMovementDirection() const; // Get the current movement direction of the enemy (1 for right, -1 for left)
+
+	void updateChaseDirection(FloatRect playerBounds); // Update the direction of the enemy based on the player's position
 
 };

@@ -17,17 +17,17 @@ void Engine::update(float dtAsSeconds)
 		// Update the player
 		m_Player.update(dtAsSeconds);
 
-		// Update the enemy
-		m_Enemy.update(dtAsSeconds, hasGroundAhead());
-
 		// Check if the enemy can detect the player
 		bool playerDetected = m_Enemy.canDetectPlayer(m_Player.getPosition());
 
-		// testing if player detected
-		if (playerDetected)
-		{
-			std::cout << "Player detected by enemy!" << std::endl;
-		}
+		// Set enemy state based on player detection
+		m_Enemy.setChasing(playerDetected);
+
+		// Determine the direction of the enemy based on the player's position
+		m_Enemy.updateChaseDirection(m_Player.getPosition());
+
+		// Check ground and update enemy movement
+		m_Enemy.update(dtAsSeconds, hasGroundAhead(), m_Player.getPosition());
 
 		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 

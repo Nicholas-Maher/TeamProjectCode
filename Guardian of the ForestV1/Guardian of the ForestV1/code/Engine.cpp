@@ -86,8 +86,8 @@ bool Engine::hasGroundAhead()
 
 	float checkX;
 
-	// Determine the direction the enemy is moving and set the checkX accordingly
-	if (m_Enemy.getSpeed() > 0)
+	// Determine the direction the enemy moving
+	if (m_Enemy.getMovementDirection() > 0)
 	{
 		checkX = enemyPos.x + 51.f; // Moving right
 

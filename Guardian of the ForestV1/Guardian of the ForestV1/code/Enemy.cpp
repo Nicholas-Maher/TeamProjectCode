@@ -2,35 +2,68 @@
 #include <cmath>
 #include <iostream>
 
-Enemy::Enemy(sf::Vector2f startPosition)
+using namespace sf;
+
+Enemy::Enemy(Vector2f startPosition)
 {
 	// Set the position of the enemy
 	m_Position = startPosition;
 	// Set the starting position of the enemy
 	m_StartPosition = startPosition;
 	// Set the size of the enemy
-	m_Body.setSize(sf::Vector2f(50.f,100.f));
+	m_Body.setSize(Vector2f(50.f,100.f));
 	// Set the color of the enemy
-	m_Body.setFillColor(sf::Color::Red);
+	m_Body.setFillColor(Color::Red);
 	// Set the position of the enemy body
 	m_Body.setPosition(m_Position);
 }
 
 
 // Draws the enemy on the window
-void Enemy::draw(sf::RenderWindow& window)
+void Enemy::draw(RenderWindow& window)
 {
 	window.draw(m_Body);
 }
 
 // Returns position of enemy
-sf::Vector2f Enemy::getPosition() const
+Vector2f Enemy::getPosition() const
 {
 	return m_Position;
 }
 
-void Enemy::update(float dt, bool groundAhead)
+void Enemy::update(float dt, bool groundAhead, FloatRect playerBounds)
 {
+	if (m_IsChasing)
+	{
+		// Get the centre of the player
+		float playerX = playerBounds.left + playerBounds.width / 2.f;
+
+		// Get the centre of the enemy
+		float enemyX = m_Position.x + 25.f;
+
+		// Move towards the player
+		if (playerX > enemyX)
+		{
+			m_Speed = m_ChaseSpeed;
+		}
+		else if (playerX < enemyX)
+		{
+			m_Speed = -m_ChaseSpeed;
+		}
+	}
+
+	if (!m_IsChasing)
+	{
+		// If the enemy is not chasing, it should patrol
+		if (m_Position.x >= m_StartPosition.x + m_PatrolDistance)
+		{
+			m_Speed = -100.f;
+		}
+		else if (m_Position.x <= m_StartPosition.x)
+		{
+			m_Speed = 100.f;
+		}
+	}
 
 	// If there is no ground ahead, reverse the direction of the enemy
 	if (!groundAhead && m_WasGroundAhead)
@@ -43,23 +76,12 @@ void Enemy::update(float dt, bool groundAhead)
 	// Update the position of the enemy based on its speed and delta time
 	m_Position.x += m_Speed * dt;
 
-	// Check if enemy has reached the patrol distance and reverse its direction if necessary
-	if (m_Position.x >= m_StartPosition.x + m_PatrolDistance)
-	{
-		m_Speed = -100.f;
-	}
-
-	if (m_Position.x <= m_StartPosition.x)
-	{
-		m_Speed = 100.f;
-	}
-
 	// Update the position of enemy body
 	m_Body.setPosition(m_Position);
 }
 
 // Sets the position of the enemy
-void Enemy::setPosition(sf::Vector2f position)
+void Enemy::setPosition(Vector2f position)
 {
 	m_Position = position;
 
@@ -74,7 +96,7 @@ float Enemy::getSpeed() const
 }
 
 // Check if the enemy can detect the player based on their position
-bool Enemy::canDetectPlayer(sf::FloatRect playerBounds)
+bool Enemy::canDetectPlayer(FloatRect playerBounds)
 {
 	//testing if the player is within the detection range of the enemy
 	std::cout << "Detection function called!" << std::endl;
@@ -91,9 +113,49 @@ bool Enemy::canDetectPlayer(sf::FloatRect playerBounds)
 	float distanceX = playerX - enemyX;
 	float distanceY = playerY - enemyY;
 
+	//Checking player detection by enemy
 	float distance = std::sqrt((distanceX * distanceX) + (distanceY * distanceY));
 	std::cout << "Distance: " << distance << " | Detection range: " << m_DetectionRange << std::endl;
 
 	// Check if the distance is within the detection range
 	return distance <= m_DetectionRange;
+}
+
+// Set the chasing state of the enemy
+void Enemy::setChasing(bool chasing)
+{
+	m_IsChasing = chasing;
+}
+
+// Get the current movement direction of the enemy (1 for right, -1 for left)
+float Enemy::getMovementDirection() const
+{
+	return m_Speed;
+}
+
+void Enemy::updateChaseDirection(FloatRect playerBounds)
+{
+	if (m_IsChasing)
+	{
+		// Get the centre of the player
+		float playerX = playerBounds.left + playerBounds.width / 2.f;
+
+		// Get the centre of the enemy
+		float enemyX = m_Position.x + 25.f;
+
+		// Determine the direction
+		if (playerX > enemyX)
+		{
+			m_Speed = m_ChaseSpeed;
+		}
+		else if (playerX < enemyX)
+		{
+			m_Speed = -m_ChaseSpeed;
+		}
+	}
+	else
+	{
+		// Return to normal patrol speed
+		m_Speed = (m_Speed > 0) ? 100.f : -100.f;
+	}
 }
