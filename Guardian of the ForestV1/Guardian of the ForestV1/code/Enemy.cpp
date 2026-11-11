@@ -33,24 +33,6 @@ Vector2f Enemy::getPosition() const
 
 void Enemy::update(float dt, bool groundAhead, FloatRect playerBounds)
 {
-	if (m_IsChasing)
-	{
-		// Get the centre of the player
-		float playerX = playerBounds.left + playerBounds.width / 2.f;
-
-		// Get the centre of the enemy
-		float enemyX = m_Position.x + 25.f;
-
-		// Move towards the player
-		if (playerX > enemyX)
-		{
-			m_Speed = m_ChaseSpeed;
-		}
-		else if (playerX < enemyX)
-		{
-			m_Speed = -m_ChaseSpeed;
-		}
-	}
 
 	if (!m_IsChasing)
 	{
@@ -65,10 +47,19 @@ void Enemy::update(float dt, bool groundAhead, FloatRect playerBounds)
 		}
 	}
 
-	// If there is no ground ahead, reverse the direction of the enemy
-	if (!groundAhead && m_WasGroundAhead)
+	// Check if there is safe ground ahead
+	if (!groundAhead)
 	{
-		m_Speed = -m_Speed;
+		if (m_IsChasing)
+		{
+			// Stop chasing at the platform edge
+			m_Speed = 0.f;
+		}
+		else if (m_WasGroundAhead)
+		{
+			// Reverse direction during normal patrol
+			m_Speed = -m_Speed;
+		}
 	}
 
 	m_WasGroundAhead = groundAhead;
@@ -143,12 +134,22 @@ void Enemy::updateChaseDirection(FloatRect playerBounds)
 		// Get the centre of the enemy
 		float enemyX = m_Position.x + 25.f;
 
-		// Determine the direction
-		if (playerX > enemyX)
+		// Calculate horizontal distance
+		float distanceX = std::abs(playerX - enemyX);
+
+		// Calculate actual gap between character edges
+		float actualGap = distanceX - 25.f - (playerBounds.width / 2.f);
+
+		// Stop before reaching the player
+		if (actualGap <= m_StoppingDistance)
+		{
+			m_Speed = 0.f;
+		}
+		else if (playerX > enemyX)
 		{
 			m_Speed = m_ChaseSpeed;
 		}
-		else if (playerX < enemyX)
+		else
 		{
 			m_Speed = -m_ChaseSpeed;
 		}
@@ -156,6 +157,6 @@ void Enemy::updateChaseDirection(FloatRect playerBounds)
 	else
 	{
 		// Return to normal patrol speed
-		m_Speed = (m_Speed > 0) ? 100.f : -100.f;
+		m_Speed = (m_Speed >= 0) ? 100.f : -100.f;
 	}
 }
