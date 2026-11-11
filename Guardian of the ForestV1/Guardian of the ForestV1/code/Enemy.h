@@ -29,7 +29,7 @@ private:
 	// Enemy chase speed
 	float m_ChaseSpeed = 150.f;
 	// Enemy stopping distance from chasing the player
-	float m_StoppingDistance = 65.f;
+	float m_StoppingDistance = 15.f;
 
 public:
 
