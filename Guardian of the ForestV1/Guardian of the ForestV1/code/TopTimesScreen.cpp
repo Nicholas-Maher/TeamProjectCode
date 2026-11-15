@@ -167,6 +167,7 @@ void TopTimesScreen::resetTopTimesToDefaults()
 {
     vector<int> defaultTimes = { 1000, 2000, 3000, 4000, 5000 };
     // updates the vector, text file, and text for the screen if the top times vector doesn't already have default values
+	// comparing vectors source - https://www.geeksforgeeks.org/cpp/quickly-check-two-stl-vectors-contain-elements-not/
     if (m_TopTimes != defaultTimes)
     {
         m_TopTimes.clear();
