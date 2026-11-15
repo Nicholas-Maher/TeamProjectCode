@@ -171,6 +171,11 @@ int LevelManager::getCurrentLevel()
 	return m_CurrentLevel;
 }
 
+void LevelManager::setCurrentLevel(int level)
+{
+	m_CurrentLevel = level;
+}
+
 float LevelManager::getTimeLimit()
 {
 	return m_BaseTimeLimit * m_TimeModifier;
@@ -179,4 +184,9 @@ float LevelManager::getTimeLimit()
 Vector2f LevelManager::getStartPosition()
 {
 	return m_StartPosition;
+}
+
+int LevelManager::getNumLevels() const
+{
+	return NUM_LEVELS;
 }

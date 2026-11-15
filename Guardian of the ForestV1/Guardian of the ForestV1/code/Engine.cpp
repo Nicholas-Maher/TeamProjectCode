@@ -5,13 +5,18 @@ Engine::Engine()
 {
 	// Get the screen resolution and create an SFML window and View resolution.x = 1920 and  resolution.y = 1080;
 	Vector2f resolution;
-	resolution.x = 1920;
-	resolution.y = 1080;
+	//resolution.x = 1920;
+	//resolution.y = 1080;
+
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
+
 	m_Window.create(VideoMode(resolution.x, resolution.y), "Guardian of the Forest", Style::Fullscreen);
 	m_Window.setFramerateLimit(60);
 
+	/*
 	/*Nicholas -- adding Font to the main Menu*/
-	m_MenuFont.loadFromFile("fonts/Cinzel.ttf");
+	//m_MenuFont.loadFromFile("fonts/Cinzel.ttf");
 
 	// Initialize the full screen view
 	m_MainView.setSize(resolution);
@@ -61,6 +66,7 @@ void Engine::init()
 	// Load the texture for the background vertex array
 	m_TextureTiles = TextureHolder::GetTexture("graphics/tiles_sheet.png");
 
+	/*
 	// Setting up the background for the healthbar
 	m_HealthBarBackground.setFillColor(Color::Red);
 	m_HealthBarBackground.setPosition(55, 55);
@@ -76,6 +82,8 @@ void Engine::init()
 	m_HealthBarBorder.setPosition(55 - m_HealthBarBorderWidth, 55 - m_HealthBarBorderWidth);
 	m_HealthBarBorder.setSize(Vector2f((m_Player.getFullHealth() * m_HealthBarWidthMultiplier) +
 		m_HealthBarBorderWidth * 2, 70 + (m_HealthBarBorderWidth * 2)));
+
+	*/
 }
 
 // Function to check if there is ground for the enemy

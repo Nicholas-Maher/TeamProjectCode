@@ -5,6 +5,13 @@
 #include "LevelManager.h"
 #include "Enemy.h"
 
+#include "Screen.h"
+#include "MainMenu.h"
+#include "VictoryScreen.h"
+#include "TopTimesScreen.h"
+
+#include "HUD.h"
+
 using namespace sf;
 
 class Engine
@@ -18,6 +25,15 @@ private:
 
 	// A class to manage all the levels
 	LevelManager m_LM;
+
+	// The Hud
+	Hud m_Hud;
+	int m_FramesSinceLastHUDUpdate = 0;
+	int m_TargetFramesPerHUDUpdate = 30;
+
+	MainMenu m_MainMenu;
+	VictoryScreen m_VictoryScreen;
+	TopTimesScreen m_TopTimesScreen;
 
 	const int TILE_SIZE = 50;
 	const int VERTS_IN_QUAD = 4;
@@ -48,7 +64,11 @@ private:
 	float m_TimeRemaining = 10;
 	Time m_GameTimeTotal;
 
+	// How much time has passed in the current level
+	float m_LevelTimeElapsed = 0;
 
+	// For tracking the total score and will be added to the leaderboard if the player completes the game and the score is fast enough
+	float m_TotalTimeElapsed = 0;
 
 	// Is it time for a new/first level?
 	bool m_NewLevelRequired = true;
@@ -65,13 +85,6 @@ private:
 
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
-
-	// Health bar
-	RectangleShape m_HealthBar;
-	RectangleShape m_HealthBarBackground;
-	RectangleShape m_HealthBarBorder;
-	int m_HealthBarBorderWidth = 20;
-	int m_HealthBarWidthMultiplier = 4;
 
 	//Creating Enemy
 	Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
@@ -92,6 +105,12 @@ private:
 	bool detectCollisions(Player& character);
 
 public:
+
+	// the game states - these help allow the game to switch between modes - Patrick
+	enum class State { MAIN_MENU, PLAYING, TOP_TIMES, PAUSED, VICTORY, GAME_OVER };
+
+	State state = State::MAIN_MENU;
+
 	// The Engine constructor
 	Engine();
 

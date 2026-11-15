@@ -9,10 +9,12 @@ void Engine::update(float dtAsSeconds)
 {
 	if (m_NewLevelRequired)
 	{
+		m_LevelTimeElapsed = 0;
 		loadLevel();
 	}
 
-	if (m_Playing)
+	//if (m_Playing)
+	if (state == State::PLAYING)
 	{
 		// Update the player
 		m_Player.update(dtAsSeconds);
@@ -29,24 +31,75 @@ void Engine::update(float dtAsSeconds)
 			std::cout << "Player detected by enemy!" << std::endl;
 		}
 
-		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 
 		// Detect collisions and see if the player has reached the goal tile
-		// The second part of the if condition is only executed
-		// when the player is touching the home tile
+		// the inner conditions set the bool required for a new level to be loaded if the level beaten wasn't the last level and set the game state 
+		// to victory if the player reaches the goal on the last level
 		if (detectCollisions(m_Player))
 		{
-			// New level required
-			m_NewLevelRequired = true;
+			m_TotalTimeElapsed += m_LevelTimeElapsed;
+
+			if (m_LM.getCurrentLevel() < m_LM.getNumLevels())
+			{
+				// New level required
+				m_NewLevelRequired = true;
+			}
+			// if the player reaches the goal on the last level
+			else
+			{
+				// set the total time text in the victory screen
+				stringstream ssTotalTime;
+				ssTotalTime << "Total Time: " << (int)m_TotalTimeElapsed;
+				m_VictoryScreen.setTimeText(ssTotalTime.str());
+
+				// checks if the total time can go into the top times leaderboard
+				if (m_TopTimesScreen.isATopTime((int)m_TotalTimeElapsed))
+				{
+					m_TopTimesScreen.addTimeToLeaderboard((int)m_TotalTimeElapsed);
+				}
+
+				state = State::VICTORY;
+				m_NewLevelRequired = false;
+				return;
+			}
 		}
 
 		// Count down the time the player has left
 		m_TimeRemaining -= dtAsSeconds;
 
+		// increment the time elapsed
+		m_LevelTimeElapsed += dtAsSeconds;
+
 		// Has the player run out of time
 		if (m_TimeRemaining <= 0)
 		{
 			m_NewLevelRequired = true;
+		}
+
+		// Time to update the HUD?
+		// Increment the number of frames since the last HUD calculation
+		m_FramesSinceLastHUDUpdate++;
+
+		// Update the HUD every m_TargetFramesPerHUDUpdate frames
+		if (m_FramesSinceLastHUDUpdate > m_TargetFramesPerHUDUpdate)
+		{
+			// Update game HUD text
+			stringstream ssTime;
+			stringstream ssLevel;
+
+			// Update the time text
+			ssTime << (int)m_TimeRemaining << " seconds";
+			m_Hud.setTime(ssTime.str());
+
+			// Update the level text
+			ssLevel << "Level: " << m_LM.getCurrentLevel();
+			m_Hud.setLevel(ssLevel.str());
+
+			// updates the health bar
+			m_Hud.setHealthBar(m_Player.getHealth(), m_Player.getFullHealth());
+
+
+			m_FramesSinceLastHUDUpdate = 0;
 		}
 
 	}// End if playing
@@ -86,5 +139,6 @@ void Engine::update(float dtAsSeconds)
 	}
 
 	m_MainView.setCenter(cameraX, cameraY);
+	/*End of Camera Code -- Nicholas */
+
 }
-/*End of Camera Code -- Nicholas */

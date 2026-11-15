@@ -1,4 +1,3 @@
-
 #include "Engine.h"
 #include <Vector>
 
@@ -15,43 +14,76 @@ void Engine::handleInput()
             {
                 m_Window.close();
             }
-
-            // Handle the player starting the game
-            if (Keyboard::isKeyPressed(Keyboard::Return))
-            {
-                if (m_Mainmenu)
-                {
-                    if (m_NewLevelRequired)
-                    {
-                        loadLevel();
-                    }
-
-                    m_Mainmenu = false;
-                }
-
-                m_Playing = true;
-            }
         }
 
         // Handle mouse clicks on the main menu
-        if (m_Mainmenu &&event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        if (state == State::MAIN_MENU &&event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
         {
             // Get the mouse position
             Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
 
             // Start Game Button
-            if (FloatRect(810, 500, 300, 80).contains((mousePosition.x),(mousePosition.y)))
+            if (m_MainMenu.getStartButton().contains((mousePosition.x),(mousePosition.y)))
             {
-                if (m_NewLevelRequired)
-                {
-                    loadLevel();
-                }
+                m_TotalTimeElapsed = 0;
+                m_LevelTimeElapsed = 0;
+                m_LM.setCurrentLevel(0); // resets the level to 0 so when load level is called, it increments it to 1
+                //loadLevel();
+                m_NewLevelRequired = true;
 
-                m_Mainmenu = false;
-                m_Playing = true;
+                //m_Mainmenu = false;
+                //m_Playing = true;
+                state = State::PLAYING;
+            }
+
+            // Top Scores Button
+            if (m_MainMenu.getTopTimesButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::TOP_TIMES;
             }
             // Quit the Game Button
-            else if (FloatRect(810, 620, 300, 80).contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            else if (m_MainMenu.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
+        // Handle mouse clicks on the victory screen
+        else if (state == State::VICTORY && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            // Get the mouse position
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // Main Menu Button
+            if (m_VictoryScreen.getMainMenuButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Quit the Game Button
+            else if (m_VictoryScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
+        // Handle mouse clicks on the top times screen
+        else if (state == State::TOP_TIMES && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            // Get the mouse position
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // Main Menu Button
+            if (m_TopTimesScreen.getMainMenuButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Reset times Button
+            if (m_TopTimesScreen.getResetTimesButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                m_TopTimesScreen.resetTopTimesToDefaults();
+            }
+            // Quit the Game Button
+            else if (m_TopTimesScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
             {
                 m_Window.close();
             }
@@ -59,7 +91,8 @@ void Engine::handleInput()
     }
 
     // Handle input specific to the player
-    if (!m_Mainmenu && m_Player.handleInput())
+    //if (!m_Mainmenu && m_Player.handleInput())
+    if (state == State::PLAYING && m_Player.handleInput())
     {
         // Play a jump sound
     }
