@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Bar.h" />
+    <ClInclude Include="code\Button.h" />
     <ClInclude Include="code\Enemy.h" />
     <ClInclude Include="code\Engine.h" />
     <ClInclude Include="code\GameOverScreen.h" />
@@ -28,6 +29,8 @@
     <ClInclude Include="code\MainMenu.h" />
     <ClInclude Include="code\Particle.h" />
     <ClInclude Include="code\ParticleSystem.h" />
+    <ClInclude Include="code\Pickup.h" />
+    <ClInclude Include="code\PowerOrb.h" />
     <ClInclude Include="code\Screen.h" />
     <ClInclude Include="code\SoundManager.h" />
     <ClInclude Include="code\TextureHolder.h" />
@@ -37,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\Bar.cpp" />
+    <ClCompile Include="code\Button.cpp" />
     <ClCompile Include="code\DetectCollisions.cpp" />
     <ClCompile Include="code\Draw.cpp" />
     <ClCompile Include="code\Enemy.cpp" />
@@ -50,7 +54,9 @@
     <ClCompile Include="code\MainMenu.cpp" />
     <ClCompile Include="code\Particle.cpp" />
     <ClCompile Include="code\ParticleSystem.cpp" />
+    <ClCompile Include="code\Pickup.cpp" />
     <ClCompile Include="code\PopulateEmitters.cpp" />
+    <ClCompile Include="code\PowerOrb.cpp" />
     <ClCompile Include="code\Screen.cpp" />
     <ClCompile Include="code\SoundManager.cpp" />
     <ClCompile Include="code\TextureHolder.cpp" />

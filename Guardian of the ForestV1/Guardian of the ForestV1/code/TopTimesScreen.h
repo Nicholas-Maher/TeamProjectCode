@@ -11,15 +11,11 @@ class TopTimesScreen : public Screen
 private:
 
 	string m_FileToLoad;
-	Text m_Title;
 
 	Text m_TimesText;
 
-	RectangleShape m_MainMenuButton;
-	Text m_MainMenuText;
-
-	RectangleShape m_ResetTimesButton;
-	Text m_ResetTimesText;
+	Button m_MainMenuButton;
+	Button m_ResetTimesButton;
 
 	vector<int> m_TopTimes;
 	int m_NumTopTimes = 5;

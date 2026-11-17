@@ -5,13 +5,10 @@ class MainMenu : public Screen
 {
 
 private:
-	Text title;
+	Text m_Title;
 
-	RectangleShape m_StartButton;
-	Text m_StartText;
-
-	RectangleShape m_TopTimesButton;
-	Text m_TopTimesText;
+	Button m_StartButton;
+	Button m_TopTimesButton;
 
 public:
 	MainMenu();

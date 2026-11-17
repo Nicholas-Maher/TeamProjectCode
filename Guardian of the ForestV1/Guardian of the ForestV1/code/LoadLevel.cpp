@@ -43,6 +43,8 @@ void Engine::loadLevel()
 	// Spawn the player
 	m_Player.spawn(m_LM.getStartPosition(), GRAVITY);
 
+	m_PowerOrb.spawn(Vector2f(100, 1000));
+
 
 	// Spawn the enemy at a specific tile position (for example, tile (10, y))	
 	int enemyTileX = 25;

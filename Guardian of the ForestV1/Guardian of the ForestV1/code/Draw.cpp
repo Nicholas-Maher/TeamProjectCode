@@ -62,6 +62,11 @@ void Engine::draw()
 		// Draw the player
 		m_Window.draw(m_Player.getSprite());
 
+		if (m_PowerOrb.isActive())
+		{
+			m_Window.draw(m_PowerOrb.getSprite());
+		}
+
 		// Draw the enemy
 		m_Enemy.draw(m_Window);
 

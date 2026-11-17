@@ -7,8 +7,6 @@ TopTimesScreen::TopTimesScreen()
 
 	m_Font.loadFromFile("fonts/Cinzel.ttf");
 
-    /** Patrick - buttons based on Nicholas' main main button logic **/
-
     // Screen heading text
     m_Title.setFont(m_Font);
     m_Title.setString("Top Times");
@@ -26,65 +24,23 @@ TopTimesScreen::TopTimesScreen()
     setTimesText();
 
     // Main Menu button
-    m_MainMenuButton.setSize(Vector2f(300, 80));
-    m_MainMenuButton.setPosition(810, 600);
-    m_MainMenuButton.setFillColor(Color(45, 110, 55));
-    m_MainMenuButton.setOutlineColor(Color::White);
-
-    // main menu text
-    m_MainMenuText.setFont(m_Font);
-    m_MainMenuText.setString("MAIN MENU");
-    m_MainMenuText.setCharacterSize(30);
-    m_MainMenuText.setFillColor(Color::White);
-
-    FloatRect menuBounds = m_MainMenuText.getLocalBounds();
-    m_MainMenuText.setOrigin(menuBounds.left + menuBounds.width / 2.f, menuBounds.top + menuBounds.height / 2.f);
-    m_MainMenuText.setPosition(960, 640);
+    m_MainMenuButton.spawn(Vector2f(810, 600), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
 
     // Reset times button
-    m_ResetTimesButton.setSize(Vector2f(300, 80));
-    m_ResetTimesButton.setPosition(810, 720);
-    m_ResetTimesButton.setFillColor(Color(45, 110, 55));
-    m_ResetTimesButton.setOutlineColor(Color::White);
-
-    // Reset times text
-    m_ResetTimesText.setFont(m_Font);
-    m_ResetTimesText.setString("RESET TIMES");
-    m_ResetTimesText.setCharacterSize(30);
-    m_ResetTimesText.setFillColor(Color::White);
-
-    FloatRect resetBounds = m_ResetTimesText.getLocalBounds();
-    m_ResetTimesText.setOrigin(resetBounds.left + resetBounds.width / 2.f, resetBounds.top + resetBounds.height / 2.f);
-    m_ResetTimesText.setPosition(960, 760);
+    m_ResetTimesButton.spawn(Vector2f(810, 720), Color(45, 110, 55), 0, "RESET TIMES", Color::White);
 
     // Quit button
-    m_QuitButton.setSize(Vector2f(300, 80));
-    m_QuitButton.setPosition(810, 840);
-    m_QuitButton.setFillColor(Color(120, 45, 40));
-    m_QuitButton.setOutlineColor(Color::White);
-    m_QuitButton.setOutlineThickness(3);
-
-    m_QuitButton.getGlobalBounds();
-
-    // Quit text
-    m_QuitText.setFont(m_Font);
-    m_QuitText.setString("QUIT GAME");
-    m_QuitText.setCharacterSize(30);
-    m_QuitText.setFillColor(Color::White);
-
-    FloatRect quitBounds = m_QuitText.getLocalBounds();
-    m_QuitText.setOrigin(quitBounds.left + quitBounds.width / 2.f, quitBounds.top + quitBounds.height / 2.f);
-    m_QuitText.setPosition(960, 880);
+    m_QuitButton.spawn(Vector2f(810, 840), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 }
 
 FloatRect TopTimesScreen::getMainMenuButton() const
 {
-    return m_MainMenuButton.getGlobalBounds();
+    return m_MainMenuButton.getButton();
 }
 
 FloatRect TopTimesScreen::getResetTimesButton() const
 {
-    return m_ResetTimesButton.getGlobalBounds();
+    return m_ResetTimesButton.getButton();
 }
 
 void TopTimesScreen::setTimesText()
@@ -185,10 +141,7 @@ void TopTimesScreen::draw(sf::RenderWindow& window)
 {
     window.draw(m_Title);
     window.draw(m_TimesText);
-    window.draw(m_MainMenuButton);
-    window.draw(m_MainMenuText);
-    window.draw(m_ResetTimesButton);
-    window.draw(m_ResetTimesText);
-    window.draw(m_QuitButton);
-    window.draw(m_QuitText);
+    m_MainMenuButton.draw(window);
+    m_ResetTimesButton.draw(window);
+    m_QuitButton.draw(window);
 }

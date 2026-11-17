@@ -101,7 +101,7 @@ public:
 	int getPower() const;
 	void setPower(int health);
 	int getFullPower() const;
-	void setFullPower(int fullHealth);
+	void setFullPower(int power);
 	int getStartPower() const;
 	int getStartFullPower() const;
 

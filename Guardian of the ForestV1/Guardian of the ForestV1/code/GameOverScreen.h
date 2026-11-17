@@ -5,14 +5,10 @@ class GameOverScreen : public Screen
 {
 
 private:
-	Text m_Title;
 	Text m_MainText;
 
-	RectangleShape m_RetryButton;
-	Text m_RetryText;
-
-	RectangleShape m_MainMenuButton;
-	Text m_MainMenuText;
+	Button m_RetryButton;
+	Button m_MainMenuButton;
 
 public:
 	GameOverScreen();
