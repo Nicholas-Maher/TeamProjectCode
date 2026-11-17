@@ -5,12 +5,9 @@ class VictoryScreen : public Screen
 {
 
 private:
-	Text m_Title;
-
 	Text m_TimeText;
 
-	RectangleShape m_MainMenuButton;
-	Text m_MainMenuText;
+	Button m_MainMenuButton;
 
 public:
 	VictoryScreen();

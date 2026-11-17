@@ -11,8 +11,9 @@
 #include "VictoryScreen.h"
 #include "GameOverScreen.h"
 #include "TopTimesScreen.h"
-
 #include "HUD.h"
+
+#include "PowerOrb.h"
 
 using namespace sf;
 
@@ -98,6 +99,9 @@ private:
 
 	//Creating Enemy
 	Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
+
+	// Making a single power orb for testing
+	PowerOrb m_PowerOrb;
 	
 	bool hasGroundAhead(); // Function to check if there is ground ahead of the enemy
 	

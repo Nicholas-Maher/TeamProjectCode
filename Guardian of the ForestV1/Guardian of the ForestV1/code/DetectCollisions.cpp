@@ -48,6 +48,13 @@ bool Engine::detectCollisions(Player& character)
 		}
 	}
 
+	/*  temp version of pickup collision made for just one pickup  */
+	if (m_Player.getPosition().intersects(m_PowerOrb.getPosition()) && m_PowerOrb.isActive())
+	{
+		m_PowerOrb.gotIt();
+		m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
+	}
+
 	/*Nicholas -- player Bourder*/
 	/**************************
 

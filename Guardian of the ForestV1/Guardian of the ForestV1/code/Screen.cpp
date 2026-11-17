@@ -8,5 +8,5 @@ Screen::Screen()
 
 FloatRect Screen::getQuitButton() const
 {
-	return m_QuitButton.getGlobalBounds();
+	return m_QuitButton.getButton();
 }

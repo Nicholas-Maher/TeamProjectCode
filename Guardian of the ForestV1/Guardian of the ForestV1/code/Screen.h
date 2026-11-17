@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Button.h"
 #include <sstream>
 
 using namespace sf;
@@ -10,8 +11,9 @@ protected:
 	Font m_Font;
 	Vector2f m_Resolution;
 
-	RectangleShape m_QuitButton;
-	Text m_QuitText;
+	Text m_Title;
+
+	Button m_QuitButton;
 
 public:
 	Screen();
