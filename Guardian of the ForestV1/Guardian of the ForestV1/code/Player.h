@@ -58,9 +58,14 @@ private:
 	float m_Acceleration = 0.9;
 	float m_Deceleration = 2;
 
+	const int START_POWER = 0;
+	const int START_FULL_POWER = 100;
+	int m_FullPower = START_FULL_POWER;
+	int m_Power = START_POWER;
+
 	const int START_HEALTH = 100;
 	int m_FullHealth = START_HEALTH;
-	int m_Health = m_FullHealth;
+	int m_Health = START_HEALTH;
 
 	// When was the gameactor last hit
 	Time m_timeLastHit;
@@ -92,6 +97,13 @@ public:
 
 	//move the rectangle to the next cell in the animation
 	void moveTextureRect(); // clo
+
+	int getPower() const;
+	void setPower(int health);
+	int getFullPower() const;
+	void setFullPower(int fullHealth);
+	int getStartPower() const;
+	int getStartFullPower() const;
 
 	int getHealth() const;
 	void setHealth(int health);

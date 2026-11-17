@@ -100,9 +100,9 @@ void Engine::update(float dtAsSeconds)
 			ssLevel << "Level: " << m_LM.getCurrentLevel();
 			m_Hud.setLevel(ssLevel.str());
 
-			// updates the health bar
-			/********  remember to set this back to player values  *********/
+			// update the health and power bars
 			m_Hud.setHealthBar(m_Player.getHealth(), m_Player.getFullHealth());
+			m_Hud.setPowerBar(m_Player.getPower(), m_Player.getFullPower());
 
 
 			m_FramesSinceLastHUDUpdate = 0;

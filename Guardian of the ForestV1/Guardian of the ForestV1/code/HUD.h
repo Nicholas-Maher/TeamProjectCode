@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Bar.h"
 
 using namespace sf;
 
@@ -12,15 +13,10 @@ private:
 	Text m_LevelText;
 
 	// Health bar
-	RectangleShape m_HealthBar;
-	RectangleShape m_HealthBarBackground;
-	RectangleShape m_HealthBarBorder;
-	int m_DefaultWidth = 100;
-	int m_Height = 70;
-	int m_HealthBarBorderWidth = 10;
-	int m_HealthBarWidthMultiplier = 4;
+	Bar m_HealthBar;
 
-	float yPos = 80;
+	// Power meter
+	Bar m_PowerBar;
 
 public:
 	Hud();
@@ -31,6 +27,7 @@ public:
 	void setTime(String text);
 
 	void setHealthBar(int currentHealth, int maxHealth);
+	void setPowerBar(int currentPower, int maxPower);
 
 	void draw(sf::RenderWindow& window);
 };

@@ -63,6 +63,9 @@
     <ClInclude Include="code\GameOverScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="code\Bar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\DetectCollisions.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="code\GameOverScreen.cpp">
       <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Bar.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

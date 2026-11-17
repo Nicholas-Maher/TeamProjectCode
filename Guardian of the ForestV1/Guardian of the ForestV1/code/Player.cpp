@@ -12,6 +12,7 @@ Player::Player()
 
 	m_JumpDuration = .45;
 	m_Health = m_FullHealth;
+	m_Power = START_POWER;
 }
 
 void Player::spawn(Vector2f startPosition, float gravity)
@@ -154,6 +155,31 @@ void Player::setFullHealth(int fullHealth)
 int Player::getStartHealth() const
 {
 	return START_HEALTH;
+}
+
+int Player::getPower() const
+{
+	return m_Power;
+}
+
+void Player::setPower(int power)
+{
+	m_Power = power;
+}
+
+int Player::getFullPower() const
+{
+	return m_FullPower;
+}
+
+void Player::setFullPower(int fullPower)
+{
+	m_FullPower = fullPower;
+}
+
+int Player::getStartPower() const
+{
+	return START_POWER;
 }
 
 FloatRect Player::getPosition()
