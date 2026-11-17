@@ -1,11 +1,11 @@
 #include "Player.h"
 #include "LevelManager.h"
 #include "TextureHolder.h"
+#include <iostream>
 
 Player::Player()
 {
 	// Associate a texture with the sprite
-	//m_Sprite = Sprite(TextureHolder::GetTexture("graphics/Thomas.png"));
 	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/pacman-spritesheet-resized-810-730.png"));
 	m_Sprite.setTextureRect(sf::IntRect{ 12,62,50,50 });
 	ani_counter = 1;
@@ -131,14 +131,29 @@ void Player::update(float elapsedTime)
 
 }
 
-int Player::getHealth()
+int Player::getHealth() const
 {
 	return m_Health;
 }
 
-int Player::getFullHealth()
+void Player::setHealth(int health)
+{
+	m_Health = health;
+}
+
+int Player::getFullHealth() const
 {
 	return m_FullHealth;
+}
+
+void Player::setFullHealth(int fullHealth)
+{
+	m_FullHealth = fullHealth;
+}
+
+int Player::getStartHealth() const
+{
+	return START_HEALTH;
 }
 
 FloatRect Player::getPosition()
@@ -179,12 +194,13 @@ Sprite Player::getSprite()
 	return m_Sprite;
 }
 
-bool Player::hit(Time hitTime)
+bool Player::hit(Time hitTime, int damage)
 {
 	if (hitTime.asMilliseconds() - m_timeLastHit.asMilliseconds() > 300)// 3 tenths of second
 	{
 		m_timeLastHit = hitTime;
-		m_Health -= 10.0f;
+		m_Health -= damage;
+		//std::cout << "hit time: " << hitTime.asSeconds() << std::endl;
 		return true;
 	}
 	else

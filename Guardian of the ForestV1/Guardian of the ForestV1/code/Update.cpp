@@ -60,6 +60,7 @@ void Engine::update(float dtAsSeconds)
 					m_TopTimesScreen.addTimeToLeaderboard((int)m_TotalTimeElapsed);
 				}
 
+				m_TotalTimeElapsed = 0; // resets the total time variable
 				state = State::VICTORY;
 				m_NewLevelRequired = false;
 				// Play the reach goal sound

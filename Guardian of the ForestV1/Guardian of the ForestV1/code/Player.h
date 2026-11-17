@@ -93,11 +93,14 @@ public:
 	//move the rectangle to the next cell in the animation
 	void moveTextureRect(); // clo
 
-	int getHealth();
-	int getFullHealth();
+	int getHealth() const;
+	void setHealth(int health);
+	int getFullHealth() const;
+	void setFullHealth(int fullHealth);
+	int getStartHealth() const;
 
 	// Handle the player getting hit by an enemy
-	bool hit(Time hitTime);
+	bool hit(Time hitTime, int damage);
 
 	// Where is the player
 	FloatRect getPosition();

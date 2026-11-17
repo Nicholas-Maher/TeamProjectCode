@@ -27,12 +27,14 @@ void Engine::handleInput()
             {
                 m_TotalTimeElapsed = 0;
                 m_LevelTimeElapsed = 0;
+                // resets the player's health
+                m_Player.setFullHealth(m_Player.getStartHealth());
+                m_Player.setHealth(m_Player.getFullHealth());
+
                 m_LM.setCurrentLevel(0); // resets the level to 0 so when load level is called, it increments it to 1
                 //loadLevel();
                 m_NewLevelRequired = true;
 
-                //m_Mainmenu = false;
-                //m_Playing = true;
                 state = State::PLAYING;
             }
 
@@ -61,6 +63,36 @@ void Engine::handleInput()
             }
             // Quit the Game Button
             else if (m_VictoryScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
+        // Handle mouse clicks on the game over screen
+        else if (state == State::GAME_OVER && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            // Get the mouse position
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // retry Button
+            if (m_GameOverScreen.getRetryButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                // resets the player's health
+                m_Player.setFullHealth(m_Player.getStartHealth());
+                m_Player.setHealth(m_Player.getFullHealth());
+
+                // sets the current level to one less that current so when load level is called, it increments it to the level the player was just on
+                m_LM.setCurrentLevel(m_LM.getCurrentLevel() - 1); 
+                m_NewLevelRequired = true;
+                state = State::PLAYING;
+            }
+            // Main Menu Button
+            else if (m_GameOverScreen.getMainMenuButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Quit the Game Button
+            else if (m_GameOverScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
             {
                 m_Window.close();
             }

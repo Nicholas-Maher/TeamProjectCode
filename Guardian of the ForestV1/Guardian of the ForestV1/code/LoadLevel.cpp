@@ -21,6 +21,7 @@ void Engine::loadLevel()
 	populateEmitters(m_FireEmitters, m_ArrayLevel);
 
 	/*Nicholas fixing - adding a border adound the map*/
+	/*
 	// Get the size of the loaded level in pixels.
 	float levelWidth = m_LM.getLevelSize().x * TILE_SIZE;
 
@@ -32,6 +33,7 @@ void Engine::loadLevel()
 
 	m_LevelBorder.setFillColor(sf::Color::Transparent);
 
+	*/
 	/*End of Nicholas - code*/
 
 	// How long is this new time limit

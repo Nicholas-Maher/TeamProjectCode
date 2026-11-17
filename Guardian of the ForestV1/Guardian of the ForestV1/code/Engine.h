@@ -9,6 +9,7 @@
 #include "Screen.h"
 #include "MainMenu.h"
 #include "VictoryScreen.h"
+#include "GameOverScreen.h"
 #include "TopTimesScreen.h"
 
 #include "HUD.h"
@@ -36,11 +37,12 @@ private:
 	// The Hud
 	Hud m_Hud;
 	int m_FramesSinceLastHUDUpdate = 0;
-	int m_TargetFramesPerHUDUpdate = 500;
+	int m_TargetFramesPerHUDUpdate = 250;
 
 	MainMenu m_MainMenu;
 	VictoryScreen m_VictoryScreen;
 	TopTimesScreen m_TopTimesScreen;
+	GameOverScreen m_GameOverScreen;
 
 	const int TILE_SIZE = 50;
 	const int VERTS_IN_QUAD = 4;
@@ -51,15 +53,11 @@ private:
 	// A regular RenderWindow
 	RenderWindow m_Window;
 
-	// The main Views
+	// The main View
 	View m_MainView;
-	/////View m_LeftView;
-	/////View m_RightView;
 
-	// Three views for the background
+	// the view for the background
 	View m_BGMainView;
-	/////View m_BGLeftView;
-	/////View m_BGRightView;
 
 	View m_HudView;
 
@@ -71,12 +69,6 @@ private:
 
 	// Is the game currently playing?
 	bool m_Playing = false;
-
-	// Is character 1 or 2 the current focus?
-	/////bool m_Character1 = true;
-
-	// Start in full screen mode
-	//////bool m_SplitScreen = false;
 
 	// How much time is left in the current level
 	float m_TimeRemaining = 10;
@@ -95,7 +87,7 @@ private:
 	VertexArray m_VALevel;
 
 	/*Nicholas -- Level Border*/
-	sf::RectangleShape m_LevelBorder;
+	//sf::RectangleShape m_LevelBorder;
 
 	// The 2d array with the map for the level
 	// A pointer to a pointer

@@ -34,9 +34,16 @@ void Engine::draw()
 		// Switch to HUD view for the menu
 		m_Window.setView(m_HudView);
 
-		// Draw the main menu - Patrick - made the main menu class and moved Nicholas's text and button creating and drawing logic into it
 		m_VictoryScreen.draw(m_Window);
+	}
 
+	// Draw the victory screen
+	if (state == State::GAME_OVER)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
+
+		m_GameOverScreen.draw(m_Window);
 	}
 
 	if (state == State::PLAYING)
@@ -70,9 +77,7 @@ void Engine::draw()
 		// Switch to HUD view for the menu
 		m_Window.setView(m_HudView);
 
-		// Draw the main menu - Patrick - made the main menu class and moved Nicholas's text and button creating and drawing logic into it
 		m_TopTimesScreen.draw(m_Window);
-
 	}
 	
 	// Show everything we have just drawn

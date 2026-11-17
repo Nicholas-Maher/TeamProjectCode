@@ -15,7 +15,7 @@ private:
 
 	int m_CurrentLevel = 0;
 	// temporarily changed to 3 while we just have 3 levels
-	const int NUM_LEVELS = 1;
+	const int NUM_LEVELS = 3;
 
 public:
 

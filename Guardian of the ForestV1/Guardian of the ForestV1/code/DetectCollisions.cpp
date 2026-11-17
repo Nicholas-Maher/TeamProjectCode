@@ -29,6 +29,8 @@ bool Engine::detectCollisions(Player& character)
 	if (endY >= m_LM.getLevelSize().y)
 		endY = m_LM.getLevelSize().y;
 
+	bool playerDamaged = false;
+
 	// Has the character fallen out of the map?
 	// This can be part of level manager
 	FloatRect level(0, 0, m_LM.getLevelSize().x * TILE_SIZE, m_LM.getLevelSize().y * TILE_SIZE);
@@ -36,6 +38,14 @@ bool Engine::detectCollisions(Player& character)
 	{
 		// respawn the character changeing this mean he falls for every with out end
 		character.spawn(m_LM.getStartPosition(), GRAVITY);
+		character.hit(m_GameTimeTotal, 20); // the player loses 20 health when they fall off the map
+		// sends the player to the game over screen if they run out of health
+		if (character.getHealth() <= 0)
+		{
+			m_GameOverScreen.setMainText("You died!");
+			m_LevelTimeElapsed = 0; // resets the level timer
+			state = State::GAME_OVER;
+		}
 	}
 
 	/*Nicholas -- player Bourder*/
