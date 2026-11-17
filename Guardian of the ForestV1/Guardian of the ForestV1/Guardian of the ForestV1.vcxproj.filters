@@ -14,29 +14,38 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Header Files\Screens">
-      <UniqueIdentifier>{92e9ecfa-4b59-4e7c-bb2d-c2064596c753}</UniqueIdentifier>
+      <UniqueIdentifier>{d0fa1e2f-5521-4bbd-a417-02c3cabcc9b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Screens">
-      <UniqueIdentifier>{99e36af3-89a1-439b-bfdb-ba3cf30f8748}</UniqueIdentifier>
+      <UniqueIdentifier>{654a797a-54c6-4661-ad4a-e34e7042c590}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="code\HUD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="code\LevelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\Player.h">
+    <ClInclude Include="code\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\SoundManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\TextureHolder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\Enemy.h">
+    <ClInclude Include="code\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\HUD.h">
+    <ClInclude Include="code\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\MainMenu.h">
@@ -45,10 +54,10 @@
     <ClInclude Include="code\Screen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="code\VictoryScreen.h">
+    <ClInclude Include="code\TopTimesScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="code\TopTimesScreen.h">
+    <ClInclude Include="code\VictoryScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
@@ -60,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\HUD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\HandleInput.cpp">
@@ -74,10 +86,22 @@
     <ClCompile Include="code\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\Player.cpp">
+    <ClCompile Include="code\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\PopulateEmitters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\SoundManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\TextureHolder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\Update.cpp">
@@ -86,19 +110,16 @@
     <ClCompile Include="code\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\HUD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code\Screen.cpp">
+    <ClCompile Include="code\MainMenu.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="code\MainMenu.cpp">
+    <ClCompile Include="code\TopTimesScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
     <ClCompile Include="code\VictoryScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="code\TopTimesScreen.cpp">
+    <ClCompile Include="code\Screen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
   </ItemGroup>

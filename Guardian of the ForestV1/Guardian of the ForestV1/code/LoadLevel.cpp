@@ -13,8 +13,12 @@ void Engine::loadLevel()
 	}
 	delete[] m_ArrayLevel;
 
-	// Load the next 2d array with the map for the level And repopulate the vertex array as well
+	// Load the next 2d array with the map for the level
+	// And repopulate the vertex array as well
 	m_ArrayLevel = m_LM.nextLevel(m_VALevel);
+
+	// Prepare the sound emitters
+	populateEmitters(m_FireEmitters, m_ArrayLevel);
 
 	/*Nicholas fixing - adding a border adound the map*/
 	// Get the size of the loaded level in pixels.
@@ -58,6 +62,4 @@ void Engine::loadLevel()
 
 	// Make sure this code isn't run again
 	m_NewLevelRequired = false;
-
-	m_Playing = true; // this prevents the need to press enter at the start of each new level
-}
+	}

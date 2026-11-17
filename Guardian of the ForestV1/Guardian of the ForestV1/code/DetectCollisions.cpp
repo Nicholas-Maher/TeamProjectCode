@@ -39,6 +39,7 @@ bool Engine::detectCollisions(Player& character)
 	}
 
 	/*Nicholas -- player Bourder*/
+	/**************************
 
 	// Get the player's current position.
 	FloatRect playerBounds = character.getPosition();
@@ -61,6 +62,7 @@ bool Engine::detectCollisions(Player& character)
 		character.stopRight(levelWidth);
 	}
 
+	*///////////////////////////
 	/*End of Nicholas - code*/
 
 	for (int x = startX; x < endX; x++)
@@ -78,8 +80,21 @@ bool Engine::detectCollisions(Player& character)
 				if (character.getHead().intersects(block))
 				{
 					character.spawn(m_LM.getStartPosition(), GRAVITY);
+					// Which sound should be played?
+					if (m_ArrayLevel[y][x] == 2)// Fire, ouch!
+					{
+						// Play a sound
+						m_SM.playFallInFire();
+
+					}
+					else // Water
+					{
+						// Play a sound
+						m_SM.playFallInWater();
+					}
 				}
 			}
+
 
 			// Is character colliding with a regular block
 			if (m_ArrayLevel[y][x] == 1)
@@ -104,6 +119,24 @@ bool Engine::detectCollisions(Player& character)
 					character.stopJump();
 				}
 			}
+			
+			// More collision detection here once we have learned about particle effects
+			// Has the characters' feet touched fire or water?
+			// If so, start a particle effect
+			// Make sure this is the first time we have detected this
+			// by seeing if an effect is already running			
+			if (!m_PS.running()) {
+				if (m_ArrayLevel[y][x] == 2 || m_ArrayLevel[y][x] == 3)
+				{
+					if (character.getFeet().intersects(block))
+					{
+						// position and start the particle system
+						m_PS.emitParticles(character.getCenter());
+
+					}
+				}
+			}
+
 			// Has the character reached the goal?
 			if (m_ArrayLevel[y][x] == 4)
 			{

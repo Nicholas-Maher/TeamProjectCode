@@ -13,7 +13,7 @@ void Engine::update(float dtAsSeconds)
 		loadLevel();
 	}
 
-	//if (m_Playing)
+	// if (m_Playing) // og had this
 	if (state == State::PLAYING)
 	{
 		// Update the player
@@ -43,6 +43,8 @@ void Engine::update(float dtAsSeconds)
 			{
 				// New level required
 				m_NewLevelRequired = true;
+				// Play the reach goal sound
+				m_SM.playReachGoal();
 			}
 			// if the player reaches the goal on the last level
 			else
@@ -60,6 +62,8 @@ void Engine::update(float dtAsSeconds)
 
 				state = State::VICTORY;
 				m_NewLevelRequired = false;
+				// Play the reach goal sound
+				m_SM.playReachGoal();
 				return;
 			}
 		}
@@ -77,7 +81,7 @@ void Engine::update(float dtAsSeconds)
 		}
 
 		// Time to update the HUD?
-		// Increment the number of frames since the last HUD calculation
+	// Increment the number of frames since the last HUD calculation
 		m_FramesSinceLastHUDUpdate++;
 
 		// Update the HUD every m_TargetFramesPerHUDUpdate frames
@@ -96,6 +100,7 @@ void Engine::update(float dtAsSeconds)
 			m_Hud.setLevel(ssLevel.str());
 
 			// updates the health bar
+			/********  remember to set this back to player values  *********/
 			m_Hud.setHealthBar(m_Player.getHealth(), m_Player.getFullHealth());
 
 
@@ -104,10 +109,35 @@ void Engine::update(float dtAsSeconds)
 
 	}// End if playing
 
+	// Check if a fire sound needs to be played
+	vector<Vector2f>::iterator it;
+
+	// Iterate through the vector of Vector2f objects
+	for (it = m_FireEmitters.begin(); it != m_FireEmitters.end(); it++)
+	{
+		// Where is this emitter?
+		// Store the location in pos
+		float posX = (*it).x;
+		float posY = (*it).y;
+
+		// is the emiter near the player?
+		// Make a 500 pixel rectangle around the emitter
+		FloatRect localRect(posX - 250, posY - 250, 500, 500);
+
+		// Is the player inside localRect?
+		if (m_Player.getPosition().intersects(localRect))
+		{
+			// Play the sound and pass in the location as well
+			m_SM.playFire(Vector2f(posX, posY), m_Player.getCenter());
+		}
+	}
+
+	m_MainView.setCenter(m_Player.getCenter());
+
 	// Sets the main to focus on the player
 
 	/*Nicholas Camera fix to stay verial but foloow the player horizontally  */
-
+	
 	//Keep the level vertically centred.
 	float levelHeight = m_LM.getLevelSize().y * TILE_SIZE;
 
@@ -139,6 +169,12 @@ void Engine::update(float dtAsSeconds)
 	}
 
 	m_MainView.setCenter(cameraX, cameraY);
-	/*End of Camera Code -- Nicholas */
 
-}
+	/*End of Camera Code -- Nicholas */
+		
+	// Update the particles
+	if (m_PS.running())
+	{
+		m_PS.update(dtAsSeconds);
+	}
+}// End of update function

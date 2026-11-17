@@ -29,7 +29,7 @@ Hud::Hud()
 	FloatRect healthBarBounds = m_HealthBarBackground.getLocalBounds();
 	m_HealthBarBackground.setOrigin(healthBarBounds.left + healthBarBounds.width / 2.f, healthBarBounds.top + healthBarBounds.height / 2.f);
 	m_HealthBarBackground.setPosition((m_Resolution.x / 2), yPos);
-	
+
 	// Setting up the dynamic part of the healthbar with a default width
 	m_HealthBar.setFillColor(Color::Green);
 	m_HealthBar.setSize(Vector2f(m_DefaultWidth * m_HealthBarWidthMultiplier, m_Height));

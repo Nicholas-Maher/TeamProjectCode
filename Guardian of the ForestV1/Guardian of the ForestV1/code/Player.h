@@ -6,14 +6,10 @@ using namespace sf;
 class Player
 {
 protected:
-	const int START_HEALTH = 100;
-	int m_FullHealth = START_HEALTH;
-	int m_Health = m_FullHealth;
-
-	// sprite sheet
+	// Of course we will need a sprite
 	Sprite m_Sprite;
-	Sprite m_SpriteSheet;
 
+	/*************** Clo animation variables ***************/
 	// And a texture
 	Texture m_Texture;
 
@@ -27,19 +23,20 @@ protected:
 	Clock clock;
 	float timeElapsed;
 	float animationTimer = 0;
+	/*************** Clo animation variables end ***************/
 
 	// How long does a jump last
 	float m_JumpDuration;
 
 	// Is character currently jumping or falling
-	bool m_IsJumping = false;
-	bool m_IsFalling = false;
+	bool m_IsJumping;
+	bool m_IsFalling;
 
 	// Which directions is the character currently walking in
 	bool m_WalkLeftPressed = false;
 	bool m_WalkRightPressed = false;
 
-	// Which directions is the character currently walking in
+	// Which directions is the character currently running in
 	bool m_RunLeftPressed = false;
 	bool m_RunRightPressed = false;
 
@@ -49,12 +46,7 @@ protected:
 	// Has the player just initialted a jump
 	bool m_JustJumped = false;
 
-	// When was the gameactor last hit
-	Time m_timeLastHit;
-
-
-
-	// Private variables and functions
+	// Private variables and functions come next
 private:
 	// What is the gravity
 	float m_Gravity;
@@ -65,6 +57,13 @@ private:
 	float m_VelocityX = 0;
 	float m_Acceleration = 0.9;
 	float m_Deceleration = 2;
+
+	const int START_HEALTH = 100;
+	int m_FullHealth = START_HEALTH;
+	int m_Health = m_FullHealth;
+
+	// When was the gameactor last hit
+	Time m_timeLastHit;
 
 	// Where is the player
 	Vector2f m_Position;
@@ -80,24 +79,25 @@ private:
 
 	// All our public functions will come next
 public:
-
-	Player();
+	// A constructor specific to Player
+	Player(); // our version didn't have this here
 
 	void spawn(Vector2f startPosition, float gravity);
 
+	// The overriden input handler for Player
 	bool handleInput();
 
-	// Handle the player getting hit by a zombie
-	bool hit(Time hitTime);
-
 	//setSprite to use correct animation cell
-	void setSpriteFromSheet(sf::IntRect textureBox);
+	void setSpriteFromSheet(sf::IntRect textureBox); // clo
 
 	//move the rectangle to the next cell in the animation
-	void moveTextureRect();
+	void moveTextureRect(); // clo
 
 	int getHealth();
 	int getFullHealth();
+
+	// Handle the player getting hit by an enemy
+	bool hit(Time hitTime);
 
 	// Where is the player
 	FloatRect getPosition();
@@ -110,7 +110,7 @@ public:
 
 	// Send a copy of the sprite to main
 	Sprite getSprite();
-	Sprite getSpriteFromSheet();
+	Sprite getSpriteFromSheet(); // clo
 
 	// Make the character walk
 	void walkLeft(float elapsedTime);
@@ -135,4 +135,5 @@ public:
 
 	// We will call this function once every frame
 	void update(float elapsedTime);
+
 };

@@ -3,27 +3,27 @@
 
 void Engine::handleInput()
 {
-    Event event;
+	Event event;
 
-    while (m_Window.pollEvent(event))
-    {
-        if (event.type == Event::KeyPressed)
-        {
-            // Handle the player quitting
-            if (Keyboard::isKeyPressed(Keyboard::Escape))
-            {
-                m_Window.close();
-            }
-        }
+	while (m_Window.pollEvent(event))
+	{
+		if (event.type == Event::KeyPressed)
+		{
+			// Handle the player quitting
+			if (Keyboard::isKeyPressed(Keyboard::Escape))
+			{
+				m_Window.close();
+			}
+		}
 
         // Handle mouse clicks on the main menu
-        if (state == State::MAIN_MENU &&event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        if (state == State::MAIN_MENU && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
         {
             // Get the mouse position
             Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
 
             // Start Game Button
-            if (m_MainMenu.getStartButton().contains((mousePosition.x),(mousePosition.y)))
+            if (m_MainMenu.getStartButton().contains((mousePosition.x), (mousePosition.y)))
             {
                 m_TotalTimeElapsed = 0;
                 m_LevelTimeElapsed = 0;
@@ -88,12 +88,12 @@ void Engine::handleInput()
                 m_Window.close();
             }
         }
-    }
+	}	
 
-    // Handle input specific to the player
-    //if (!m_Mainmenu && m_Player.handleInput())
+	// Handle input specific to the player
     if (state == State::PLAYING && m_Player.handleInput())
-    {
-        // Play a jump sound
-    }
+	{
+		// Play a jump sound
+		m_SM.playJump();
+	}
 }
