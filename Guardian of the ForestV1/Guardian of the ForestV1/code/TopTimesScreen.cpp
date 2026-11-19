@@ -15,7 +15,7 @@ TopTimesScreen::TopTimesScreen()
 
     FloatRect titleBounds = m_Title.getLocalBounds();
     m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(960, 150);
+    m_Title.setPosition(m_Resolution.x / 2.0f, 150);
 
     // top times text
     m_TimesText.setFont(m_Font);
@@ -24,13 +24,13 @@ TopTimesScreen::TopTimesScreen()
     setTimesText();
 
     // Main Menu button
-    m_MainMenuButton.spawn(Vector2f(810, 600), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
+    m_MainMenuButton.spawn(Vector2f(m_Resolution.x / 2.0f, 600), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
 
     // Reset times button
-    m_ResetTimesButton.spawn(Vector2f(810, 720), Color(45, 110, 55), 0, "RESET TIMES", Color::White);
+    m_ResetTimesButton.spawn(Vector2f(m_Resolution.x / 2.0f, 720), Color(45, 110, 55), 0, "RESET TIMES", Color::White);
 
     // Quit button
-    m_QuitButton.spawn(Vector2f(810, 840), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
+    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 840), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 }
 
 FloatRect TopTimesScreen::getMainMenuButton() const

@@ -12,7 +12,7 @@ GameOverScreen::GameOverScreen()
 
     FloatRect titleBounds = m_Title.getLocalBounds();
     m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(960, 150);
+    m_Title.setPosition(m_Resolution.x / 2.0f, 150);
 
     // main text
     m_MainText.setFont(m_Font);
@@ -22,16 +22,16 @@ GameOverScreen::GameOverScreen()
 
     FloatRect mainTextBounds = m_MainText.getLocalBounds();
     m_MainText.setOrigin(mainTextBounds.left + mainTextBounds.width / 2.f, mainTextBounds.top + mainTextBounds.height / 2.f);
-    m_MainText.setPosition(960, 350);
+    m_MainText.setPosition(m_Resolution.x / 2.0f, 350);
 
     // Retry button
-    m_RetryButton.spawn(Vector2f(810, 500), Color(45, 110, 55), 0, "RETRY", Color::White);
+    m_RetryButton.spawn(Vector2f(m_Resolution.x / 2.0f, 500), Color(45, 110, 55), 0, "RETRY", Color::White);
 
     // Main Menu button
-    m_MainMenuButton.spawn(Vector2f(810, 620), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
+    m_MainMenuButton.spawn(Vector2f(m_Resolution.x / 2.0f, 620), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
 
     // Quit button
-    m_QuitButton.spawn(Vector2f(810, 740), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
+    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 740), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 }
 
 FloatRect GameOverScreen::getRetryButton() const
@@ -47,6 +47,9 @@ FloatRect GameOverScreen::getMainMenuButton() const
 void GameOverScreen::setMainText(String text)
 {
     m_MainText.setString(text);
+    FloatRect textRect = m_MainText.getLocalBounds();
+    m_MainText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+    m_MainText.setPosition(m_Resolution.x / 2.0f, 370);
 }
 
 void GameOverScreen::draw(sf::RenderWindow& window)

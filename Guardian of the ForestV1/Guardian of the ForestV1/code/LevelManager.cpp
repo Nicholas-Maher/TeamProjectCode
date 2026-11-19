@@ -32,7 +32,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		// leavel loads of Levels Folder in to level1.txt file
 		levelToLoad = "levels/level1-Earth.txt";
 		m_StartPosition.x = 1;
-		m_StartPosition.y = 900;
+		m_StartPosition.y = 950;
 		m_BaseTimeLimit = 200.0f;
 		break;
 

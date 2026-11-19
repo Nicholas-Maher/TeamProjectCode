@@ -52,7 +52,10 @@ bool Engine::detectCollisions(Player& character)
 	if (m_Player.getPosition().intersects(m_PowerOrb.getPosition()) && m_PowerOrb.isActive())
 	{
 		m_PowerOrb.gotIt();
-		m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
+		if (m_Player.getPower() <= m_Player.getFullPower())
+		{
+			m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
+		}
 	}
 
 	/*Nicholas -- player Bourder*/

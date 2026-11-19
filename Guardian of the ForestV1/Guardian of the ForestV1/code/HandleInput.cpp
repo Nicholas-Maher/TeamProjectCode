@@ -31,6 +31,10 @@ void Engine::handleInput()
                 m_Player.setFullHealth(m_Player.getStartHealth());
                 m_Player.setHealth(m_Player.getFullHealth());
 
+                // resets the player's power
+                m_Player.setFullPower(m_Player.getStartFullPower());
+                m_Player.setPower(m_Player.getStartPower());
+
                 m_LM.setCurrentLevel(0); // resets the level to 0 so when load level is called, it increments it to 1
                 //loadLevel();
                 m_NewLevelRequired = true;
@@ -78,8 +82,10 @@ void Engine::handleInput()
             if (m_GameOverScreen.getRetryButton().contains((mousePosition.x), (mousePosition.y)))
             {
                 // resets the player's health
-                m_Player.setFullHealth(m_Player.getStartHealth());
                 m_Player.setHealth(m_Player.getFullHealth());
+
+                // resets the player's power
+                m_Player.setPower(m_Player.getStartPower());
 
                 // sets the current level to one less that current so when load level is called, it increments it to the level the player was just on
                 m_LM.setCurrentLevel(m_LM.getCurrentLevel() - 1); 

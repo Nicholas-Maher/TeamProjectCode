@@ -26,7 +26,7 @@ Hud::Hud()
 	m_HealthBar.spawn(Color::Green, Color::Red, Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2), 80, 100, 100, 70, 10, 4);
 
 	// power bar
-	m_PowerBar.spawn(Color(17, 17, 132), Color::Red, Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2), 200, 0, 100, 70, 10, 4);
+	m_PowerBar.spawn(Color::Red, Color(17, 17, 132),  Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2), 200, 0, 100, 70, 10, 4);
 }
 
 

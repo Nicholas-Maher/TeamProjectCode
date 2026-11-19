@@ -26,6 +26,11 @@ void Player::spawn(Vector2f startPosition, float gravity)
 
 	// Move the sprite in to position
 	m_Sprite.setPosition(m_Position);
+
+	m_WalkLeftPressed = false;
+	m_WalkRightPressed = false;
+	m_RunLeftPressed = false;
+	m_RunRightPressed = false;
 }
 
 void Player::update(float elapsedTime)
@@ -180,6 +185,11 @@ void Player::setFullPower(int fullPower)
 int Player::getStartPower() const
 {
 	return START_POWER;
+}
+
+int Player::getStartFullPower() const
+{
+	return START_FULL_POWER;
 }
 
 FloatRect Player::getPosition()

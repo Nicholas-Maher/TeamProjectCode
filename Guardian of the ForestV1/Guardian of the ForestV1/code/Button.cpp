@@ -13,6 +13,9 @@ void Button::spawn(Vector2f position, Color buttonColour, int outlineThickness, 
     **/
     // button
     m_Button.setSize(Vector2f(300, 80));
+
+    FloatRect buttonBounds = m_Button.getLocalBounds();
+    m_Button.setOrigin(buttonBounds.left + buttonBounds.width / 2.f, buttonBounds.top + buttonBounds.height / 2.f);
     m_Button.setPosition(position);
     m_Button.setFillColor(buttonColour);
     m_Button.setOutlineColor(Color::White);
@@ -27,7 +30,7 @@ void Button::spawn(Vector2f position, Color buttonColour, int outlineThickness, 
     FloatRect textBounds = m_Text.getLocalBounds();
     m_Text.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f);
     // Patrick - centring text in the buttons
-    FloatRect buttonBounds = m_Button.getGlobalBounds();
+    buttonBounds = m_Button.getGlobalBounds();
     m_Text.setPosition(buttonBounds.left + buttonBounds.width / 2.f, buttonBounds.top + buttonBounds.height / 2.f);
 }
 

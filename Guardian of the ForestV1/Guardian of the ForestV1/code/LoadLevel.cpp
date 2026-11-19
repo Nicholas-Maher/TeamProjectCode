@@ -38,7 +38,7 @@ void Engine::loadLevel()
 
 	// How long is this new time limit
 
-	m_TimeRemaining = m_LM.getTimeLimit();
+	//m_TimeRemaining = m_LM.getTimeLimit();
 
 	// Spawn the player
 	m_Player.spawn(m_LM.getStartPosition(), GRAVITY);

@@ -71,12 +71,9 @@ private:
 	// Is the game currently playing?
 	bool m_Playing = false;
 
-	// How much time is left in the current level
-	float m_TimeRemaining = 10;
-	Time m_GameTimeTotal;
-
 	// How much time has passed in the current level
 	float m_LevelTimeElapsed = 0;
+	Time m_GameTimeTotal;
 
 	// For tracking the total score and will be added to the leaderboard if the player completes the game and the score is fast enough
 	float m_TotalTimeElapsed = 0;

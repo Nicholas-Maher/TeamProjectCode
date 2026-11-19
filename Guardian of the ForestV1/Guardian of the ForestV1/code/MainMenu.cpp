@@ -21,16 +21,16 @@ MainMenu::MainMenu()
 
     FloatRect titleBounds = m_Title.getLocalBounds();
     m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(960, 350);
+    m_Title.setPosition(m_Resolution.x / 2.0f, 350);
 
     // Start Game button
-    m_StartButton.spawn(Vector2f(810, 500), Color(45, 110, 55), 0, "START GAME", Color::White);
+    m_StartButton.spawn(Vector2f(m_Resolution.x / 2.0f, 500), Color(45, 110, 55), 0, "START GAME", Color::White);
 
     // Top times button
-    m_TopTimesButton.spawn(Vector2f(810, 620), Color(45, 110, 55), 0, "TOP SCORES", Color::White);
+    m_TopTimesButton.spawn(Vector2f(m_Resolution.x / 2.0f, 620), Color(45, 110, 55), 0, "TOP SCORES", Color::White);
 
     // Quit button
-    m_QuitButton.spawn(Vector2f(810, 740), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
+    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 740), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 
 
     /* End of:  Nicholas - adding a simple main menu to the game ************/

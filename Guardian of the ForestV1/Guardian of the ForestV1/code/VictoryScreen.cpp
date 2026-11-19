@@ -22,13 +22,13 @@ VictoryScreen::VictoryScreen()
 
     FloatRect timeBounds = m_TimeText.getLocalBounds();
     m_TimeText.setOrigin(timeBounds.left + timeBounds.width / 2.f, timeBounds.top + timeBounds.height / 2.f);
-    m_TimeText.setPosition(960, 350);
+    m_TimeText.setPosition(m_Resolution.x / 2.0f, 350);
 
     // Main Menu button
-    m_MainMenuButton.spawn(Vector2f(810, 500), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
+    m_MainMenuButton.spawn(Vector2f(m_Resolution.x / 2.0f, 500), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
 
     // Quit button
-    m_QuitButton.spawn(Vector2f(810, 620), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
+    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 620), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 }
 
 FloatRect VictoryScreen::getMainMenuButton() const
@@ -39,6 +39,9 @@ FloatRect VictoryScreen::getMainMenuButton() const
 void VictoryScreen::setTimeText(String text)
 {
     m_TimeText.setString(text);
+    FloatRect textRect = m_TimeText.getLocalBounds();
+    m_TimeText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+    m_TimeText.setPosition(m_Resolution.x / 2.0f, 370);
 }
 
 void VictoryScreen::draw(sf::RenderWindow& window)
