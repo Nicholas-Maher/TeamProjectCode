@@ -9,10 +9,12 @@ void Engine::update(float dtAsSeconds)
 {
 	if (m_NewLevelRequired)
 	{
+		m_LevelTimeElapsed = 0;
 		loadLevel();
 	}
 
-	if (m_Playing)
+	// if (m_Playing) // og had this
+	if (state == State::PLAYING)
 	{
 		// Update the player
 		m_Player.update(dtAsSeconds);
@@ -29,19 +31,49 @@ void Engine::update(float dtAsSeconds)
 		// Check ground and update enemy movement
 		m_Enemy.update(dtAsSeconds, hasGroundAhead(), m_Player.getPosition());
 
-		m_HealthBar.setSize(Vector2f(m_Player.getHealth() * m_HealthBarWidthMultiplier, 70));
 
 		// Detect collisions and see if the player has reached the goal tile
-		// The second part of the if condition is only executed
-		// when the player is touching the home tile
+		// the inner conditions set the bool required for a new level to be loaded if the level beaten wasn't the last level and set the game state 
+		// to victory if the player reaches the goal on the last level
 		if (detectCollisions(m_Player))
 		{
-			// New level required
-			m_NewLevelRequired = true;
+			m_TotalTimeElapsed += m_LevelTimeElapsed;
+
+			if (m_LM.getCurrentLevel() < m_LM.getNumLevels())
+			{
+				// New level required
+				m_NewLevelRequired = true;
+				// Play the reach goal sound
+				m_SM.playReachGoal();
+			}
+			// if the player reaches the goal on the last level
+			else
+			{
+				// set the total time text in the victory screen
+				stringstream ssTotalTime;
+				ssTotalTime << "Total Time: " << (int)m_TotalTimeElapsed;
+				m_VictoryScreen.setTimeText(ssTotalTime.str());
+
+				// checks if the total time can go into the top times leaderboard
+				if (m_TopTimesScreen.isATopTime((int)m_TotalTimeElapsed))
+				{
+					m_TopTimesScreen.addTimeToLeaderboard((int)m_TotalTimeElapsed);
+				}
+
+				m_TotalTimeElapsed = 0; // resets the total time variable
+				state = State::VICTORY;
+				m_NewLevelRequired = false;
+				// Play the reach goal sound
+				m_SM.playReachGoal();
+				return;
+			}
 		}
 
 		// Count down the time the player has left
 		m_TimeRemaining -= dtAsSeconds;
+
+		// increment the time elapsed
+		m_LevelTimeElapsed += dtAsSeconds;
 
 		// Has the player run out of time
 		if (m_TimeRemaining <= 0)
@@ -49,12 +81,64 @@ void Engine::update(float dtAsSeconds)
 			m_NewLevelRequired = true;
 		}
 
+		// Time to update the HUD?
+	// Increment the number of frames since the last HUD calculation
+		m_FramesSinceLastHUDUpdate++;
+
+		// Update the HUD every m_TargetFramesPerHUDUpdate frames
+		if (m_FramesSinceLastHUDUpdate > m_TargetFramesPerHUDUpdate)
+		{
+			// Update game HUD text
+			stringstream ssTime;
+			stringstream ssLevel;
+
+			// Update the time text
+			ssTime << (int)m_TimeRemaining << " seconds";
+			m_Hud.setTime(ssTime.str());
+
+			// Update the level text
+			ssLevel << "Level: " << m_LM.getCurrentLevel();
+			m_Hud.setLevel(ssLevel.str());
+
+			// update the health and power bars
+			m_Hud.setHealthBar(m_Player.getHealth(), m_Player.getFullHealth());
+			m_Hud.setPowerBar(m_Player.getPower(), m_Player.getFullPower());
+
+
+			m_FramesSinceLastHUDUpdate = 0;
+		}
+
 	}// End if playing
+
+	// Check if a fire sound needs to be played
+	vector<Vector2f>::iterator it;
+
+	// Iterate through the vector of Vector2f objects
+	for (it = m_FireEmitters.begin(); it != m_FireEmitters.end(); it++)
+	{
+		// Where is this emitter?
+		// Store the location in pos
+		float posX = (*it).x;
+		float posY = (*it).y;
+
+		// is the emiter near the player?
+		// Make a 500 pixel rectangle around the emitter
+		FloatRect localRect(posX - 250, posY - 250, 500, 500);
+
+		// Is the player inside localRect?
+		if (m_Player.getPosition().intersects(localRect))
+		{
+			// Play the sound and pass in the location as well
+			m_SM.playFire(Vector2f(posX, posY), m_Player.getCenter());
+		}
+	}
+
+	m_MainView.setCenter(m_Player.getCenter());
 
 	// Sets the main to focus on the player
 
 	/*Nicholas Camera fix to stay verial but foloow the player horizontally  */
-
+	
 	//Keep the level vertically centred.
 	float levelHeight = m_LM.getLevelSize().y * TILE_SIZE;
 
@@ -86,5 +170,12 @@ void Engine::update(float dtAsSeconds)
 	}
 
 	m_MainView.setCenter(cameraX, cameraY);
-}
-/*End of Camera Code -- Nicholas */
+
+	/*End of Camera Code -- Nicholas */
+		
+	// Update the particles
+	if (m_PS.running())
+	{
+		m_PS.update(dtAsSeconds);
+	}
+}// End of update function

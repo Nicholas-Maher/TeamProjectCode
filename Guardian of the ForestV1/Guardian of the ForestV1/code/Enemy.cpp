@@ -90,7 +90,7 @@ float Enemy::getSpeed() const
 bool Enemy::canDetectPlayer(FloatRect playerBounds)
 {
 	//testing if the player is within the detection range of the enemy
-	std::cout << "Detection function called!" << std::endl;
+	//std::cout << "Detection function called!" << std::endl;
 
 	// Get centre of the player
 	float playerX = playerBounds.left + playerBounds.width / 2.f;
@@ -106,7 +106,7 @@ bool Enemy::canDetectPlayer(FloatRect playerBounds)
 
 	//Checking player detection by enemy
 	float distance = std::sqrt((distanceX * distanceX) + (distanceY * distanceY));
-	std::cout << "Distance: " << distance << " | Detection range: " << m_DetectionRange << std::endl;
+	//std::cout << "Distance: " << distance << " | Detection range: " << m_DetectionRange << std::endl;
 
 	// Check if the distance is within the detection range
 	return distance <= m_DetectionRange;

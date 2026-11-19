@@ -33,7 +33,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		levelToLoad = "levels/level1-Earth.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 900;
-		m_BaseTimeLimit = 30.0f;
+		m_BaseTimeLimit = 200.0f;
 		break;
 
 	case 2:
@@ -41,7 +41,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		levelToLoad = "Levels/level2-Water.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 900;
-		m_BaseTimeLimit = 30.0f;
+		m_BaseTimeLimit = 200.0f;
 		break;
 
 	case 3:
@@ -49,7 +49,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		levelToLoad = "Levels/level3-Air.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 600;
-		m_BaseTimeLimit = 30.0f;
+		m_BaseTimeLimit = 200.0f;
 		break;
 
 	case 4:
@@ -57,7 +57,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		levelToLoad = "Levels/level4-Fire.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 400;
-		m_BaseTimeLimit = 30.0f;
+		m_BaseTimeLimit = 200.0f;
 		break;
 
 	case 5:
@@ -65,7 +65,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 		levelToLoad = "Levels/level5-Homeland.txt";
 		m_StartPosition.x = 1;
 		m_StartPosition.y = 400;
-		m_BaseTimeLimit = 30.0f;
+		m_BaseTimeLimit = 200.0f;
 		break;
 	}
 
@@ -89,7 +89,7 @@ int** LevelManager::nextLevel(VertexArray& rVaLevel)
 	inputFile.seekg(0, ios::beg);
 
 	// Prepare the 2d array to hold the int values from the file
-	int** arrayLevel = new int*[m_LevelSize.y];
+	int** arrayLevel = new int* [m_LevelSize.y];
 	for (int i = 0; i < m_LevelSize.y; ++i)
 	{
 		// Add a new array into each array element
@@ -171,6 +171,11 @@ int LevelManager::getCurrentLevel()
 	return m_CurrentLevel;
 }
 
+void LevelManager::setCurrentLevel(int level)
+{
+	m_CurrentLevel = level;
+}
+
 float LevelManager::getTimeLimit()
 {
 	return m_BaseTimeLimit * m_TimeModifier;
@@ -179,4 +184,9 @@ float LevelManager::getTimeLimit()
 Vector2f LevelManager::getStartPosition()
 {
 	return m_StartPosition;
+}
+
+int LevelManager::getNumLevels() const
+{
+	return NUM_LEVELS;
 }

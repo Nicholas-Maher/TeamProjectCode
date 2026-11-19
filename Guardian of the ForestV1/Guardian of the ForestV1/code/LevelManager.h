@@ -14,7 +14,8 @@ private:
 	float m_BaseTimeLimit = 0;
 
 	int m_CurrentLevel = 0;
-	const int NUM_LEVELS = 5;
+	// temporarily changed to 3 while we just have 3 levels
+	const int NUM_LEVELS = 3;
 
 public:
 
@@ -31,5 +32,8 @@ public:
 	Vector2i getLevelSize();
 
 	int getCurrentLevel();
+	void setCurrentLevel(int level);
+
+	int getNumLevels() const;
 
 };

@@ -29,6 +29,8 @@ bool Engine::detectCollisions(Player& character)
 	if (endY >= m_LM.getLevelSize().y)
 		endY = m_LM.getLevelSize().y;
 
+	bool playerDamaged = false;
+
 	// Has the character fallen out of the map?
 	// This can be part of level manager
 	FloatRect level(0, 0, m_LM.getLevelSize().x * TILE_SIZE, m_LM.getLevelSize().y * TILE_SIZE);
@@ -36,9 +38,25 @@ bool Engine::detectCollisions(Player& character)
 	{
 		// respawn the character changeing this mean he falls for every with out end
 		character.spawn(m_LM.getStartPosition(), GRAVITY);
+		character.hit(m_GameTimeTotal, 20); // the player loses 20 health when they fall off the map
+		// sends the player to the game over screen if they run out of health
+		if (character.getHealth() <= 0)
+		{
+			m_GameOverScreen.setMainText("You died!");
+			m_LevelTimeElapsed = 0; // resets the level timer
+			state = State::GAME_OVER;
+		}
+	}
+
+	/*  temp version of pickup collision made for just one pickup  */
+	if (m_Player.getPosition().intersects(m_PowerOrb.getPosition()) && m_PowerOrb.isActive())
+	{
+		m_PowerOrb.gotIt();
+		m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
 	}
 
 	/*Nicholas -- player Bourder*/
+	/**************************
 
 	// Get the player's current position.
 	FloatRect playerBounds = character.getPosition();
@@ -61,6 +79,7 @@ bool Engine::detectCollisions(Player& character)
 		character.stopRight(levelWidth);
 	}
 
+	*///////////////////////////
 	/*End of Nicholas - code*/
 
 	for (int x = startX; x < endX; x++)
@@ -78,8 +97,21 @@ bool Engine::detectCollisions(Player& character)
 				if (character.getHead().intersects(block))
 				{
 					character.spawn(m_LM.getStartPosition(), GRAVITY);
+					// Which sound should be played?
+					if (m_ArrayLevel[y][x] == 2)// Fire, ouch!
+					{
+						// Play a sound
+						m_SM.playFallInFire();
+
+					}
+					else // Water
+					{
+						// Play a sound
+						m_SM.playFallInWater();
+					}
 				}
 			}
+
 
 			// Is character colliding with a regular block
 			if (m_ArrayLevel[y][x] == 1)
@@ -104,6 +136,24 @@ bool Engine::detectCollisions(Player& character)
 					character.stopJump();
 				}
 			}
+			
+			// More collision detection here once we have learned about particle effects
+			// Has the characters' feet touched fire or water?
+			// If so, start a particle effect
+			// Make sure this is the first time we have detected this
+			// by seeing if an effect is already running			
+			if (!m_PS.running()) {
+				if (m_ArrayLevel[y][x] == 2 || m_ArrayLevel[y][x] == 3)
+				{
+					if (character.getFeet().intersects(block))
+					{
+						// position and start the particle system
+						m_PS.emitParticles(character.getCenter());
+
+					}
+				}
+			}
+
 			// Has the character reached the goal?
 			if (m_ArrayLevel[y][x] == 4)
 			{

@@ -1,101 +1,90 @@
-
 #include "Engine.h"
 
 void Engine::draw()
 {
-    // Rub out the last frame
-    m_Window.clear(Color::White);
+	// Rub out the last frame
+	m_Window.clear(Color::White);
+	
+	// Update the shader parameters
+	//////m_RippleShader.setUniform("uTime", m_GameTimeTotal.asSeconds()); // og had this
 
-    // Switch to background view
-    m_Window.setView(m_BGMainView);
+	// Switch to background view
+	m_Window.setView(m_BGMainView);
 
-    // Draw the background
-    m_Window.draw(m_BackgroundSprite);
+	// Draw the background
+	m_Window.draw(m_BackgroundSprite);
 
-    // Draw the main menu
-    if (m_Mainmenu)
-    {
-        // Switch to HUD view for the menu
-        m_Window.setView(m_HudView);
+	// Draw the background, complete with shader effect
+	////m_Window.draw(m_BackgroundSprite, &m_RippleShader); // og had this
+	
+	// Draw the main menu
+	if (state == State::MAIN_MENU)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
 
-        // Game title
-        Text title;
-        title.setFont(m_MenuFont);
-        title.setString("GUARDIAN OF THE FOREST");
-        title.setCharacterSize(60);
-        title.setFillColor(Color(220, 240, 180));
+		// Draw the main menu - Patrick - made the main menu class and moved Nicholas's text and button creating and drawing logic into it
+		m_MainMenu.draw(m_Window);
 
-        FloatRect titleBounds = title.getLocalBounds();
-        title.setOrigin(titleBounds.left + titleBounds.width / 2.f,titleBounds.top + titleBounds.height / 2.f);
+	}
 
-        title.setPosition(960, 350);
-        m_Window.draw(title);
+	// Draw the victory screen
+	if (state == State::VICTORY)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
 
-        // Start Game button
-        RectangleShape startButton(Vector2f(300, 80));
-        startButton.setPosition(810, 500);
-        startButton.setFillColor(Color(45, 110, 55));
-        startButton.setOutlineColor(Color::White);
-        m_Window.draw(startButton);
+		m_VictoryScreen.draw(m_Window);
+	}
 
-        // Start Game text
-        Text startText;
-        startText.setFont(m_MenuFont);
-        startText.setString("START GAME");
-        startText.setCharacterSize(30);
-        startText.setFillColor(Color::White);
+	// Draw the victory screen
+	if (state == State::GAME_OVER)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
 
-        FloatRect startBounds = startText.getLocalBounds();
-        startText.setOrigin(startBounds.left + startBounds.width / 2.f, startBounds.top + startBounds.height / 2.f);
+		m_GameOverScreen.draw(m_Window);
+	}
 
-        startText.setPosition(960, 540);
-        m_Window.draw(startText);
+	if (state == State::PLAYING)
+	{
+		// Switch to m_MainView
+		m_Window.setView(m_MainView);
 
-        // Quit button
-        RectangleShape quitButton(Vector2f(300, 80));
-        quitButton.setPosition(810, 620);
-        quitButton.setFillColor(Color(120, 45, 40));
-        quitButton.setOutlineColor(Color::White);
-        quitButton.setOutlineThickness(3);
-        m_Window.draw(quitButton);
+		// Draw the level
+		m_Window.draw(m_VALevel, &m_TextureTiles);
 
-        // Quit text
-        Text quitText;
-        quitText.setFont(m_MenuFont);
-        quitText.setString("QUIT GAME");
-        quitText.setCharacterSize(30);
-        quitText.setFillColor(Color::White);
+		/***********************
+		// Draw the LevelBorder
+		m_Window.draw(m_LevelBorder);
+		*//////////////////
 
-        FloatRect quitBounds = quitText.getLocalBounds();
-        quitText.setOrigin(quitBounds.left + quitBounds.width / 2.f,quitBounds.top + quitBounds.height / 2.f );
+		// Draw the player
+		m_Window.draw(m_Player.getSprite());
 
-        quitText.setPosition(960, 660);
-        m_Window.draw(quitText);
-    }
-    else
-    {
-        // Switch to m_MainView
-        m_Window.setView(m_MainView);
+		if (m_PowerOrb.isActive())
+		{
+			m_Window.draw(m_PowerOrb.getSprite());
+		}
 
-        // Draw the level
-        m_Window.draw(m_VALevel, &m_TextureTiles);
+		// Draw the enemy
+		m_Enemy.draw(m_Window);
 
-        // Draw the LevelBorder
-        m_Window.draw(m_LevelBorder);
+		// Draw the HUD
+		m_Window.setView(m_HudView);
+		m_Hud.draw(m_Window);
 
-        // Draw the player
-        m_Window.draw(m_Player.getSprite());
-        
-        // Draw the enemy
-        m_Enemy.draw(m_Window);
+	}
+	
+	// Draw the top times screen
+	if (state == State::TOP_TIMES)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
 
-        // Draw the HUD
-        m_Window.setView(m_HudView);
-        m_Window.draw(m_HealthBarBorder);
-        m_Window.draw(m_HealthBarBackground);
-        m_Window.draw(m_HealthBar);
-    }
-
-    // Show everything we have just drawn
-    m_Window.display();
+		m_TopTimesScreen.draw(m_Window);
+	}
+	
+	// Show everything we have just drawn
+	m_Window.display();
 }
