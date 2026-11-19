@@ -415,7 +415,7 @@ bool Player::handleInput()
 {
 	m_JustJumped = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::W))
+	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
 
 		// Start a jump if not already jumping
