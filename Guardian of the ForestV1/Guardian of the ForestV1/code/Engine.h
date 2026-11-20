@@ -90,7 +90,7 @@ private:
 	VertexArray m_VALevel;
 
 	/*Nicholas -- Level Border*/
-	//sf::RectangleShape m_LevelBorder;
+	sf::RectangleShape m_LevelBorder;
 
 	// The 2d array with the map for the level
 	// A pointer to a pointer

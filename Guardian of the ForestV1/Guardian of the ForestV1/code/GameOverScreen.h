@@ -5,7 +5,7 @@ class GameOverScreen : public Screen
 {
 
 private:
-	Text m_MainText;
+	TextBlock m_MainText;
 
 	Button m_RetryButton;
 	Button m_MainMenuButton;

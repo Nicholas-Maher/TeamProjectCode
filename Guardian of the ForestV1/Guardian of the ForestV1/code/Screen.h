@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Button.h"
+#include "TextBlock.h"
 #include <sstream>
 
 using namespace sf;
@@ -11,7 +12,7 @@ protected:
 	Font m_Font;
 	Vector2f m_Resolution;
 
-	Text m_Title;
+	TextBlock m_Title;
 
 	Button m_QuitButton;
 

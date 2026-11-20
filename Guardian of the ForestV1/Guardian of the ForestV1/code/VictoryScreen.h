@@ -5,7 +5,7 @@ class VictoryScreen : public Screen
 {
 
 private:
-	Text m_TimeText;
+	TextBlock m_TimeText;
 
 	Button m_MainMenuButton;
 

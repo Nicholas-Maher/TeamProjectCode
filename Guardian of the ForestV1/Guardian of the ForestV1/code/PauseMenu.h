@@ -5,7 +5,7 @@ class PauseMenu : public Screen
 {
 
 private:
-    Text m_Title;
+    TextBlock m_Title;
 
     Button m_ResumeButton;
     Button m_MainMenuButton;

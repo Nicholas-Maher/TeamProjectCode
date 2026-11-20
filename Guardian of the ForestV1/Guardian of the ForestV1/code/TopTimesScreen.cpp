@@ -9,14 +9,7 @@ TopTimesScreen::TopTimesScreen()
 	m_Font.loadFromFile("fonts/Cinzel.ttf");
 
     // Screen heading text
-    m_Title.setFont(m_Font);
-    m_Title.setString("Top Times");
-    m_Title.setCharacterSize(100);
-    m_Title.setFillColor(Color(46, 111, 64));
-
-    FloatRect titleBounds = m_Title.getLocalBounds();
-    m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(m_Resolution.x / 2.0f, 150);
+    m_Title.spawn("TOP TIMES", 100, Color(46, 111, 64), Vector2f(m_Resolution.x / 2.0f, 150));
 
     // top times text
     m_TimesText.setFont(m_Font);
@@ -146,7 +139,7 @@ void TopTimesScreen::resetTopTimesToDefaults()
 
 void TopTimesScreen::draw(sf::RenderWindow& window)
 {
-    window.draw(m_Title);
+    m_Title.draw(window);
     window.draw(m_TimesText);
     m_MainMenuButton.draw(window);
     m_ResetTimesButton.draw(window);

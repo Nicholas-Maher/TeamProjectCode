@@ -6,19 +6,7 @@ PauseMenu::PauseMenu()
     m_Font.loadFromFile("fonts/Cinzel.ttf");
 
     // Pause title
-    m_Title.setFont(m_Font);
-    m_Title.setString("PAUSED");
-    m_Title.setCharacterSize(100);
-    m_Title.setFillColor(Color::Red);
-
-    FloatRect titleBounds = m_Title.getLocalBounds();
-
-    m_Title.setOrigin(
-        titleBounds.left + titleBounds.width / 2.f,
-        titleBounds.top + titleBounds.height / 2.f
-    );
-
-    m_Title.setPosition(m_Resolution.x / 2.0f, 350);
+    m_Title.spawn("PAUSED", 100, Color::Red, Vector2f(m_Resolution.x / 2.0f, 350));
 
     // Resume button
     m_ResumeButton.spawn(
@@ -48,8 +36,7 @@ FloatRect PauseMenu::getMainMenuButton() const
 
 void PauseMenu::draw(sf::RenderWindow& window)
 {
-    window.draw(m_Title);
-
+    m_Title.draw(window);
     m_ResumeButton.draw(window);
     m_MainMenuButton.draw(window);
     m_QuitButton.draw(window);

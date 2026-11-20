@@ -5,24 +5,10 @@ GameOverScreen::GameOverScreen()
 	m_Font.loadFromFile("fonts/Cinzel.ttf");
 
     // Screen heading text
-    m_Title.setFont(m_Font);
-    m_Title.setString("The Forest has been felled!");
-    m_Title.setCharacterSize(100);
-    m_Title.setFillColor(Color(46, 111, 64));
-
-    FloatRect titleBounds = m_Title.getLocalBounds();
-    m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(m_Resolution.x / 2.0f, 150);
+    m_Title.spawn("The Forest has been felled!", 100, Color(46, 111, 64), Vector2f(m_Resolution.x / 2.0f, 150));
 
     // main text
-    m_MainText.setFont(m_Font);
-    m_MainText.setString("----------------");
-    m_MainText.setCharacterSize(100);
-    m_MainText.setFillColor(Color(46, 111, 64));
-
-    FloatRect mainTextBounds = m_MainText.getLocalBounds();
-    m_MainText.setOrigin(mainTextBounds.left + mainTextBounds.width / 2.f, mainTextBounds.top + mainTextBounds.height / 2.f);
-    m_MainText.setPosition(m_Resolution.x / 2.0f, 350);
+    m_Title.spawn("-----------------", 100, Color(46, 111, 64), Vector2f(m_Resolution.x / 2.0f, 350));
 
     // Retry button
     m_RetryButton.spawn(Vector2f(m_Resolution.x / 2.0f, 500), Color(45, 110, 55), 0, "RETRY", Color::White);
@@ -47,15 +33,12 @@ FloatRect GameOverScreen::getMainMenuButton() const
 void GameOverScreen::setMainText(String text)
 {
     m_MainText.setString(text);
-    FloatRect textRect = m_MainText.getLocalBounds();
-    m_MainText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-    m_MainText.setPosition(m_Resolution.x / 2.0f, 370);
 }
 
 void GameOverScreen::draw(sf::RenderWindow& window)
 {
-    window.draw(m_Title);
-    window.draw(m_MainText);
+    m_Title.draw(window);
+    m_MainText.draw(window);
     m_RetryButton.draw(window);
     m_MainMenuButton.draw(window);
     m_QuitButton.draw(window);

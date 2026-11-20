@@ -5,11 +5,11 @@ class ControlsScreen : public Screen
 {
 
 private:
-	Text m_Title;
-	Text m_JumpText;
-	Text m_LeftText;
-	Text m_RightText;
-	Text m_RunText;
+	TextBlock m_Title;
+	TextBlock m_JumpText;
+	TextBlock m_LeftText;
+	TextBlock m_RightText;
+	TextBlock m_RunText;
 
 	Button m_JumpButton;
 	Button m_MoveLeftButton;

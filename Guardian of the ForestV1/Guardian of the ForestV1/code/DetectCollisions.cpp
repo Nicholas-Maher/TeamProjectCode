@@ -52,14 +52,13 @@ bool Engine::detectCollisions(Player& character)
 	if (m_Player.getPosition().intersects(m_PowerOrb.getPosition()) && m_PowerOrb.isActive())
 	{
 		m_PowerOrb.gotIt();
-		if (m_Player.getPower() <= m_Player.getFullPower())
+		if (m_Player.getPower() < m_Player.getFullPower())
 		{
 			m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
 		}
 	}
 
 	/*Nicholas -- player Bourder*/
-	/**************************
 
 	// Get the player's current position.
 	FloatRect playerBounds = character.getPosition();
@@ -70,7 +69,7 @@ bool Engine::detectCollisions(Player& character)
 	// Stop the player at the left edge.
 	if (playerBounds.left < 0.f)
 	{
-		character.stopLeft(0.f);
+		character.stopLeft(0.0f);
 	}
 
 	// Update the player's position after the correction.
@@ -82,7 +81,6 @@ bool Engine::detectCollisions(Player& character)
 		character.stopRight(levelWidth);
 	}
 
-	*///////////////////////////
 	/*End of Nicholas - code*/
 
 	for (int x = startX; x < endX; x++)

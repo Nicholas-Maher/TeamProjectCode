@@ -50,9 +50,7 @@ void Engine::update(float dtAsSeconds)
 			else
 			{
 				// set the total time text in the victory screen
-				stringstream ssTotalTime;
-				ssTotalTime << "Total Time: " << (int)m_TotalTimeElapsed;
-				m_VictoryScreen.setTimeText(ssTotalTime.str());
+				m_VictoryScreen.setTimeText(convertTimeToString(m_TotalTimeElapsed));
 
 				// checks if the total time can go into the top times leaderboard
 				if (m_TopTimesScreen.isATopTime((int)m_TotalTimeElapsed))

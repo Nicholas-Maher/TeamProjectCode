@@ -5,7 +5,7 @@ class MainMenu : public Screen
 {
 
 private:
-	Text m_Title;
+	TextBlock m_Title;
 
 	Button m_StartButton;
 	Button m_TopTimesButton;

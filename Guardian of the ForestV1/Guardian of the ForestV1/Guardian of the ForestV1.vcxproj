@@ -35,6 +35,7 @@
     <ClInclude Include="code\PowerOrb.h" />
     <ClInclude Include="code\Screen.h" />
     <ClInclude Include="code\SoundManager.h" />
+    <ClInclude Include="code\TextBlock.h" />
     <ClInclude Include="code\TextureHolder.h" />
     <ClInclude Include="code\Player.h" />
     <ClInclude Include="code\TopTimesScreen.h" />
@@ -64,6 +65,7 @@
     <ClCompile Include="code\PowerOrb.cpp" />
     <ClCompile Include="code\Screen.cpp" />
     <ClCompile Include="code\SoundManager.cpp" />
+    <ClCompile Include="code\TextBlock.cpp" />
     <ClCompile Include="code\TextureHolder.cpp" />
     <ClCompile Include="code\Player.cpp" />
     <ClCompile Include="code\TopTimesScreen.cpp" />

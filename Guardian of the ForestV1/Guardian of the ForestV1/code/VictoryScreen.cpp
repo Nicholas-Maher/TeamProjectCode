@@ -5,24 +5,10 @@ VictoryScreen::VictoryScreen()
 	m_Font.loadFromFile("fonts/Cinzel.ttf");
 
     // Screen heading text
-    m_Title.setFont(m_Font);
-    m_Title.setString("You Won! You saved the Forest!");
-    m_Title.setCharacterSize(100);
-    m_Title.setFillColor(Color(46, 111, 64));
-
-    FloatRect titleBounds = m_Title.getLocalBounds();
-    m_Title.setOrigin(titleBounds.left + titleBounds.width / 2.f, titleBounds.top + titleBounds.height / 2.f);
-    m_Title.setPosition(960, 150);
+    m_Title.spawn("You Won! You saved the Forest!", 100, Color(46, 111, 64), Vector2f(m_Resolution.x / 2.0f, 150));
 
     // time text
-    m_TimeText.setFont(m_Font);
-    m_TimeText.setString("--------------");
-    m_TimeText.setCharacterSize(100);
-    m_TimeText.setFillColor(Color(46, 111, 64));
-
-    FloatRect timeBounds = m_TimeText.getLocalBounds();
-    m_TimeText.setOrigin(timeBounds.left + timeBounds.width / 2.f, timeBounds.top + timeBounds.height / 2.f);
-    m_TimeText.setPosition(m_Resolution.x / 2.0f, 350);
+    m_TimeText.spawn("", 100, Color(46, 111, 64), Vector2f(m_Resolution.x / 2.0f, 350));
 
     // Main Menu button
     m_MainMenuButton.spawn(Vector2f(m_Resolution.x / 2.0f, 500), Color(45, 110, 55), 0, "MAIN MENU", Color::White);
@@ -39,15 +25,12 @@ FloatRect VictoryScreen::getMainMenuButton() const
 void VictoryScreen::setTimeText(String text)
 {
     m_TimeText.setString(text);
-    FloatRect textRect = m_TimeText.getLocalBounds();
-    m_TimeText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-    m_TimeText.setPosition(m_Resolution.x / 2.0f, 370);
 }
 
 void VictoryScreen::draw(sf::RenderWindow& window)
 {
-    window.draw(m_Title);
-    window.draw(m_TimeText);
+    m_Title.draw(window);
+    m_TimeText.draw(window);
     m_MainMenuButton.draw(window);
     m_QuitButton.draw(window);
 }
