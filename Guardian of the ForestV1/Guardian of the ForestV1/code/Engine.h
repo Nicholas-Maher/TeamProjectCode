@@ -8,12 +8,14 @@
 #include "ParticleSystem.h"
 #include "Screen.h"
 #include "MainMenu.h"
+#include "ControlsScreen.h"
 #include "VictoryScreen.h"
 #include "GameOverScreen.h"
 #include "TopTimesScreen.h"
 #include "HUD.h"
 
 #include "PowerOrb.h"
+#include "UtilityFunctions.h"
 
 using namespace sf;
 
@@ -44,6 +46,7 @@ private:
 	VictoryScreen m_VictoryScreen;
 	TopTimesScreen m_TopTimesScreen;
 	GameOverScreen m_GameOverScreen;
+	ControlsScreen m_ControlsScreen;
 
 	const int TILE_SIZE = 50;
 	const int VERTS_IN_QUAD = 4;
@@ -99,6 +102,12 @@ private:
 
 	// Making a single power orb for testing
 	PowerOrb m_PowerOrb;
+
+	// has the button to set the key for a given button been clicked on in the controls screen and if true a key can be set
+	bool settingJump = false;
+	bool settingMoveLeft = false;
+	bool settingMoveRight = false;
+	bool settingRun = false;
 	
 	bool hasGroundAhead(); // Function to check if there is ground ahead of the enemy
 	
@@ -106,13 +115,13 @@ private:
 	// Private functions for internal use only
 	void handleInput();
 	void update(float dtAsSeconds);
-	void draw();	
+	void draw();
 
 	// Load a new level
 	void loadLevel();
 
 	// Run will call all the private functions
-	bool detectCollisions(Player& character); // was PlayableCharacter in og
+	bool detectCollisions(Player& character);
 	
 	// Make a vector of the best places to emit sounds from
 	void populateEmitters(vector <Vector2f>& vSoundEmitters,
@@ -124,7 +133,7 @@ private:
 public:
 
 	// the game states - these help allow the game to switch between modes - Patrick
-	enum class State { MAIN_MENU, PLAYING, TOP_TIMES, PAUSED, VICTORY, GAME_OVER };
+	enum class State { MAIN_MENU, PLAYING, CONTROLS, TOP_TIMES, PAUSED, VICTORY, GAME_OVER };
 	
 	State state = State::MAIN_MENU;
 

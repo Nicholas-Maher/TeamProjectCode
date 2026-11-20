@@ -69,35 +69,21 @@ void Engine::update(float dtAsSeconds)
 			}
 		}
 
-		// Count down the time the player has left
-		//m_TimeRemaining -= dtAsSeconds;
-
 		// increment the time elapsed
 		m_LevelTimeElapsed += dtAsSeconds;
 
-		/*
-		// Has the player run out of time
-		if (m_TimeRemaining <= 0)
-		{
-			m_GameOverScreen.setMainText("You ran out of time!");
-			m_LevelTimeElapsed = 0;
-			state = State::GAME_OVER;
-		}*/
-
 		// Time to update the HUD?
-	// Increment the number of frames since the last HUD calculation
+		// Increment the number of frames since the last HUD calculation
 		m_FramesSinceLastHUDUpdate++;
 
 		// Update the HUD every m_TargetFramesPerHUDUpdate frames
 		if (m_FramesSinceLastHUDUpdate > m_TargetFramesPerHUDUpdate)
 		{
 			// Update game HUD text
-			stringstream ssTime;
 			stringstream ssLevel;
 
 			// Update the time text
-			ssTime << (int)m_LevelTimeElapsed << " seconds";
-			m_Hud.setTime(ssTime.str());
+			m_Hud.setTime(convertTimeToString(m_LevelTimeElapsed));
 
 			// Update the level text
 			ssLevel << "Level: " << m_LM.getCurrentLevel();

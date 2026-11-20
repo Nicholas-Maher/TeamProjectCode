@@ -48,6 +48,12 @@ Engine::Engine()
 	// Initialize the particle system
 	m_PS.init(1000);
 
+	// setting the text for the buttons in the controls screen to display the key bindings of the each action
+	m_ControlsScreen.setJumpButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getJumpButton())));
+	m_ControlsScreen.setMoveLeftButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getMoveLeftButton())));
+	m_ControlsScreen.setMoveRightButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getMoveRightButton())));
+	m_ControlsScreen.setRunButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getRunButton())));
+
 }// End Engine constructor
 
 void Engine::run()

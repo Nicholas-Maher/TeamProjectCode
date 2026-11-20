@@ -75,6 +75,12 @@
     <ClInclude Include="code\Button.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
+    <ClInclude Include="code\UtilityFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\ControlsScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\DetectCollisions.cpp">
@@ -150,6 +156,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\Button.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="code\ControlsScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
   </ItemGroup>

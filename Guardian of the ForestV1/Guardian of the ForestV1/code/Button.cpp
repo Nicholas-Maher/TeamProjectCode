@@ -9,7 +9,7 @@ Button::Button()
 void Button::spawn(Vector2f position, Color buttonColour, int outlineThickness, String text, Color textColour)
 {
     /** Patrick - buttons based on Nicholas' main main button logic from Engine but I added a way to centre the text in the buttons
-    using their global bounds
+    using their global bounds and moved that and setting its position into the Button::setString() function
     **/
     // button
     m_Button.setSize(Vector2f(300, 80));
@@ -26,7 +26,13 @@ void Button::spawn(Vector2f position, Color buttonColour, int outlineThickness, 
     m_Text.setString(text);
     m_Text.setCharacterSize(30);
     m_Text.setFillColor(textColour);
+    setString(text);
+}
 
+void Button::setString(String text)
+{
+    m_Text.setString(text);
+    FloatRect buttonBounds = m_Button.getLocalBounds();
     FloatRect textBounds = m_Text.getLocalBounds();
     m_Text.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f);
     // Patrick - centring text in the buttons

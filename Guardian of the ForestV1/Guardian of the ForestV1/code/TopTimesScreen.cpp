@@ -1,4 +1,5 @@
 #include "TopTimesScreen.h"
+#include "UtilityFunctions.h"
 
 TopTimesScreen::TopTimesScreen()
 {
@@ -45,13 +46,19 @@ FloatRect TopTimesScreen::getResetTimesButton() const
 
 void TopTimesScreen::setTimesText()
 {
+    string times[5];
+
+    for (int i = 0; i < m_TopTimes.size(); i++)
+    {
+        times[i] = convertTimeToString(m_TopTimes[i]);
+    }
     std::stringstream timesStream;
     timesStream <<
-        "\n1 - " << m_TopTimes[0] <<
-        "\n2 - " << m_TopTimes[1] <<
-        "\n3 - " << m_TopTimes[2] <<
-        "\n4 - " << m_TopTimes[3] <<
-        "\n5 - " << m_TopTimes[4];
+        "\n1 - " << times[0] <<
+        "\n2 - " << times[1] <<
+        "\n3 - " << times[2] <<
+        "\n4 - " << times[3] <<
+        "\n5 - " << times[4];
 
     m_TimesText.setString(timesStream.str());
 
@@ -121,7 +128,7 @@ void TopTimesScreen::updateTopTimesFile()
 // if the top times vector doesn't already match the default values
 void TopTimesScreen::resetTopTimesToDefaults()
 {
-    vector<int> defaultTimes = { 1000, 2000, 3000, 4000, 5000 };
+    vector<int> defaultTimes = { 300, 600, 900, 1200, 1500 }; // seconds
     // updates the vector, text file, and text for the screen if the top times vector doesn't already have default values
 	// comparing vectors source - https://www.geeksforgeeks.org/cpp/quickly-check-two-stl-vectors-contain-elements-not/
     if (m_TopTimes != defaultTimes)

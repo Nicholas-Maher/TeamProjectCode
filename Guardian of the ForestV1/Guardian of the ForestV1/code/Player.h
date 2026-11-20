@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
 using namespace sf;
 
 class Player
@@ -79,6 +80,19 @@ private:
 	FloatRect m_Right;
 	FloatRect m_Left;
 
+	// source of info about keys being stored in a Key enum in the Keyboard class - https://www.sfml-dev.org/documentation/2.6.1/classsf_1_1Keyboard.html. 
+	// the enum variables to store the default action key bindings
+	Keyboard::Key m_DefaultJumpButton = Keyboard::Space;
+	Keyboard::Key m_DefaultMoveLeftButton = Keyboard::A;
+	Keyboard::Key m_DefaultMoveRightButton = Keyboard::D;
+	Keyboard::Key m_DefaultRunButton = Keyboard::LShift;
+
+	// the enum variables to store action key bindings
+	Keyboard::Key m_JumpButton = m_DefaultJumpButton;
+	Keyboard::Key m_MoveLeftButton = m_DefaultMoveLeftButton;
+	Keyboard::Key m_MoveRightButton = m_DefaultMoveRightButton;
+	Keyboard::Key m_RunButton = m_DefaultRunButton;
+
 	// And a texture
 	//Texture m_Texture;
 
@@ -126,6 +140,18 @@ public:
 	// Send a copy of the sprite to main
 	Sprite getSprite();
 	Sprite getSpriteFromSheet(); // clo
+
+	void setJumpButton(Keyboard::Key key);
+	void setMoveLeftButton(Keyboard::Key key);
+	void setMoveRightButton(Keyboard::Key key);
+	void setRunButton(Keyboard::Key key);
+
+	Keyboard::Key getJumpButton();
+	Keyboard::Key getMoveLeftButton();
+	Keyboard::Key getMoveRightButton();
+	Keyboard::Key getRunButton();
+
+	void restoreDefaultButtons();
 
 	// Make the character walk
 	void walkLeft(float elapsedTime);

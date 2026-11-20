@@ -420,14 +420,63 @@ Sprite Player::getSpriteFromSheet()
 	return m_Sprite;
 }
 
+/****************     Key binding setting functions     ********************/
+void Player::setJumpButton(Keyboard::Key key)
+{
+	m_JumpButton = key;
+}
+void Player::setMoveLeftButton(Keyboard::Key key)
+{
+	m_MoveLeftButton = key;
+}
+void Player::setMoveRightButton(Keyboard::Key key)
+{
+	m_MoveRightButton = key;
+}
+void Player::setRunButton(Keyboard::Key key)
+{
+	m_RunButton = key;
+}
+
+Keyboard::Key Player::getJumpButton()
+{
+	return m_JumpButton;
+}
+
+Keyboard::Key Player::getMoveLeftButton()
+{
+	return m_MoveLeftButton;
+}
+
+Keyboard::Key Player::getMoveRightButton()
+{
+	return m_MoveRightButton;
+}
+
+Keyboard::Key Player::getRunButton()
+{
+	return m_RunButton;
+}
+
+void Player::restoreDefaultButtons()
+{
+	m_JumpButton = m_DefaultJumpButton;
+	m_MoveLeftButton = m_DefaultMoveLeftButton;
+	m_MoveRightButton = m_DefaultMoveRightButton;
+	m_RunButton = m_DefaultRunButton;
+}
+/****************    End of Key binding setting functions     ********************/
+
 // A virtual function
 bool Player::handleInput()
 {
 	m_JustJumped = false;
 
-	if (Keyboard::isKeyPressed(Keyboard::Space))
-	{
+	Keyboard::Key jumpButton = Keyboard::W;
+	//Keyboard::
 
+	if (Keyboard::isKeyPressed(m_JumpButton))
+	{
 		// Start a jump if not already jumping
 		// but only if standing on a block (not falling)
 		if (!m_IsJumping && !m_IsFalling)
@@ -445,7 +494,7 @@ bool Player::handleInput()
 	}
 
 	// Check if walking keys are pressed
-	if (Keyboard::isKeyPressed(Keyboard::A))
+	if (Keyboard::isKeyPressed(m_MoveLeftButton))
 	{
 		m_WalkLeftPressed = true;
 	}
@@ -454,7 +503,7 @@ bool Player::handleInput()
 		m_WalkLeftPressed = false;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::D))
+	if (Keyboard::isKeyPressed(m_MoveRightButton))
 	{
 		m_WalkRightPressed = true;
 	}
@@ -464,7 +513,7 @@ bool Player::handleInput()
 	}
 
 	// Check if running keys are pressed
-	if (Keyboard::isKeyPressed(Keyboard::A) && Keyboard::isKeyPressed(Keyboard::LShift))
+	if (Keyboard::isKeyPressed(m_MoveLeftButton) && Keyboard::isKeyPressed(m_RunButton))
 	{
 		m_WalkLeftPressed = false;
 		m_RunLeftPressed = true;
@@ -474,7 +523,7 @@ bool Player::handleInput()
 		m_RunLeftPressed = false;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::D) && Keyboard::isKeyPressed(Keyboard::LShift))
+	if (Keyboard::isKeyPressed(m_MoveRightButton) && Keyboard::isKeyPressed(m_RunButton))
 	{
 		m_WalkRightPressed = false;
 		m_RunRightPressed = true;

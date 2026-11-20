@@ -29,8 +29,11 @@ MainMenu::MainMenu()
     // Top times button
     m_TopTimesButton.spawn(Vector2f(m_Resolution.x / 2.0f, 620), Color(45, 110, 55), 0, "TOP SCORES", Color::White);
 
+    // Controls button
+    m_ControlsButton.spawn(Vector2f(m_Resolution.x / 2.0f, 740), Color(45, 110, 55), 0, "CONTROLS", Color::White);
+
     // Quit button
-    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 740), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
+    m_QuitButton.spawn(Vector2f(m_Resolution.x / 2.0f, 860), Color(120, 45, 40), 3, "QUIT GAME", Color::White);
 
 
     /* End of:  Nicholas - adding a simple main menu to the game ************/
@@ -46,10 +49,16 @@ FloatRect MainMenu::getTopTimesButton() const
     return m_TopTimesButton.getButton();
 }
 
+FloatRect MainMenu::getControlsButton() const
+{
+    return m_ControlsButton.getButton();
+}
+
 void MainMenu::draw(sf::RenderWindow& window)
 {
     window.draw(m_Title);
     m_StartButton.draw(window);
     m_TopTimesButton.draw(window);
+    m_ControlsButton.draw(window);
     m_QuitButton.draw(window);
 }

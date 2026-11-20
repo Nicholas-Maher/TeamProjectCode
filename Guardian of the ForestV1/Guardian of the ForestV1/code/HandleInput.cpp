@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include <Vector>
+#include <iostream>
 
 void Engine::handleInput()
 {
@@ -15,6 +16,46 @@ void Engine::handleInput()
 				m_Window.close();
 			}
 		}
+
+        // for handling when the player has pressed a button to set a key bind for an action in the controls screen
+        if (event.type == Event::KeyPressed)
+        {
+            if (state == State::CONTROLS)
+            {
+                if (settingJump)
+                {
+                    m_Player.setJumpButton(event.key.code);
+                    //string key = Keyboard::getDescription(event.key.scancode).toAnsiString();
+                    //cout << key << endl;
+                    m_ControlsScreen.setJumpButtonText(Keyboard::getDescription(event.key.scancode));
+                    settingJump = false;
+                }
+                else if(settingMoveLeft)
+                {
+                    m_Player.setMoveLeftButton(event.key.code);
+                    m_ControlsScreen.setMoveLeftButtonText(Keyboard::getDescription(event.key.scancode));
+                    settingMoveLeft = false;
+                }
+                else if (settingMoveRight)
+                {
+                    m_Player.setMoveRightButton(event.key.code);
+                    m_ControlsScreen.setMoveRightButtonText(Keyboard::getDescription(event.key.scancode));
+                    settingMoveRight = false;
+                }
+                else if (settingRun)
+                {
+                    m_Player.setRunButton(event.key.code);
+                    m_ControlsScreen.setRunButtonText(Keyboard::getDescription(event.key.scancode));
+                    settingRun = false;
+                }
+            }
+            //event.key
+            // Handle the player quitting
+            if (Keyboard::isKeyPressed(Keyboard::Escape))
+            {
+                m_Window.close();
+            }
+        }
 
         // Handle mouse clicks on the main menu
         if (state == State::MAIN_MENU && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
@@ -41,9 +82,13 @@ void Engine::handleInput()
 
                 state = State::PLAYING;
             }
-
+            // Control menu Button
+            else if (m_MainMenu.getControlsButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::CONTROLS;
+            }
             // Top Scores Button
-            if (m_MainMenu.getTopTimesButton().contains((mousePosition.x), (mousePosition.y)))
+            else if (m_MainMenu.getTopTimesButton().contains((mousePosition.x), (mousePosition.y)))
             {
                 state = State::TOP_TIMES;
             }
@@ -67,6 +112,71 @@ void Engine::handleInput()
             }
             // Quit the Game Button
             else if (m_VictoryScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
+        // Handle mouse clicks on the controls screen
+        else if (state == State::CONTROLS && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            // Get the mouse position
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // set jump Button
+            if (m_ControlsScreen.getJumpButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                settingJump = true;
+                settingMoveLeft = false;
+                settingMoveRight = false;
+                settingRun = false;
+                m_ControlsScreen.setJumpButtonText("Enter key...");
+            }
+            // set left Button
+            else if (m_ControlsScreen.getMoveLeftButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                settingJump = false;
+                settingMoveLeft = true;
+                settingMoveRight = false;
+                settingRun = false;
+                m_ControlsScreen.setMoveLeftButtonText("Enter key...");
+            }
+
+            // set right Button
+            else if (m_ControlsScreen.getMoveRightButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                settingJump = false;
+                settingMoveLeft = false;
+                settingMoveRight = true;
+                settingRun = false;
+                m_ControlsScreen.setMoveRightButtonText("Enter key...");
+            }
+            // set run Button
+            else if (m_ControlsScreen.getRunButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                settingJump = false;
+                settingMoveLeft = false;
+                settingMoveRight = false;
+                settingRun = true;
+                m_ControlsScreen.setRunButtonText("Enter key...");
+            }
+            // set reset Button
+            else if (m_ControlsScreen.getResetButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Player.restoreDefaultButtons();
+                // how to get the scan code from a key - https://www.sfml-dev.org/documentation/3.1.0/namespacesf_1_1Keyboard.html#a765ce72191e25b42281063405c40b4b8
+                m_ControlsScreen.setJumpButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getJumpButton())));
+                m_ControlsScreen.setMoveLeftButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getMoveLeftButton())));
+                m_ControlsScreen.setMoveRightButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getMoveRightButton())));
+                m_ControlsScreen.setRunButtonText(Keyboard::getDescription(Keyboard::delocalize(m_Player.getRunButton())));
+            }
+            // Main Menu Button
+            else if (m_ControlsScreen.getMainMenuButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Quit the Game Button
+            else if (m_ControlsScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
             {
                 m_Window.close();
             }

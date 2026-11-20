@@ -28,6 +28,15 @@ void Engine::draw()
 
 	}
 
+	// Draw the controls screen
+	if (state == State::CONTROLS)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
+
+		m_ControlsScreen.draw(m_Window);
+	}
+
 	// Draw the victory screen
 	if (state == State::VICTORY)
 	{

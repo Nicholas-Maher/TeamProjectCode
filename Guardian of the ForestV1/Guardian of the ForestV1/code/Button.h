@@ -13,6 +13,7 @@ private:
 public:
 	Button();
 	void spawn(Vector2f position, Color buttonColour, int outlineThickness, String text, Color textColour);
+	void setString(String text);
 	FloatRect getButton() const;
 	void draw(sf::RenderWindow& window);
 
