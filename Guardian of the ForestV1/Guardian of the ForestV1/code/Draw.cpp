@@ -4,7 +4,7 @@ void Engine::draw()
 {
 	// Rub out the last frame
 	m_Window.clear(Color::White);
-	
+
 	// Update the shader parameters
 	//////m_RippleShader.setUniform("uTime", m_GameTimeTotal.asSeconds()); // og had this
 
@@ -16,7 +16,7 @@ void Engine::draw()
 
 	// Draw the background, complete with shader effect
 	////m_Window.draw(m_BackgroundSprite, &m_RippleShader); // og had this
-	
+
 	// Draw the main menu
 	if (state == State::MAIN_MENU)
 	{
@@ -55,7 +55,7 @@ void Engine::draw()
 		m_GameOverScreen.draw(m_Window);
 	}
 
-	if (state == State::PLAYING)
+	if (state == State::PLAYING || state == State::PAUSED)
 	{
 		// Switch to m_MainView
 		m_Window.setView(m_MainView);
@@ -83,8 +83,13 @@ void Engine::draw()
 		m_Window.setView(m_HudView);
 		m_Hud.draw(m_Window);
 
+		// Draw pause menu
+		if (state == State::PAUSED)
+		{
+			m_PauseMenu.draw(m_Window);
+		}
 	}
-	
+
 	// Draw the top times screen
 	if (state == State::TOP_TIMES)
 	{
@@ -93,7 +98,7 @@ void Engine::draw()
 
 		m_TopTimesScreen.draw(m_Window);
 	}
-	
+
 	// Show everything we have just drawn
 	m_Window.display();
 }

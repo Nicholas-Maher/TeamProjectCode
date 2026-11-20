@@ -30,6 +30,7 @@
     <ClInclude Include="code\MainMenu.h" />
     <ClInclude Include="code\Particle.h" />
     <ClInclude Include="code\ParticleSystem.h" />
+    <ClInclude Include="code\PauseMenu.h" />
     <ClInclude Include="code\Pickup.h" />
     <ClInclude Include="code\PowerOrb.h" />
     <ClInclude Include="code\Screen.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="code\MainMenu.cpp" />
     <ClCompile Include="code\Particle.cpp" />
     <ClCompile Include="code\ParticleSystem.cpp" />
+    <ClCompile Include="code\PauseMenu.cpp" />
     <ClCompile Include="code\Pickup.cpp" />
     <ClCompile Include="code\PopulateEmitters.cpp" />
     <ClCompile Include="code\PowerOrb.cpp" />

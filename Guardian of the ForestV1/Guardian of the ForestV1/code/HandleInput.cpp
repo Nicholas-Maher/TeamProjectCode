@@ -6,17 +6,22 @@ void Engine::handleInput()
 {
 	Event event;
 
-	while (m_Window.pollEvent(event))
-	{
-		if (event.type == Event::KeyPressed)
-		{
-			// Handle the player quitting
-			if (Keyboard::isKeyPressed(Keyboard::Escape))
-			{
-				m_Window.close();
-			}
-		}
-
+    while (m_Window.pollEvent(event))
+    {
+        if (event.type == Event::KeyPressed)
+        {
+            if (event.key.code == Keyboard::Escape)
+            {
+                if (state == State::PLAYING)
+                {
+                    state = State::PAUSED;
+                }
+                else if (state == State::PAUSED)
+                {
+                    state = State::PLAYING;
+                }
+            }
+        }
         // for handling when the player has pressed a button to set a key bind for an action in the controls screen
         if (event.type == Event::KeyPressed)
         {
@@ -30,7 +35,7 @@ void Engine::handleInput()
                     m_ControlsScreen.setJumpButtonText(Keyboard::getDescription(event.key.scancode));
                     settingJump = false;
                 }
-                else if(settingMoveLeft)
+                else if (settingMoveLeft)
                 {
                     m_Player.setMoveLeftButton(event.key.code);
                     m_ControlsScreen.setMoveLeftButtonText(Keyboard::getDescription(event.key.scancode));
@@ -48,12 +53,6 @@ void Engine::handleInput()
                     m_ControlsScreen.setRunButtonText(Keyboard::getDescription(event.key.scancode));
                     settingRun = false;
                 }
-            }
-            //event.key
-            // Handle the player quitting
-            if (Keyboard::isKeyPressed(Keyboard::Escape))
-            {
-                m_Window.close();
             }
         }
 
@@ -94,6 +93,27 @@ void Engine::handleInput()
             }
             // Quit the Game Button
             else if (m_MainMenu.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
+        else if (state == State::PAUSED && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // Resume button
+            if (m_PauseMenu.getResumeButton().contains(mousePosition.x, mousePosition.y))
+            {
+                state = State::PLAYING;
+            }
+            // Main Menu button
+            else if (m_PauseMenu.getMainMenuButton().contains(mousePosition.x, mousePosition.y))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Quit Game button
+            else if (m_PauseMenu.getQuitButton().contains(mousePosition.x, static_cast<float>(mousePosition.y)))
             {
                 m_Window.close();
             }
@@ -198,7 +218,7 @@ void Engine::handleInput()
                 m_Player.setPower(m_Player.getStartPower());
 
                 // sets the current level to one less that current so when load level is called, it increments it to the level the player was just on
-                m_LM.setCurrentLevel(m_LM.getCurrentLevel() - 1); 
+                m_LM.setCurrentLevel(m_LM.getCurrentLevel() - 1);
                 m_NewLevelRequired = true;
                 state = State::PLAYING;
             }
@@ -236,7 +256,7 @@ void Engine::handleInput()
                 m_Window.close();
             }
         }
-	}	
+    }
 
 	// Handle input specific to the player
     if (state == State::PLAYING && m_Player.handleInput())

@@ -8,6 +8,7 @@
 #include "ParticleSystem.h"
 #include "Screen.h"
 #include "MainMenu.h"
+#include "PauseMenu.h"
 #include "ControlsScreen.h"
 #include "VictoryScreen.h"
 #include "GameOverScreen.h"
@@ -43,6 +44,7 @@ private:
 	int m_TargetFramesPerHUDUpdate = 250;
 
 	MainMenu m_MainMenu;
+	PauseMenu m_PauseMenu;
 	VictoryScreen m_VictoryScreen;
 	TopTimesScreen m_TopTimesScreen;
 	GameOverScreen m_GameOverScreen;
@@ -108,10 +110,10 @@ private:
 	bool settingMoveLeft = false;
 	bool settingMoveRight = false;
 	bool settingRun = false;
-	
+
 	bool hasGroundAhead(); // Function to check if there is ground ahead of the enemy
-	
-	
+
+
 	// Private functions for internal use only
 	void handleInput();
 	void update(float dtAsSeconds);
@@ -122,19 +124,19 @@ private:
 
 	// Run will call all the private functions
 	bool detectCollisions(Player& character);
-	
+
 	// Make a vector of the best places to emit sounds from
 	void populateEmitters(vector <Vector2f>& vSoundEmitters,
 		int** arrayLevel);
 
 	// A vector of Vector2f for the fire emiiter locations
 	vector <Vector2f> m_FireEmitters;
-	
+
 public:
 
 	// the game states - these help allow the game to switch between modes - Patrick
 	enum class State { MAIN_MENU, PLAYING, CONTROLS, TOP_TIMES, PAUSED, VICTORY, GAME_OVER };
-	
+
 	State state = State::MAIN_MENU;
 
 	// The Engine constructor
