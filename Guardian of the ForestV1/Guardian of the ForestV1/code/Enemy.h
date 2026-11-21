@@ -31,6 +31,8 @@ private:
 	// Enemy stopping distance from chasing the player
 	float m_StoppingDistance = 15.f;
 
+	bool m_IsAlive;
+
 public:
 
 	//Initializes the enemy with a position
@@ -49,6 +51,11 @@ public:
 
 	// enemies speed and direction
 	float getSpeed() const;
+
+	// sets the enemy alive status
+	void setIsAlive(bool aliveStatus);
+
+	bool getIsAlive() const;
 
 	bool canDetectPlayer(FloatRect playerBounds); // Check if the enemy can detect the player based on their position
 

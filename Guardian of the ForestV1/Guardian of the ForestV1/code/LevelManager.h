@@ -8,6 +8,8 @@ class LevelManager
 {
 private:
 	Vector2i m_LevelSize;
+	Vector2i m_LevelPickupSpawnPointsSize;
+	Vector2i m_LevelEnemySpawnPointsSize;
 	Vector2f m_StartPosition;
 
 	float m_TimeModifier = 1;
@@ -28,8 +30,12 @@ public:
 	Vector2f getStartPosition();
 
 	int** nextLevel(VertexArray& rVaLevel);
+	int** nextLevelPickupSpawnPoints();
+	int** nextLevelEnemySpawnPoints();
 
 	Vector2i getLevelSize();
+	Vector2i getLevelPickupSpawnPointsSize();
+	Vector2i getLevelEnemySpawnPointsSize();
 
 	int getCurrentLevel();
 	void setCurrentLevel(int level);

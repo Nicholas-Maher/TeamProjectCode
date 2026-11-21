@@ -48,13 +48,18 @@ bool Engine::detectCollisions(Player& character)
 		}
 	}
 
-	/*  temp version of pickup collision made for just one pickup  */
-	if (m_Player.getPosition().intersects(m_PowerOrb.getPosition()) && m_PowerOrb.isActive())
+	/********************* pickup collision detection *************************************/
+	for (m_vpPickupsIter = m_vpPickups.begin(); m_vpPickupsIter != m_vpPickups.end(); ++m_vpPickupsIter)
 	{
-		m_PowerOrb.gotIt();
-		if (m_Player.getPower() < m_Player.getFullPower())
+		// power orbs
+		if ((*m_vpPickupsIter)->getType() == "PowerOrb")
+		if (m_Player.getPosition().intersects((*m_vpPickupsIter)->getPosition()) && (*m_vpPickupsIter)->isActive())
 		{
-			m_Player.setPower(m_Player.getPower() + m_PowerOrb.getValue()); // increases the player's power level by the orb value
+			if (m_Player.getPower() < m_Player.getFullPower())
+			{
+				(*m_vpPickupsIter)->gotIt();
+				m_Player.setPower(m_Player.getPower() + (*m_vpPickupsIter)->getValue()); // increases the player's power level by the orb value
+			}
 		}
 	}
 

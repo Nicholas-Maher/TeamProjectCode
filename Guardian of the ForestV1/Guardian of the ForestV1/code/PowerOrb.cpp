@@ -5,6 +5,7 @@ PowerOrb::PowerOrb()
 {
 	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/orb1.png"));
 	m_Value = 50;
+	m_Type = "PowerOrb";
 }
 
 void PowerOrb::spawn(Vector2f startPosition)

@@ -71,13 +71,26 @@ void Engine::draw()
 		// Draw the player
 		m_Window.draw(m_Player.getSprite());
 
-		if (m_PowerOrb.isActive())
+		// Draw the enemy
+		//m_Enemy.draw(m_Window);
+
+		// draw the enemies
+		for (m_vpEnemiesIter = m_vpEnemies.begin(); m_vpEnemiesIter != m_vpEnemies.end(); ++m_vpEnemiesIter)
 		{
-			m_Window.draw(m_PowerOrb.getSprite());
+			if ((*m_vpEnemiesIter)->getIsAlive())
+			{
+				(*m_vpEnemiesIter)->draw(m_Window);
+			}
 		}
 
-		// Draw the enemy
-		m_Enemy.draw(m_Window);
+		// draw the pickups
+		for (m_vpPickupsIter = m_vpPickups.begin(); m_vpPickupsIter != m_vpPickups.end(); ++m_vpPickupsIter)
+		{
+			if ((*m_vpPickupsIter)->isActive())
+			{
+				m_Window.draw((*m_vpPickupsIter)->getSprite());
+			}
+		}
 
 		// Draw the HUD
 		m_Window.setView(m_HudView);

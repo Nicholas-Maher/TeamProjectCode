@@ -8,6 +8,7 @@ class Pickup
 protected:
 
 	Sprite m_Sprite;
+	String m_Type;
 
 	// Where is the the game object
 	Vector2f m_Position;
@@ -27,6 +28,8 @@ public:
 	FloatRect getPosition();
 
 	Sprite getSprite();
+
+	String getType();
 
 	// Get the goodness from the pickup - pure virtual method
 	// like how Engine::detectCollisions does

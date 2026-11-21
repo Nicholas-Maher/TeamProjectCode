@@ -166,6 +166,16 @@ Vector2i LevelManager::getLevelSize()
 	return m_LevelSize;
 }
 
+Vector2i LevelManager::getLevelEnemySpawnPointsSize()
+{
+	return m_LevelEnemySpawnPointsSize;
+}
+
+Vector2i LevelManager::getLevelPickupSpawnPointsSize()
+{
+	return m_LevelPickupSpawnPointsSize;
+}
+
 int LevelManager::getCurrentLevel()
 {
 	return m_CurrentLevel;
@@ -189,4 +199,144 @@ Vector2f LevelManager::getStartPosition()
 int LevelManager::getNumLevels() const
 {
 	return NUM_LEVELS;
+}
+
+int** LevelManager::nextLevelEnemySpawnPoints()
+{
+	m_LevelEnemySpawnPointsSize.x = 0;
+	m_LevelEnemySpawnPointsSize.y = 0;
+
+	// use the current level to ensure that correct level artefacts are loaded
+
+	// Load the appropriate level from a text file
+	string levelToLoad;
+	switch (m_CurrentLevel)
+	{
+
+	case 1:
+		levelToLoad = "levels/level1-Earth-enemies.txt";
+		break;
+
+	case 2:
+		levelToLoad = "levels/level2-Water-enemies.txt";
+		break;
+
+	case 3:
+		levelToLoad = "levels/level3-Air-enemies.txt";
+		break;
+
+	}
+
+	ifstream inputFile(levelToLoad);
+	string s;
+
+	// Count the number of rows in the file
+	while (getline(inputFile, s))
+	{
+		++m_LevelEnemySpawnPointsSize.y;
+	}
+
+	// Store the length of the rows
+	m_LevelEnemySpawnPointsSize.x = s.length();
+
+	// Go back to the start of the file
+	inputFile.clear();
+	inputFile.seekg(0, ios::beg);
+
+	// Prepare the 2d array to hold the int values from the file
+	int** arrayLevel = new int* [m_LevelEnemySpawnPointsSize.y];
+	for (int i = 0; i < m_LevelEnemySpawnPointsSize.y; ++i)
+	{
+		// Add a new array into each array element
+		arrayLevel[i] = new int[m_LevelEnemySpawnPointsSize.x];
+	}
+
+	// Loop through the file and store all the values in the 2d array
+	string row;
+	int i = 0;
+	while (inputFile >> row)
+	{
+		for (int j = 0; j < row.length(); j++) {
+
+			const char val = row[j];
+			arrayLevel[i][j] = atoi(&val);
+		}
+
+		i++;
+	}
+
+	// close the file
+	inputFile.close();
+
+	return arrayLevel;
+}
+
+int** LevelManager::nextLevelPickupSpawnPoints()
+{
+	m_LevelPickupSpawnPointsSize.x = 0;
+	m_LevelPickupSpawnPointsSize.y = 0;
+
+	// use the current level to ensure that correct level artefacts are loaded
+
+	// Load the appropriate level from a text file
+	string levelToLoad;
+	switch (m_CurrentLevel)
+	{
+
+	case 1:
+		levelToLoad = "levels/level1-Earth-pickups.txt";
+		break;
+
+	case 2:
+		levelToLoad = "levels/level2-Water-pickups.txt";
+		break;
+
+	case 3:
+		levelToLoad = "levels/level3-Air-pickups.txt";
+		break;
+
+	}
+
+	ifstream inputFile(levelToLoad);
+	string s;
+
+	// Count the number of rows in the file
+	while (getline(inputFile, s))
+	{
+		++m_LevelPickupSpawnPointsSize.y;
+	}
+
+	// Store the length of the rows
+	m_LevelPickupSpawnPointsSize.x = s.length();
+
+	// Go back to the start of the file
+	inputFile.clear();
+	inputFile.seekg(0, ios::beg);
+
+	// Prepare the 2d array to hold the int values from the file
+	int** arrayLevel = new int* [m_LevelPickupSpawnPointsSize.y];
+	for (int i = 0; i < m_LevelPickupSpawnPointsSize.y; ++i)
+	{
+		// Add a new array into each array element
+		arrayLevel[i] = new int[m_LevelPickupSpawnPointsSize.x];
+	}
+
+	// Loop through the file and store all the values in the 2d array
+	string row;
+	int i = 0;
+	while (inputFile >> row)
+	{
+		for (int j = 0; j < row.length(); j++) {
+
+			const char val = row[j];
+			arrayLevel[i][j] = atoi(&val);
+		}
+
+		i++;
+	}
+
+	// close the file
+	inputFile.close();
+
+	return arrayLevel;
 }

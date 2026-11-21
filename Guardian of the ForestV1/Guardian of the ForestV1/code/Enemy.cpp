@@ -16,6 +16,8 @@ Enemy::Enemy(Vector2f startPosition)
 	m_Body.setFillColor(Color::Red);
 	// Set the position of the enemy body
 	m_Body.setPosition(m_Position);
+
+	m_IsAlive = true;
 }
 
 
@@ -84,6 +86,16 @@ void Enemy::setPosition(Vector2f position)
 float Enemy::getSpeed() const
 {
 	return m_Speed;
+}
+
+void Enemy::setIsAlive(bool aliveStatus)
+{
+	m_IsAlive = aliveStatus;
+}
+
+bool Enemy::getIsAlive() const
+{
+	return m_IsAlive;
 }
 
 // Check if the enemy can detect the player based on their position

@@ -79,15 +79,15 @@ void Engine::run()
 }
 
 // Function to check if there is ground for the enemy
-bool Engine::hasGroundAhead()
+bool Engine::hasGroundAhead(Enemy& enemy)
 {
 	// Get the enemy's current position
-	sf::Vector2f enemyPos = m_Enemy.getPosition();
+	sf::Vector2f enemyPos = enemy.getPosition();
 
 	float checkX;
 
 	// Determine the direction the enemy moving
-	if (m_Enemy.getMovementDirection() > 0)
+	if (enemy.getMovementDirection() > 0)
 	{
 		checkX = enemyPos.x + 51.f; // Moving right
 

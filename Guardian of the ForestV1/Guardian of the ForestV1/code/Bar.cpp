@@ -72,5 +72,4 @@ void Bar::draw(sf::RenderWindow& window)
 	window.draw(m_BarBorder);
 	window.draw(m_BarBackground);
 	window.draw(m_Bar);
-
 }

@@ -18,6 +18,8 @@
 #include "PowerOrb.h"
 #include "UtilityFunctions.h"
 
+#include <vector>
+
 using namespace sf;
 
 class Engine
@@ -96,11 +98,24 @@ private:
 	// A pointer to a pointer
 	int** m_ArrayLevel = NULL;
 
+	// The 2d array with the monster spawn positions
+	// A pointer to a pointer
+	int** m_ArrayEnemySpawnPoints = NULL;
+	int** m_ArrayPickupSpawnPoints = NULL;
+
 	// Texture for the background and the level tiles
 	Texture m_TextureTiles;
 
 	//Creating Enemy
-	Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
+	//Enemy m_Enemy{ sf::Vector2f(500.f, 400.f) };
+
+	// vector of pointers to enemies
+	vector<Enemy*>m_vpEnemies; 
+	vector<Enemy*>::iterator m_vpEnemiesIter; // an iterator to loop through the vector of enemies
+
+	// vector of pointers to pickups
+	vector<Pickup*>m_vpPickups;
+	vector<Pickup*>::iterator m_vpPickupsIter; // an iterator to loop through the vector of pickups
 
 	// Making a single power orb for testing
 	PowerOrb m_PowerOrb;
@@ -111,7 +126,7 @@ private:
 	bool settingMoveRight = false;
 	bool settingRun = false;
 
-	bool hasGroundAhead(); // Function to check if there is ground ahead of the enemy
+	bool hasGroundAhead(Enemy& enemy); // Function to check if there is ground ahead of the enemy
 
 
 	// Private functions for internal use only
@@ -121,6 +136,12 @@ private:
 
 	// Load a new level
 	void loadLevel();
+
+	// load the enemies
+	void loadEnemies();
+
+	// load the pickups
+	void loadPickups();
 
 	// Run will call all the private functions
 	bool detectCollisions(Player& character);

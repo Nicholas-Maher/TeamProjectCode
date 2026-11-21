@@ -22,6 +22,11 @@ Sprite Pickup::getSprite()
 	return m_Sprite;
 }
 
+String Pickup::getType()
+{
+	return m_Type;
+}
+
 int Pickup::getValue() const
 {
 	return m_Value;

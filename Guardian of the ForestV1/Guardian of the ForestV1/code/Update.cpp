@@ -19,6 +19,7 @@ void Engine::update(float dtAsSeconds)
 		// Update the player
 		m_Player.update(dtAsSeconds);
 
+		/*
 		// Check if the enemy can detect the player
 		bool playerDetected = m_Enemy.canDetectPlayer(m_Player.getPosition());
 
@@ -30,6 +31,26 @@ void Engine::update(float dtAsSeconds)
 
 		// Check ground and update enemy movement
 		m_Enemy.update(dtAsSeconds, hasGroundAhead(), m_Player.getPosition());
+		*/
+
+		// update the enemies
+		for (m_vpEnemiesIter = m_vpEnemies.begin(); m_vpEnemiesIter != m_vpEnemies.end(); ++m_vpEnemiesIter)
+		{
+			if ((*m_vpEnemiesIter)->getIsAlive())
+			{
+				// Check if the enemy can detect the player
+				bool playerDetected = (*m_vpEnemiesIter)->canDetectPlayer(m_Player.getPosition());
+
+				// Set enemy state based on player detection
+				(*m_vpEnemiesIter)->setChasing(playerDetected);
+
+				// Determine the direction of the enemy based on the player's position
+				(*m_vpEnemiesIter)->updateChaseDirection(m_Player.getPosition());
+
+				// Check ground and update enemy movement
+				(*m_vpEnemiesIter)->update(dtAsSeconds, hasGroundAhead(**m_vpEnemiesIter), m_Player.getPosition());
+			}
+		}
 
 
 		// Detect collisions and see if the player has reached the goal tile
