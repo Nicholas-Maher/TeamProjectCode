@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Screens">
       <UniqueIdentifier>{654a797a-54c6-4661-ad4a-e34e7042c590}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameActors">
+      <UniqueIdentifier>{c1f23b0a-89ea-48f6-831a-4277ae732a77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameActors">
+      <UniqueIdentifier>{0064eb1a-3dc0-4e54-8e61-48b0bd05e078}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Engine.h">
@@ -40,12 +46,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\TextureHolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="code\MainMenu.h">
@@ -86,6 +86,15 @@
     </ClInclude>
     <ClInclude Include="code\TextBlock.h">
       <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Player.h">
+      <Filter>Header Files\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Enemy.h">
+      <Filter>Header Files\GameActors</Filter>
+    </ClInclude>
+    <ClInclude Include="code\GameObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,13 +137,7 @@
     <ClCompile Include="code\TextureHolder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code\Update.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="code\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="code\MainMenu.cpp">
@@ -172,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="code\TextBlock.cpp">
       <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Player.cpp">
+      <Filter>Source Files\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Enemy.cpp">
+      <Filter>Source Files\GameActors</Filter>
+    </ClCompile>
+    <ClCompile Include="code\GameObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

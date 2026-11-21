@@ -1,10 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 
 using namespace sf;
 
 
-class Enemy
+class Enemy : public GameObject
 {
 private:
 

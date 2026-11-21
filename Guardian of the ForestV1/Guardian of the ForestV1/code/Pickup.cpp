@@ -12,16 +12,6 @@ void Pickup::spawn(Vector2f startPosition)
 	m_IsActive = true;
 }
 
-FloatRect Pickup::getPosition()
-{
-	return m_Sprite.getGlobalBounds();
-}
-
-Sprite Pickup::getSprite()
-{
-	return m_Sprite;
-}
-
 String Pickup::getType()
 {
 	return m_Type;

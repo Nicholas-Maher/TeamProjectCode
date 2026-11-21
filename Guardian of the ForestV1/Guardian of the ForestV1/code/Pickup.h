@@ -1,17 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 
 using namespace sf;
 
-class Pickup
+class Pickup : public GameObject
 {
 protected:
 
-	Sprite m_Sprite;
 	String m_Type;
-
-	// Where is the the game object
-	Vector2f m_Position;
 
 	bool m_IsActive;
 
@@ -24,10 +21,6 @@ public:
 	Pickup();
 
 	virtual void spawn(Vector2f startPosition) = 0;
-
-	FloatRect getPosition();
-
-	Sprite getSprite();
 
 	String getType();
 

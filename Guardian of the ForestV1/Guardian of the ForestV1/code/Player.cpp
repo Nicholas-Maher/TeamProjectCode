@@ -192,11 +192,6 @@ int Player::getStartFullPower() const
 	return START_FULL_POWER;
 }
 
-FloatRect Player::getPosition()
-{
-	return m_Sprite.getGlobalBounds();
-}
-
 Vector2f Player::getCenter()
 {
 	return Vector2f(
@@ -223,11 +218,6 @@ FloatRect Player::getLeft()
 FloatRect Player::getRight()
 {
 	return m_Right;
-}
-
-Sprite Player::getSprite()
-{
-	return m_Sprite;
 }
 
 bool Player::hit(Time hitTime, int damage)

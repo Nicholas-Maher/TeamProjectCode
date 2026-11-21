@@ -1,14 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "GameObject.h"
 
 using namespace sf;
 
-class Player
+class Player : public GameObject
 {
 protected:
-	// Of course we will need a sprite
-	Sprite m_Sprite;
 
 	/*************** Clo animation variables ***************/
 	// And a texture
@@ -71,8 +69,6 @@ private:
 	// When was the gameactor last hit
 	Time m_timeLastHit;
 
-	// Where is the player
-	Vector2f m_Position;
 
 	// Where are the characters various body parts?
 	FloatRect m_Feet;
@@ -128,8 +124,6 @@ public:
 	// Handle the player getting hit by an enemy
 	bool hit(Time hitTime, int damage);
 
-	// Where is the player
-	FloatRect getPosition();
 
 	// A rectangle representing the position of different parts of the sprite
 	FloatRect getFeet();
@@ -137,8 +131,6 @@ public:
 	FloatRect getRight();
 	FloatRect getLeft();
 
-	// Send a copy of the sprite to main
-	Sprite getSprite();
 	Sprite getSpriteFromSheet(); // clo
 
 	void setJumpButton(Keyboard::Key key);
