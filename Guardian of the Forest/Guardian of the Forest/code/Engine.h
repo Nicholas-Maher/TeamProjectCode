@@ -10,6 +10,7 @@
 #include "MainMenu.h"
 #include "PauseMenu.h"
 #include "ControlsScreen.h"
+#include "LevelCompleteScreen.h"
 #include "VictoryScreen.h"
 #include "GameOverScreen.h"
 #include "TopTimesScreen.h"
@@ -47,6 +48,7 @@ private:
 
 	MainMenu m_MainMenu;
 	PauseMenu m_PauseMenu;
+	LevelCompleteScreen m_LevelCompleteScreen;
 	VictoryScreen m_VictoryScreen;
 	TopTimesScreen m_TopTimesScreen;
 	GameOverScreen m_GameOverScreen;
@@ -156,7 +158,7 @@ private:
 public:
 
 	// the game states - these help allow the game to switch between modes - Patrick
-	enum class State { MAIN_MENU, PLAYING, CONTROLS, TOP_TIMES, PAUSED, VICTORY, GAME_OVER };
+	enum class State { MAIN_MENU, PLAYING, CONTROLS, TOP_TIMES, PAUSED, LEVEL_COMPLETE, VICTORY, GAME_OVER };
 
 	State state = State::MAIN_MENU;
 

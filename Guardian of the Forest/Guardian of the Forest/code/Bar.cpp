@@ -48,20 +48,20 @@ void Bar::spawn(Color mainColour, Color BGColour, Color borderColour, float xPos
 	/******* End of bar initialisation *******/
 }
 
-void Bar::setBar(int currentHealth, int maxHealth)
+void Bar::setBar(int currentValue, int maxValue)
 {
-	m_BarBackground.setSize(Vector2f(maxHealth * m_BarWidthMultiplier, m_Height));
+	m_BarBackground.setSize(Vector2f(maxValue * m_BarWidthMultiplier, m_Height));
 	// sets the origin to the centre of the rectangle and uses that point for positioning
 	FloatRect barBounds = m_BarBackground.getLocalBounds();
 	m_BarBackground.setOrigin(barBounds.left + barBounds.width / 2.f, barBounds.top + barBounds.height / 2.f);
 	m_BarBackground.setPosition(xPos, yPos);
 
-	m_Bar.setSize(Vector2f(currentHealth * m_BarWidthMultiplier, m_Height));
+	m_Bar.setSize(Vector2f(currentValue * m_BarWidthMultiplier, m_Height));
 	// uses the same bounds as the bar background so its left side always aligns with the background's left side so the bar always starts at the left side of the background bar
 	m_Bar.setOrigin(barBounds.left + barBounds.width / 2.f, barBounds.top + barBounds.height / 2.f);
 	m_Bar.setPosition(xPos, yPos);
 
-	m_BarBorder.setSize(Vector2f((maxHealth * m_BarWidthMultiplier) + m_BarBorderWidth * 2, m_Height + (m_BarBorderWidth * 2)));
+	m_BarBorder.setSize(Vector2f((maxValue * m_BarWidthMultiplier) + m_BarBorderWidth * 2, m_Height + (m_BarBorderWidth * 2)));
 	barBounds = m_BarBorder.getLocalBounds();
 	m_BarBorder.setOrigin(barBounds.left + barBounds.width / 2.f, barBounds.top + barBounds.height / 2.f);
 	m_BarBorder.setPosition(xPos, yPos);

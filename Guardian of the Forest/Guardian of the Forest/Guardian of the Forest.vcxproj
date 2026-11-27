@@ -27,6 +27,7 @@
     <ClInclude Include="code\GameObject.h" />
     <ClInclude Include="code\GameOverScreen.h" />
     <ClInclude Include="code\HUD.h" />
+    <ClInclude Include="code\LevelCompleteScreen.h" />
     <ClInclude Include="code\LevelManager.h" />
     <ClInclude Include="code\MainMenu.h" />
     <ClInclude Include="code\Particle.h" />
@@ -55,6 +56,7 @@
     <ClCompile Include="code\GameOverScreen.cpp" />
     <ClCompile Include="code\HUD.cpp" />
     <ClCompile Include="code\HandleInput.cpp" />
+    <ClCompile Include="code\LevelCompleteScreen.cpp" />
     <ClCompile Include="code\LevelManager.cpp" />
     <ClCompile Include="code\LoadLevel.cpp" />
     <ClCompile Include="code\Main.cpp" />

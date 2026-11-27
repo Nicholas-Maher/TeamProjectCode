@@ -108,12 +108,30 @@ bool Engine::detectCollisions(Player& character)
 					{
 						// Play a sound
 						m_SM.playFallInFire();
+						character.spawn(m_LM.getStartPosition(), GRAVITY);
+						character.hit(m_GameTimeTotal, 20); // the player loses 20 health when they fall into fire
+						// sends the player to the game over screen if they run out of health
+						if (character.getHealth() <= 0)
+						{
+							m_GameOverScreen.setMainText("You died!");
+							m_LevelTimeElapsed = 0; // resets the level timer
+							state = State::GAME_OVER;
+						}
 
 					}
 					else // Water
 					{
 						// Play a sound
 						m_SM.playFallInWater();
+						character.spawn(m_LM.getStartPosition(), GRAVITY);
+						character.hit(m_GameTimeTotal, 20); // the player loses 20 health when they fall into water
+						// sends the player to the game over screen if they run out of health
+						if (character.getHealth() <= 0)
+						{
+							m_GameOverScreen.setMainText("You died!");
+							m_LevelTimeElapsed = 0; // resets the level timer
+							state = State::GAME_OVER;
+						}
 					}
 				}
 			}

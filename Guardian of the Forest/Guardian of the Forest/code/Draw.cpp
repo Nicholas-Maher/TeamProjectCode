@@ -112,6 +112,15 @@ void Engine::draw()
 		m_TopTimesScreen.draw(m_Window);
 	}
 
+	// Draw level complete screen
+	if (state == State::LEVEL_COMPLETE)
+	{
+		// Switch to HUD view for the menu
+		m_Window.setView(m_HudView);
+
+		m_LevelCompleteScreen.draw(m_Window);
+	}
+
 	// Show everything we have just drawn
 	m_Window.display();
 }

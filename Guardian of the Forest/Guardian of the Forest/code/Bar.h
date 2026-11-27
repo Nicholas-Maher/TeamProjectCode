@@ -12,10 +12,10 @@ private:
 	RectangleShape m_Bar;
 	RectangleShape m_BarBackground;
 	RectangleShape m_BarBorder;
-	int m_StatWidth = 100;
-	int m_Width = 100;
-	int m_Height = 70;
-	int m_BarBorderWidth = 10;
+	int m_StatWidth;
+	int m_Width;
+	int m_Height;
+	int m_BarBorderWidth;
 
 	// the full bar width is determined by the max value of the stat it represents (e.g. 100% player health) 
 	// but this is what this multiplier is for
@@ -29,6 +29,6 @@ public:
 
 	void spawn(Color barColour, Color BGColour, Color borderColour, float xPosition, float yPosition, int statWidth, int width,
 		int height, int borderWidth, int widthMultiplier);
-	void setBar(int currentHealth, int maxHealth);
+	void setBar(int currentValue, int maxValue);
 	void draw(sf::RenderWindow& window);
 };

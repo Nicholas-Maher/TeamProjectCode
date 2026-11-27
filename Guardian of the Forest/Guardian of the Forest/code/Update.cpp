@@ -62,8 +62,17 @@ void Engine::update(float dtAsSeconds)
 
 			if (m_LM.getCurrentLevel() < m_LM.getNumLevels())
 			{
-				// New level required
-				m_NewLevelRequired = true;
+				// Update the level complete screen title text
+				stringstream ssLevel;
+				ssLevel << "You completed Level " << m_LM.getCurrentLevel() << "!";
+				m_LevelCompleteScreen.setTitleText(ssLevel.str());
+
+				// set the total time text in the level complete screen
+				m_LevelCompleteScreen.setTimeText("Your total time so far: " + convertTimeToString(m_TotalTimeElapsed));
+
+				// sends the player to the level complete screen
+				state = State::LEVEL_COMPLETE;	
+
 				// Play the reach goal sound
 				m_SM.playReachGoal();
 			}
@@ -71,7 +80,7 @@ void Engine::update(float dtAsSeconds)
 			else
 			{
 				// set the total time text in the victory screen
-				m_VictoryScreen.setTimeText(convertTimeToString(m_TotalTimeElapsed));
+				m_VictoryScreen.setTimeText("Your total time: " + convertTimeToString(m_TotalTimeElapsed));
 
 				// checks if the total time can go into the top times leaderboard
 				if (m_TopTimesScreen.isATopTime((int)m_TotalTimeElapsed))

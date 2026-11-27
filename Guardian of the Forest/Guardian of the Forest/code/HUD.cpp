@@ -12,7 +12,7 @@ Hud::Hud()
 	m_TimeText.setFont(m_Font);
 	m_TimeText.setCharacterSize(75);
 	m_TimeText.setFillColor(Color::White);
-	m_TimeText.setPosition(m_Resolution.x - 500, 25);
+	m_TimeText.setPosition(m_Resolution.x - 200, 25);
 	m_TimeText.setString("------");
 
 	// Level
@@ -23,10 +23,10 @@ Hud::Hud()
 	m_LevelText.setString("1");
 
 	// health bar
-	m_HealthBar.spawn(Color::Green, Color::Red, Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2), 80, 100, 100, 70, 10, 4);
+	m_HealthBar.spawn(Color::Green, Color::Red, Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2) - 300, 80, 100, 100, 50, 10, 4);
 
 	// power bar
-	m_PowerBar.spawn(Color::Red, Color(17, 17, 132),  Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2), 200, 0, 100, 70, 10, 4);
+	m_PowerBar.spawn(Color::Red, Color(17, 17, 132),  Color(17, 17, 132) /*dark blue*/, (m_Resolution.x / 2) + 300, 80, 0, 100, 50, 10, 4);
 }
 
 

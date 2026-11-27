@@ -119,6 +119,30 @@ void Engine::handleInput()
             }
         }
 
+        // Handle mouse clicks on the level complete screen
+        else if (state == State::LEVEL_COMPLETE && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
+        {
+            // Get the mouse position
+            Vector2i mousePosition(event.mouseButton.x, event.mouseButton.y);
+
+            // Next level button
+            if (m_LevelCompleteScreen.getNextLevelButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                m_NewLevelRequired = true;
+                state = State::PLAYING;
+            }
+            // Main Menu Button
+            else if (m_LevelCompleteScreen.getMainMenuButton().contains((mousePosition.x), (mousePosition.y)))
+            {
+                state = State::MAIN_MENU;
+            }
+            // Quit the Game Button
+            else if (m_LevelCompleteScreen.getQuitButton().contains((mousePosition.x), static_cast<float>(mousePosition.y)))
+            {
+                m_Window.close();
+            }
+        }
+
         // Handle mouse clicks on the victory screen
         else if (state == State::VICTORY && event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
         {
