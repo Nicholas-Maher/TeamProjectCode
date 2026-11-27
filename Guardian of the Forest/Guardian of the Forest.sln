@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37614.0 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guardian of the ForestV1", "Guardian of the ForestV1\Guardian of the ForestV1.vcxproj", "{52C23C0B-1B99-4B16-87F4-7D9228F34EF2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guardian of the Forest", "Guardian of the Forest\Guardian of the Forest.vcxproj", "{52C23C0B-1B99-4B16-87F4-7D9228F34EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
