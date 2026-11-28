@@ -65,6 +65,19 @@ bool Engine::detectCollisions(Player& character)
 
 	/*Nicholas -- player Bourder*/
 
+// Nicholas - I found that the player has a feet collision box.
+// I use it to check if the player touches the top of an enemy.
+// If they collide, the enemy is set to not alive.
+
+	// Nicholas - Check if player touches enemy's head
+	for (Enemy* enemy : m_vpEnemies)// vecotor of pointers of type enemies
+	{
+		FloatRect head(enemy->getPosition(), Vector2f(50, 10)); // checks for the hitbox of the enemys head of 50m by 10
+
+		if (character.getFeet().intersects(head))enemy->setIsAlive(false);
+	}
+	// End of Code for  eney to be destroyed when on hit of head.
+
 	// Get the player's current position.
 	FloatRect playerBounds = character.getPosition();
 
@@ -160,12 +173,12 @@ bool Engine::detectCollisions(Player& character)
 					character.stopJump();
 				}
 			}
-			
+
 			// More collision detection here once we have learned about particle effects
 			// Has the characters' feet touched fire or water?
 			// If so, start a particle effect
 			// Make sure this is the first time we have detected this
-			// by seeing if an effect is already running			
+			// by seeing if an effect is already running
 			if (!m_PS.running()) {
 				if (m_ArrayLevel[y][x] == 2 || m_ArrayLevel[y][x] == 3)
 				{
